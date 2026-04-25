@@ -1,0 +1,20 @@
+# Smallest Qwen3 instruction-tuned model (~0.6 B params). Fits comfortably
+# on a single 24 GB GPU in bf16; perfect for end-to-end smoke tests.
+# Install the extras: `uv sync --extra hf`.
+name: qwen3-0.6b
+
+backend: example
+model_id: Qwen/Qwen3-0.6B
+
+dtype: bfloat16
+device_map: auto       # auto | balanced | cuda:0 | explicit dict
+
+# Qwen3-specific knobs (handled via src/models/qwen3.py).
+enable_thinking: false      # smoke test — keep output short
+strip_thinking: true
+
+generation:
+  max_new_tokens: 256
+  do_sample: false
+  temperature: 0.0
+  top_p: 1.0
