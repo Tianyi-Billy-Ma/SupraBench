@@ -1,0 +1,26 @@
+[
+    {
+        "question": "Predict the binding affinity (logKa) between the following host and guest molecules in aqueous solution at 25°C. Provide a single numerical value for logKa.",
+        "host": "OC[C@H]1O[C@@H]2O[C@H]3[C@H](O)[C@@H](O)[C@@H](O[C@H]4[C@H](O)[C@@H](O)[C@@H](O[C@H]5[C@H](O)[C@@H](O)[C@@H](O[C@H]6[C@H](O)[C@@H](O)[C@@H](O[C@H]7[C@H](O)[C@@H](O)[C@@H](O[C@H]8[C@H](O)[C@@H](O)[C@@H](O[C@H]1[C@H](O)[C@H]2O)O[C@@H]8CO)O[C@@H]7CO)O[C@@H]6CO)O[C@@H]5CO)O[C@@H]4CO)O[C@@H]3CO",
+        "guest": "O=C(O)CC[C@@H](NC(=O)OCc1ccccc1)C(=O)N[C@@H](Cc1ccc(O)cc1)C(=O)O",
+        "answer": 2.0607
+    },
+    {
+        "question": "Predict the binding affinity (logKa) between the following host and guest molecules in aqueous solution at 25°C. Provide a single numerical value for logKa.",
+        "host": "OC[C@H]1O[C@@H]2O[C@H]3[C@H](O)[C@@H](O)[C@@H](O[C@H]4[C@H](O)[C@@H](O)[C@@H](O[C@H]5[C@H](O)[C@@H](O)[C@@H](O[C@H]6[C@H](O)[C@@H](O)[C@@H](O[C@H]7[C@H](O)[C@@H](O)[C@@H](O[C@H]8[C@H](O)[C@@H](O)[C@@H](O[C@H]1[C@H](O)[C@H]2O)O[C@@H]8CO)O[C@@H]7CO)O[C@@H]6CO)O[C@@H]5CO)O[C@@H]4CO)O[C@@H]3CO",
+        "guest": "CS(=O)(=O)c1ccc(C2=C(c3ccccc3)C(=O)OC2)cc1",
+        "answer": 1.7924
+    },
+    {
+        "question": "Predict the binding affinity (logKa) between the following host and guest molecules in aqueous solution at 25°C. Provide a single numerical value for logKa.",
+        "host": "OC[C@H]1O[C@@H]2O[C@H]3[C@H](O)[C@@H](O)[C@@H](O[C@H]4[C@H](O)[C@@H](O)[C@@H](O[C@H]5[C@H](O)[C@@H](O)[C@@H](O[C@H]6[C@H](O)[C@@H](O)[C@@H](O[C@H]7[C@H](O)[C@@H](O)[C@@H](O[C@H]8[C@H](O)[C@@H](O)[C@@H](O[C@H]1[C@H](O)[C@H]2O)O[C@@H]8CO)O[C@@H]7CO)O[C@@H]6CO)O[C@@H]5CO)O[C@@H]4CO)O[C@@H]3CO",
+        "guest": "O=C(O)c1ccccc1",
+        "answer": 2.1271
+    },
+    {
+        "question": "Predict the binding affinity (logKa) between the following host and guest molecules in aqueous solution at 25°C. Provide a single numerical value for logKa.",
+        "host": "OC[C@H]1O[C@@H]2O[C@H]3[C@H](O)[C@@H](O)[C@@H](O[C@H]4[C@H](O)[C@@H](O)[C@@H](O[C@H]5[C@H](O)[C@@H](O)[C@@H](O[C@H]6[C@H](O)[C@@H](O)[C@@H](O[C@H]7[C@H](O)[C@@H](O)[C@@H](O[C@H]8[C@H](O)[C@@H](O)[C@@H](O[C@H]1[C@H](O)[C@H]2O)O[C@@H]8CO)O[C@@H]7CO)O[C@@H]6CO)O[C@@H]5CO)O[C@@H]4CO)O[C@@H]3CO",
+        "guest": "COc1cc(NS(=O)(=O)c2ccc(N)cc2)nc(OC)n1",
+        "answer": 2.7903
+    }
+]
