@@ -1,0 +1,17 @@
+# Placeholder task config. Replace once the seven tasks are finalized.
+name: task1
+
+# Key into the dataset registry (src/datasets/). Matches the argument of
+# the @register_dataset decorator on the loader class in src/datasets/task1.py.
+dataset: task1
+
+# Key into the evaluator registry (src/eval/). Matches the argument of
+# the @register_evaluator decorator on the class in src/eval/task1.py.
+evaluator: task1
+
+# Path to the raw data file, resolved relative to the repository root.
+data_path: data/task1.jsonl
+
+prompt:
+  fewshot_k: 0
+  thinking: false

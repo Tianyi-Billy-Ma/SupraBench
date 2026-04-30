@@ -1,0 +1,23 @@
+# Qwen3 via the reference HF Transformers backend (src/inference/example.py).
+# Install the extras: `uv sync --extra hf`.
+#
+# Multi-GPU: `device_map: auto` shards the model across every CUDA device
+# visible to the process. Restrict with CUDA_VISIBLE_DEVICES if needed.
+name: qwen3-8b
+
+backend: example
+model_id: Qwen/Qwen3-8B
+
+dtype: auto            # auto | bfloat16 | float16 | float32
+device_map: auto       # auto | balanced | cuda:0 | explicit dict
+
+# Qwen3-specific knobs (handled via src/models/qwen3.py).
+# system_prompt: null       # null → models.qwen3.DEFAULT_SYSTEM_PROMPT
+enable_thinking: false      # emit <think>...</think> reasoning
+strip_thinking: true        # drop <think>...</think> from the stored prediction
+
+generation:
+  max_new_tokens: 1024
+  do_sample: false
+  temperature: 0.0
+  top_p: 1.0

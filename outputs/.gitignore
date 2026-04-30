@@ -1,0 +1,6 @@
+# Ignore every run artifact written here...
+*
+# ...but keep the directory itself tracked by versioning the ignore file
+# and the README.
+!.gitignore
+!README.md
