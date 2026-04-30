@@ -15,6 +15,12 @@ dist/
 venv/
 env/
 
+# Run artifacts — per-run predictions / metrics. The directory itself is
+# tracked via outputs/.gitignore + outputs/README.md.
+outputs/**
+!outputs/.gitignore
+!outputs/README.md
+
 # OS / editor cruft
 .DS_Store
 .idea/

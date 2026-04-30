@@ -1,0 +1,12 @@
+# Example model config: ChatGPT via the OpenAI API.
+# Install the extras: `uv sync --extra api`.
+# Credentials come from OPENAI_API_KEY in the environment; never put keys here.
+name: chatgpt-4o
+
+backend: openai
+model_id: gpt-4o
+
+generation:
+  max_tokens: 1024
+  temperature: 0.0
+  top_p: 1.0
