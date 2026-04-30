@@ -6,11 +6,12 @@ Modes:
     smiles  — ask for a canonical SMILES string
 
 Run:
-    python3 supra_vqa/scripts/run_identification.py --mode name
-    python3 supra_vqa/scripts/run_identification.py --mode smiles --limit 5
+    python3 src/vqa/run_identification.py --mode name
+    python3 src/vqa/run_identification.py --mode smiles --limit 5
+    python3 src/vqa/run_identification.py --mode name --model /path/to/model
 
 Output (one directory per invocation):
-    supra_vqa/results/<model>_<mode>_<YYYYMMDD-HHMMSS>/
+    supra-vqa/results/<model>_<mode>_<YYYYMMDD-HHMMSS>/
         predictions.csv         molecule_id, image, raw_output, pred
         predictions_scored.csv  + per-row metrics (auto-eval)
         summary.json            this run's metrics
@@ -29,9 +30,9 @@ from PIL import Image
 from transformers import AutoProcessor
 from vllm import LLM, SamplingParams
 
-SUPRA_VQA_ROOT = Path(__file__).resolve().parent.parent
+SUPRA_VQA_ROOT = Path(__file__).resolve().parents[2] / "supra-vqa"
 EVAL_CSV = SUPRA_VQA_ROOT / "identification.csv"
-RESULTS_DIR = SUPRA_VQA_ROOT / "results"
+RESULTS_DIR = Path(__file__).resolve().parents[2] / "results"
 MODEL_PATH = "/home/wsun4/aisci_data/Qwen3-VL-4B-Instruct"
 
 PROMPTS = {

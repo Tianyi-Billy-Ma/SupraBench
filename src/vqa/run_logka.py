@@ -3,11 +3,12 @@ Run a Qwen3-VL model on the supra_vqa logka eval set: two images per prompt
 (host first, guest second), predict a single float logKa.
 
 Run:
-    python3 supra_vqa/scripts/run_logka.py
-    python3 supra_vqa/scripts/run_logka.py --limit 5
+    python3 src/vqa/run_logka.py
+    python3 src/vqa/run_logka.py --limit 5
+    python3 src/vqa/run_logka.py --model /path/to/model
 
 Output (one directory per invocation):
-    supra_vqa/results/<model>_logka_<YYYYMMDD-HHMMSS>/
+    supra-vqa/results/<model>_logka_<YYYYMMDD-HHMMSS>/
         predictions.csv         pair_id, host_id, guest_id, raw_output, pred
         predictions_scored.csv  per-row gold/pred/abs_error
         summary.json            this run's metrics
@@ -26,9 +27,9 @@ from PIL import Image
 from transformers import AutoProcessor
 from vllm import LLM, SamplingParams
 
-SUPRA_VQA_ROOT = Path(__file__).resolve().parent.parent
+SUPRA_VQA_ROOT = Path(__file__).resolve().parents[2] / "supra-vqa"
 EVAL_CSV = SUPRA_VQA_ROOT / "logka.csv"
-RESULTS_DIR = SUPRA_VQA_ROOT / "results"
+RESULTS_DIR = Path(__file__).resolve().parents[2] / "results"
 MODEL_PATH = "/home/wsun4/aisci_data/Qwen3-VL-4B-Instruct"
 
 PROMPT = (
