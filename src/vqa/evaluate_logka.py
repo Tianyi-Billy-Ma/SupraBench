@@ -19,9 +19,9 @@ from pathlib import Path
 
 import numpy as np
 
-SUPRA_VQA_ROOT = Path(__file__).resolve().parent.parent
+SUPRA_VQA_ROOT = Path(__file__).resolve().parents[2] / "supra-vqa"
 EVAL_CSV = SUPRA_VQA_ROOT / "logka.csv"
-RESULTS_DIR = SUPRA_VQA_ROOT / "results"
+RESULTS_DIR = Path(__file__).resolve().parents[2] / "results"
 
 
 def load_eval_index() -> dict[str, dict]:

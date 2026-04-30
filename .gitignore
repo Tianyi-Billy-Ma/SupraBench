@@ -23,3 +23,8 @@ env/
 
 # models
 models
+
+#dataset
+supra-vqa
+results
+logs
