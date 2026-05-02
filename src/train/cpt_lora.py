@@ -46,6 +46,7 @@ from transformers import (
     Trainer,
     TrainingArguments,
 )
+from transformers.integrations import HfDeepSpeedConfig
 
 
 # ---------------------------------------------------------------------------
@@ -236,6 +237,17 @@ def main(argv: list[str] | None = None) -> None:
     if is_main:
         print(f"[cpt_lora] config = {cfg['run_name']}")
 
+    # Activate the DeepSpeed ZeRO-3 init context BEFORE from_pretrained, so the
+    # 27.78B base is partitioned across ranks at construction time instead of
+    # loaded full onto each GPU (which OOMs the 48 GB A40s). Hold the object
+    # alive via _dschf — it must outlive every from_pretrained call.
+    _dschf = None
+    ds_config_path = os.environ.get("DEEPSPEED_CONFIG_FILE")
+    if ds_config_path and Path(ds_config_path).is_file():
+        _dschf = HfDeepSpeedConfig(ds_config_path)
+        if is_main:
+            print(f"[cpt_lora] activated HfDeepSpeedConfig from {ds_config_path}")
+
     # --- tokenizer -------------------------------------------------------
     tokenizer_id = cfg["model"]["model_id"]
     try:
@@ -304,6 +316,7 @@ def main(argv: list[str] | None = None) -> None:
     trainer.save_model(output_dir)  # saves LoRA adapter only
     if is_main:
         print(f"[cpt_lora] adapter saved to {output_dir}")
+    del _dschf  # hold the ZeRO-3 init context alive for the whole run
 
 
 if __name__ == "__main__":
