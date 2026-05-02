@@ -10,7 +10,7 @@ model:
   model_id: Qwen/Qwen3.5-27B
   trust_remote_code: true
   dtype: bfloat16
-  attn_implementation: sdpa
+  attn_implementation: flash_attention_2
   language_model_path: model.language_model   # Qwen3.5: model.language_model.layers.N.self_attn.{q,k,v,o}_proj
   freeze_keywords:                       # any module whose name contains one of
     - vision                             # these substrings is frozen and excluded

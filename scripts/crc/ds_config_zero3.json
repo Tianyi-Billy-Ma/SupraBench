@@ -1,0 +1,27 @@
+{
+  "comment": "DeepSpeed ZeRO-3 + bf16 config for LoRA continued pretraining of Qwen3.5-27B on 4x A40 48GB. ZeRO-3 is required because the 56 GB bf16 base does not fit a single A40; ZeRO-2 keeps a full base copy per rank and would OOM. Optimizer states + grads exist only for the ~318M LoRA params, so memory for those is trivial. No CPU offload is set on purpose: with 4x A40 and a sharded base (~14 GB/rank), we have enough VRAM for activations at seq_len=4096 and offload would add CPU<->GPU traffic.",
+  "bf16": {
+    "enabled": true
+  },
+  "fp16": {
+    "enabled": false
+  },
+  "zero_optimization": {
+    "stage": 3,
+    "overlap_comm": true,
+    "contiguous_gradients": true,
+    "sub_group_size": 1000000000,
+    "reduce_bucket_size": "auto",
+    "stage3_prefetch_bucket_size": "auto",
+    "stage3_param_persistence_threshold": "auto",
+    "stage3_max_live_parameters": 1000000000,
+    "stage3_max_reuse_distance": 1000000000,
+    "stage3_gather_16bit_weights_on_model_save": true
+  },
+  "gradient_accumulation_steps": "auto",
+  "gradient_clipping": 1.0,
+  "train_batch_size": "auto",
+  "train_micro_batch_size_per_gpu": "auto",
+  "wall_clock_breakdown": false,
+  "steps_per_print": 100
+}
