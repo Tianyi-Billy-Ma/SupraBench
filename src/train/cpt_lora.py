@@ -281,7 +281,7 @@ def main(argv: list[str] | None = None) -> None:
 
     # --- trainer ---------------------------------------------------------
     train_kwargs = dict(cfg["training"])
-    output_dir = str(os.environ.get("OUTPUTS_DIR") or train_kwargs.pop("output_dir"))
+    output_dir = str(train_kwargs.pop("output_dir"))
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     train_args = TrainingArguments(
