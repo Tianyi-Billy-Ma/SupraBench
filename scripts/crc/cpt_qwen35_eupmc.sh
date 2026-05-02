@@ -21,11 +21,10 @@ source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
 
 export WANDB_RUN_GROUP=cpt-eupmc
 export WANDB_NAME="cpt-eupmc-${JOB_ID:-local}"
-export DEEPSPEED_CONFIG_FILE=scripts/crc/ds_config_zero3.json
 
 nvidia-smi || true
 
 "${ACCELERATE}" launch \
-  --config_file scripts/crc/accelerate_deepspeed.yaml \
+  --config_file scripts/crc/accelerate_fsdp.yaml \
   src/train/cpt_lora.py \
   --config configs/train/cpt_qwen35_eupmc.yaml
