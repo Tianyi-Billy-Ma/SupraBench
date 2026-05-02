@@ -1,15 +1,22 @@
-# Accelerate launch config for 4× A40 LoRA continued pretraining.
+# Accelerate launch config for 4x A40 LoRA continued pretraining via FSDP.
 #
-# Uses FSDP_FULL_SHARD to slice the 27B base across 4 GPUs (~14 GB / GPU
-# of weights). Auto-wrap is size-based on first run — once we know the
-# decoder-layer class name from the smoke test, switch to
-# TRANSFORMER_BASED_WRAP with that class for better activation memory.
+# We wrap each transformer block as its own FSDP unit so activation memory
+# peaks at one block at a time (instead of spanning multiple blocks like
+# SIZE_BASED_WRAP would). Both classes are listed because Qwen3.5 has two
+# distinct transformer-block types — one in the language model and one in
+# the vision tower. The vision tower is frozen during text-only CPT, but
+# wrapping its blocks too keeps shape semantics consistent and lets FSDP
+# free their activations after the (no-op) backward pass.
+#
+# fsdp_cpu_ram_efficient_loading=true means only rank 0 holds the full
+# 56 GB bf16 base in CPU RAM during from_pretrained; shards are broadcast
+# to other ranks. CRC GPU nodes have 256 GB RAM — comfortable.
 compute_environment: LOCAL_MACHINE
 distributed_type: FSDP
 downcast_bf16: 'no'
 fsdp_config:
-  fsdp_auto_wrap_policy: SIZE_BASED_WRAP
-  fsdp_min_num_params: 100000000
+  fsdp_auto_wrap_policy: TRANSFORMER_BASED_WRAP
+  fsdp_transformer_layer_cls_to_wrap: Qwen3_5DecoderLayer,Qwen3_5VisionBlock
   fsdp_backward_prefetch: BACKWARD_PRE
   fsdp_cpu_ram_efficient_loading: true
   fsdp_forward_prefetch: false
