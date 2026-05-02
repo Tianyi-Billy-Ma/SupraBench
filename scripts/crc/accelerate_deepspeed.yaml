@@ -5,16 +5,19 @@
 # gradient_clipping, gradient_accumulation_steps, all zero3_* knobs,
 # offload_* knobs). All of those live in scripts/crc/ds_config_zero3.json.
 #
-# zero3_init_flag is intentionally false: we load the full base model on each
-# rank (CPU RAM is plentiful on a CRC GPU node), then DeepSpeed shards
-# parameters at training start. This keeps PEFT's module-name-based LoRA
-# targeting straightforward — get_peft_model walks named_modules() before
-# the model is sharded.
+# zero3_init_flag must be true here: the 27.78B base in bf16 is ~56 GB and
+# each A40 only has 48 GB. With the flag false, accelerate's DeepSpeed path
+# loads the full model onto every rank's GPU and then shards — but the .to()
+# call OOMs before the shard ever happens. With it true, accelerate wraps
+# `from_pretrained` in `deepspeed.zero.Init()`, so parameters are partitioned
+# across ranks at construction time. PEFT's module-name-based LoRA targeting
+# still works because module structure is unchanged; only the parameter
+# storage is sharded.
 compute_environment: LOCAL_MACHINE
 distributed_type: DEEPSPEED
 deepspeed_config:
   deepspeed_config_file: scripts/crc/ds_config_zero3.json
-  zero3_init_flag: false
+  zero3_init_flag: true
 machine_rank: 0
 main_training_function: main
 num_machines: 1
