@@ -296,7 +296,7 @@ def main(argv: list[str] | None = None) -> None:
         model=model,
         args=train_args,
         train_dataset=packed,
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
         data_collator=collator,
     )
 
