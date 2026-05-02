@@ -20,15 +20,13 @@ source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
 
 echo "[precache] HF_HOME=${HF_HOME}"
 echo "[precache] $(date) downloading model"
-huggingface-cli download Qwen/Qwen3.5-27B \
+hf download Qwen/Qwen3.5-27B \
   --repo-type model \
-  --resume-download \
   --max-workers 4
 
 echo "[precache] $(date) downloading dataset"
-huggingface-cli download mtybilly/EU-PMC \
+hf download mtybilly/EU-PMC \
   --repo-type dataset \
-  --resume-download \
   --max-workers 4
 
 echo "[precache] $(date) done"
