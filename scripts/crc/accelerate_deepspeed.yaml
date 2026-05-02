@@ -1,0 +1,26 @@
+# Accelerate launch config for 4x A40 LoRA continued pretraining via DeepSpeed.
+#
+# zero3_init_flag is intentionally false: we load the full base model on each
+# rank (CPU RAM is plentiful on a CRC GPU node), then DeepSpeed shards
+# parameters at training start. This keeps PEFT's module-name-based LoRA
+# targeting straightforward — get_peft_model walks named_modules() before
+# the model is sharded.
+#
+# zero3_save_16bit_model: true lets the final adapter be saved as a single
+# fp16 / bf16 checkpoint on rank 0 by gathering shards.
+compute_environment: LOCAL_MACHINE
+distributed_type: DEEPSPEED
+deepspeed_config:
+  deepspeed_config_file: scripts/crc/ds_config_zero3.json
+  zero3_init_flag: false
+  zero3_save_16bit_model: true
+machine_rank: 0
+main_training_function: main
+mixed_precision: bf16
+num_machines: 1
+num_processes: 4
+rdzv_backend: static
+same_network: true
+tpu_use_cluster: false
+tpu_use_sudo: false
+use_cpu: false

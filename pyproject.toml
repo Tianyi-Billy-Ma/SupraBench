@@ -19,14 +19,18 @@ dependencies = [
 
 [project.optional-dependencies]
 # Local inference via HuggingFace Transformers / vLLM.
+# torch is pinned to 2.8.x because flash-attn 2.8.3 (the latest stable
+# pre-built wheel line) does not ship a torch-2.10 build. Bumping torch
+# requires a matching flash-attn release; track Dao-AILab/flash-attention.
 hf = [
-    "torch>=2.3",
+    "torch>=2.8,<2.9",
     "transformers>=4.50",
     "accelerate>=0.33",
     "datasets>=2.20",
     "peft>=0.12",
     "trl>=0.10",
     "bitsandbytes>=0.43",
+    "deepspeed>=0.15",
     "wandb>=0.17",
     "sentencepiece>=0.2",
     "tiktoken>=0.7",

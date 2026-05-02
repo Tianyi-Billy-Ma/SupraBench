@@ -8,7 +8,9 @@ activation.
 | --- | --- |
 | `bashrc.sh` | Per-job environment: `cd` to repo root, activate `.venv`, export `HF_HOME`, `HF_TOKEN`, `OUTPUTS_DIR`, wandb. |
 | `base.sh` | Wraps `bashrc.sh` with AFS token renewal (`kinit -R`, `aklog`), an EXIT trap that cleans up `/dev/shm/torch_*`, and resolves `$PYTHON` / `$ACCELERATE`. |
-| `accelerate_fsdp.yaml` | Accelerate launch config for 4× A40 FSDP_FULL_SHARD bf16. Switch `fsdp_auto_wrap_policy` to `TRANSFORMER_BASED_WRAP` after the smoke test reveals the decoder layer class name. |
+| `ds_config_zero3.json` | DeepSpeed ZeRO-3 config (bf16, no CPU offload, stage3 with auto bucket sizing). |
+| `accelerate_deepspeed.yaml` | Accelerate launch config for 4× A40 → DeepSpeed ZeRO-3 (current). |
+| `accelerate_fsdp.yaml` | Older FSDP_FULL_SHARD config kept for reference; superseded by DeepSpeed because it under-utilized A40 VRAM at seq_len=4096. |
 | `precache.sh` | CPU job (`-q long`, 8 cores) to pull `Qwen/Qwen3.5-27B` and `mtybilly/EU-PMC` into the shared HF cache. Run once. |
 | `cpt_qwen35_eupmc_smoke.sh` | 1.5 h GPU smoke test: 20 steps over 256 rows at seq_len=1024. |
 | `cpt_qwen35_eupmc.sh` | Full LoRA CPT, 24 h walltime. Re-submit to resume from the latest checkpoint. |
