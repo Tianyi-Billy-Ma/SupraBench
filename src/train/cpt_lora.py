@@ -295,7 +295,15 @@ def main(argv: list[str] | None = None) -> None:
 
     model = attach_lora(model, cfg["lora"], targets)
     if cfg["training"].get("gradient_checkpointing"):
-        model.gradient_checkpointing_enable()
+        # use_reentrant=False is required with PEFT + DeepSpeed ZeRO-3:
+        # reentrant checkpointing's recompute path produces tensors whose
+        # metadata diverges from the original forward (LoRA-injected modules
+        # interact poorly with the saved-tensor stack), raising
+        # `CheckpointError: Recomputed values ... have different metadata`.
+        # Smoke v12 hit exactly this on the first backward pass.
+        model.gradient_checkpointing_enable(
+            gradient_checkpointing_kwargs={"use_reentrant": False}
+        )
         model.enable_input_require_grads()
     if is_main:
         model.print_trainable_parameters()
