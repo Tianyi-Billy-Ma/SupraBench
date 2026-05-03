@@ -36,7 +36,6 @@ from typing import Any, Iterable
 
 import torch
 import yaml
-from accelerate import PartialState
 from datasets import load_dataset
 from peft import LoraConfig, TaskType, get_peft_model
 from transformers import (
@@ -47,6 +46,7 @@ from transformers import (
     Trainer,
     TrainingArguments,
 )
+from transformers.integrations import HfDeepSpeedConfig
 
 
 # ---------------------------------------------------------------------------
@@ -233,16 +233,27 @@ def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
     cfg = load_config(args.config, args.override)
 
-    # Instantiate accelerate state BEFORE from_pretrained so the DeepSpeedPlugin
-    # registers the global HfDeepSpeedConfig and zero3_init_flag activates the
-    # `deepspeed.zero.Init()` context that partitions the 56 GB base across
-    # ranks at construction time. Without this, the model lands full on each
-    # A40 and OOMs.
-    _accel_state = PartialState()  # noqa: F841 — must outlive load_base_model
+    # Activate the DeepSpeed ZeRO-3 init context BEFORE from_pretrained, so the
+    # 27.78B base is partitioned across ranks at construction time instead of
+    # loaded full onto each GPU (which OOMs the 48 GB A40s). HfDeepSpeedConfig
+    # registers the global config that transformers.is_deepspeed_zero3_enabled()
+    # checks; accelerate's DeepSpeedPlugin alone doesn't wire that up — we
+    # confirmed empirically (smoke v6/v7/v10 all loaded the model full and
+    # OOM'd despite zero3_init_flag=true on the accelerate side).
+    #
+    # The JSON path is taken from DEEPSPEED_CONFIG_FILE (set in the SGE script)
+    # to avoid hardcoding a path inside src/. The object MUST be kept alive
+    # for the lifetime of from_pretrained calls.
+    _dschf = None
+    ds_config_path = os.environ.get("DEEPSPEED_CONFIG_FILE")
+    if ds_config_path and Path(ds_config_path).is_file():
+        _dschf = HfDeepSpeedConfig(ds_config_path)
 
     is_main = int(os.environ.get("RANK", "0")) == 0
     if is_main:
         print(f"[cpt_lora] config = {cfg['run_name']}")
+        if _dschf is not None:
+            print(f"[cpt_lora] activated HfDeepSpeedConfig from {ds_config_path}")
 
     # --- tokenizer -------------------------------------------------------
     tokenizer_id = cfg["model"]["model_id"]
@@ -312,6 +323,7 @@ def main(argv: list[str] | None = None) -> None:
     trainer.save_model(output_dir)  # saves LoRA adapter only
     if is_main:
         print(f"[cpt_lora] adapter saved to {output_dir}")
+    del _dschf  # release the global zero3 context after training completes
 
 
 if __name__ == "__main__":
