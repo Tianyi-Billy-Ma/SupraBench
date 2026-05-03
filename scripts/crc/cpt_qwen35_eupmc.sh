@@ -25,6 +25,6 @@ export WANDB_NAME="cpt-eupmc-${JOB_ID:-local}"
 nvidia-smi || true
 
 "${ACCELERATE}" launch \
-  --config_file scripts/crc/accelerate_fsdp.yaml \
+  --config_file scripts/crc/accelerate_deepspeed.yaml \
   src/train/cpt_lora.py \
   --config configs/train/cpt_qwen35_eupmc.yaml

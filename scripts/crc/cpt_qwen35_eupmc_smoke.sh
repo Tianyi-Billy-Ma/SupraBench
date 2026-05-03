@@ -25,13 +25,12 @@ export WANDB_NAME="cpt-smoke-${JOB_ID:-local}"
 nvidia-smi || true
 
 "${ACCELERATE}" launch \
-  --config_file scripts/crc/accelerate_fsdp.yaml \
+  --config_file scripts/crc/accelerate_deepspeed.yaml \
   src/train/cpt_lora.py \
   --config configs/train/cpt_qwen35_eupmc.yaml \
   --override \
       training.max_steps=20 \
       training.save_steps=50 \
-      training.gradient_accumulation_steps=1 \
-      dataset.train_rows=256 \
+      dataset.train_rows=2048 \
       dataset.seq_len=1024 \
       training.output_dir=outputs/cpt_qwen35_eupmc_smoke
