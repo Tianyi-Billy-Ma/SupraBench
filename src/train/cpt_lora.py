@@ -36,6 +36,7 @@ from typing import Any, Iterable
 
 import torch
 import yaml
+from accelerate import PartialState
 from datasets import load_dataset
 from peft import LoraConfig, TaskType, get_peft_model
 from transformers import (
@@ -231,6 +232,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
     cfg = load_config(args.config, args.override)
+
+    # Instantiate accelerate state BEFORE from_pretrained so the DeepSpeedPlugin
+    # registers the global HfDeepSpeedConfig and zero3_init_flag activates the
+    # `deepspeed.zero.Init()` context that partitions the 56 GB base across
+    # ranks at construction time. Without this, the model lands full on each
+    # A40 and OOMs.
+    _accel_state = PartialState()  # noqa: F841 — must outlive load_base_model
 
     is_main = int(os.environ.get("RANK", "0")) == 0
     if is_main:
