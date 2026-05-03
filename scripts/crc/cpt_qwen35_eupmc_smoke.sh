@@ -32,6 +32,8 @@ nvidia-smi || true
   --override \
       training.max_steps=20 \
       training.save_steps=50 \
+      training.gradient_checkpointing=false \
+      lora.dropout=0.0 \
       dataset.train_rows=2048 \
       dataset.seq_len=1024 \
       training.output_dir=outputs/cpt_qwen35_eupmc_smoke
