@@ -36,7 +36,6 @@ from typing import Any, Iterable
 
 import torch
 import yaml
-from accelerate import PartialState
 from datasets import load_dataset
 from peft import LoraConfig, TaskType, get_peft_model
 from transformers import (
@@ -47,7 +46,6 @@ from transformers import (
     Trainer,
     TrainingArguments,
 )
-from transformers.integrations import HfDeepSpeedConfig
 
 
 # ---------------------------------------------------------------------------
@@ -234,28 +232,9 @@ def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
     cfg = load_config(args.config, args.override)
 
-    # Two-step DeepSpeed ZeRO-3 activation, both must happen BEFORE
-    # from_pretrained:
-    #   1. PartialState() initializes torch.distributed (sets world_size=4
-    #      from accelerate-launch env vars). Without this, HfDeepSpeedConfig's
-    #      `train_batch == micro * grad_accum * world_size` assertion sees
-    #      world_size=1 and fails (smoke v11 hit exactly this).
-    #   2. HfDeepSpeedConfig registers the global config that
-    #      transformers.is_deepspeed_zero3_enabled() checks, so the very next
-    #      from_pretrained wraps construction in deepspeed.zero.Init() and
-    #      partitions the 56 GB base across ranks (avoids the per-A40 OOM).
-    # Both objects must outlive from_pretrained — keep them as locals.
-    _accel_state = PartialState()  # noqa: F841 — initializes distributed
-    _dschf = None
-    ds_config_path = os.environ.get("DEEPSPEED_CONFIG_FILE")
-    if ds_config_path and Path(ds_config_path).is_file():
-        _dschf = HfDeepSpeedConfig(ds_config_path)
-
     is_main = int(os.environ.get("RANK", "0")) == 0
     if is_main:
         print(f"[cpt_lora] config = {cfg['run_name']}")
-        if _dschf is not None:
-            print(f"[cpt_lora] activated HfDeepSpeedConfig from {ds_config_path}")
 
     # --- tokenizer -------------------------------------------------------
     tokenizer_id = cfg["model"]["model_id"]
@@ -333,7 +312,6 @@ def main(argv: list[str] | None = None) -> None:
     trainer.save_model(output_dir)  # saves LoRA adapter only
     if is_main:
         print(f"[cpt_lora] adapter saved to {output_dir}")
-    del _dschf  # release the global zero3 context after training completes
 
 
 if __name__ == "__main__":
