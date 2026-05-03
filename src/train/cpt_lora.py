@@ -36,6 +36,7 @@ from typing import Any, Iterable
 
 import torch
 import yaml
+from accelerate import PartialState
 from datasets import load_dataset
 from peft import LoraConfig, TaskType, get_peft_model
 from transformers import (
@@ -233,17 +234,18 @@ def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
     cfg = load_config(args.config, args.override)
 
-    # Activate the DeepSpeed ZeRO-3 init context BEFORE from_pretrained, so the
-    # 27.78B base is partitioned across ranks at construction time instead of
-    # loaded full onto each GPU (which OOMs the 48 GB A40s). HfDeepSpeedConfig
-    # registers the global config that transformers.is_deepspeed_zero3_enabled()
-    # checks; accelerate's DeepSpeedPlugin alone doesn't wire that up — we
-    # confirmed empirically (smoke v6/v7/v10 all loaded the model full and
-    # OOM'd despite zero3_init_flag=true on the accelerate side).
-    #
-    # The JSON path is taken from DEEPSPEED_CONFIG_FILE (set in the SGE script)
-    # to avoid hardcoding a path inside src/. The object MUST be kept alive
-    # for the lifetime of from_pretrained calls.
+    # Two-step DeepSpeed ZeRO-3 activation, both must happen BEFORE
+    # from_pretrained:
+    #   1. PartialState() initializes torch.distributed (sets world_size=4
+    #      from accelerate-launch env vars). Without this, HfDeepSpeedConfig's
+    #      `train_batch == micro * grad_accum * world_size` assertion sees
+    #      world_size=1 and fails (smoke v11 hit exactly this).
+    #   2. HfDeepSpeedConfig registers the global config that
+    #      transformers.is_deepspeed_zero3_enabled() checks, so the very next
+    #      from_pretrained wraps construction in deepspeed.zero.Init() and
+    #      partitions the 56 GB base across ranks (avoids the per-A40 OOM).
+    # Both objects must outlive from_pretrained — keep them as locals.
+    _accel_state = PartialState()  # noqa: F841 — initializes distributed
     _dschf = None
     ds_config_path = os.environ.get("DEEPSPEED_CONFIG_FILE")
     if ds_config_path and Path(ds_config_path).is_file():
