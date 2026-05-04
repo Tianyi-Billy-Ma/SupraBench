@@ -1,0 +1,102 @@
+{
+  "forward": [
+    {
+      "id": "t3_fwd_(1,1',4,4')-Tetraoxy-propylsulphite-bisnaftlen-methylen-bisglycouril_Sodium",
+      "subtype": "forward",
+      "host_name": "(1,1',4,4')-Tetraoxy-propylsulphite-bisnaftlen-methylen-bisglycouril Sodium",
+      "guest_name": null,
+      "guest_smiles": null,
+      "answer": "High-affinity guests of (1,1',4,4')-Tetraoxy-propylsulphite-bisnaftlen-methylen-bisglycouril Sodium (logKa ≥ 5.3) typically have a molecular weight of 318±99 g/mol, are neutral (formal charge +0), contain on average 3.4 ring system(s), 1.2 H-bond donor(s), and 2.0 H-bond acceptor(s). Representative guests: N,N'-bis(2-dimethylammonioethyl)-Naphthalene diimide, Methyl viologen, N-Methylacridinium iodide, Methylene Blue, Neutral Red protonated."
+    },
+    {
+      "id": "t3_fwd_4-sulfocalix[4]arene_sodium_salt",
+      "subtype": "forward",
+      "host_name": "4-sulfocalix[4]arene sodium salt",
+      "guest_name": null,
+      "guest_smiles": null,
+      "answer": "High-affinity guests of 4-sulfocalix[4]arene sodium salt (logKa ≥ 4.4) typically have a molecular weight of 400±364 g/mol, are neutral (formal charge +0), contain on average 2.4 ring system(s), 3.0 H-bond donor(s), and 3.1 H-bond acceptor(s). Representative guests: N,N'-dimethyl-1,4-diazabicyclo[2.2.2]octane, 1,3-Dimethylimidazolium, N-methyl pyridinium, Lucigenin, methyl viologen diiodide."
+    },
+    {
+      "id": "t3_fwd_5,11,17,23,29-pentaguanidinium-31,32,33,34,35-penta_(4-methylpentloxy)_calix[5]arene",
+      "subtype": "forward",
+      "host_name": "5,11,17,23,29-pentaguanidinium-31,32,33,34,35-penta (4-methylpentloxy) calix[5]arene",
+      "guest_name": null,
+      "guest_smiles": null,
+      "answer": "High-affinity guests of 5,11,17,23,29-pentaguanidinium-31,32,33,34,35-penta (4-methylpentloxy) calix[5]arene (logKa ≥ 7.1) typically have a molecular weight of 486±376 g/mol, are negatively charged (formal charge -4), contain on average 1.0 ring system(s), 0.5 H-bond donor(s), and 6.2 H-bond acceptor(s). Representative guests: clodronate, etidronate, lysophosphatidic acid, rose bengal."
+    },
+    {
+      "id": "t3_fwd_Calix[4]arene",
+      "subtype": "forward",
+      "host_name": "Calix[4]arene",
+      "guest_name": null,
+      "guest_smiles": null,
+      "answer": "High-affinity guests of Calix[4]arene (logKa ≥ 4.5) typically have a molecular weight of 149±49 g/mol, are neutral (formal charge +0), contain on average 0.1 ring system(s), 1.4 H-bond donor(s), and 1.5 H-bond acceptor(s). Representative guests: 1,4-Butanediammonium, N6-Dimethyllysine, Pentane-1,5-diamine, Lanthanum cation, Tetraethylammonium iodide."
+    },
+    {
+      "id": "t3_fwd_Cucurbit[5]uril",
+      "subtype": "forward",
+      "host_name": "Cucurbit[5]uril",
+      "guest_name": null,
+      "guest_smiles": null,
+      "answer": "High-affinity guests of Cucurbit[5]uril (logKa ≥ 4.0) typically have a molecular weight of 312±83 g/mol, are neutral (formal charge +0), contain on average 2.4 ring system(s), 0.0 H-bond donor(s), and 5.8 H-bond acceptor(s). Representative guests: Sanguinarine, Lanthanum(III) nitrate hexahydrate, Coptisine, Barium nitrate, Strontium nitrate."
+    },
+    {
+      "id": "t3_fwd_Cucurbit[6]uril",
+      "subtype": "forward",
+      "host_name": "Cucurbit[6]uril",
+      "guest_name": null,
+      "guest_smiles": null,
+      "answer": "High-affinity guests of Cucurbit[6]uril (logKa ≥ 4.0) typically have a molecular weight of 168±91 g/mol, are neutral (formal charge +0), contain on average 0.9 ring system(s), 0.6 H-bond donor(s), and 0.6 H-bond acceptor(s). Representative guests: 1-dodecyl-3-methylimidazol-3-ium bromide, cyclopropylmethanaminium, 4-(2-pyridyl)aniline, Iron(III) chloride, 1-heptyl-3-methylimidazol-3-ium bromide."
+    }
+  ],
+  "reverse": [
+    {
+      "id": "t3_rev_1,2-Dihydroxybenzene",
+      "subtype": "reverse",
+      "host_name": null,
+      "guest_name": "1,2-Dihydroxybenzene",
+      "guest_smiles": "C1=CC=C(C(=C1)O)O",
+      "answer": "High-affinity hosts for 1,2-Dihydroxybenzene (logKa ≥ 3.3) include: Tetrahydropyridazinophthalazine-tetraone functionalized Cucurbit[6]uril (logKa=5.5), Cucurbit[8]uril (logKa=4.2), Cyclobis(paraquat-1,4-phenylene) tetrakis(hexafluorophosphate) (logKa=3.6), (2-(((anthracen-9-ylmethyl)(methyl)amino)methyl)phenyl)boronic acid (logKa=3.3). The highest recorded logKa is 5.5. Favorable hosts are predominantly cucurbituril macrocycle (barrel-shaped, hydrophobic cavity, carbonyl-lined portals); macrocyclic host molecule."
+    },
+    {
+      "id": "t3_rev_1,4-phenylenedimethanaminium_chloride",
+      "subtype": "reverse",
+      "host_name": null,
+      "guest_name": "1,4-phenylenedimethanaminium chloride",
+      "guest_smiles": "[NH3+]Cc1ccc(cc1)C[NH3+].[Cl-].[Cl-]",
+      "answer": "High-affinity hosts for 1,4-phenylenedimethanaminium chloride (logKa ≥ 7.3) include: sodium sulfonated pillar[6]arene (logKa=8.3), carboxylate pillar[6]arene (logKa=7.8). The highest recorded logKa is 8.3. Favorable hosts are predominantly pillar[n]arene macrocycle (cylindrical, electron-rich cavity)."
+    },
+    {
+      "id": "t3_rev_1-Adamantanamine",
+      "subtype": "reverse",
+      "host_name": null,
+      "guest_name": "1-Adamantanamine",
+      "guest_smiles": "C1C2CC3CC1CC(C2)(C3)N",
+      "answer": "High-affinity hosts for 1-Adamantanamine (logKa ≥ 7.9) include: Cucurbit[8]uril (logKa=8.9), cucurbit[7]uril-tetraethylene glycol-berberine conjugate (logKa=8.0). The highest recorded logKa is 8.9. Favorable hosts are predominantly cucurbituril macrocycle (barrel-shaped, hydrophobic cavity, carbonyl-lined portals)."
+    },
+    {
+      "id": "t3_rev_1-Adamantylammonium_chloride",
+      "subtype": "reverse",
+      "host_name": null,
+      "guest_name": "1-Adamantylammonium chloride",
+      "guest_smiles": "C1C2CC3CC1CC(C2)(C3)[NH3+].[Cl-]",
+      "answer": "High-affinity hosts for 1-Adamantylammonium chloride (logKa ≥ 6.7) include: Monohydroxycucurbit[7]uril (logKa=11.0), carboxylate pillar[6]arene (logKa=7.3). The highest recorded logKa is 11.0. Favorable hosts are predominantly cucurbituril macrocycle (barrel-shaped, hydrophobic cavity, carbonyl-lined portals); pillar[n]arene macrocycle (cylindrical, electron-rich cavity)."
+    },
+    {
+      "id": "t3_rev_2,3-Diazabicyclo(2.2.2)oct-2-ene",
+      "subtype": "reverse",
+      "host_name": null,
+      "guest_name": "2,3-Diazabicyclo(2.2.2)oct-2-ene",
+      "guest_smiles": "C1CC2CCC1N=N2",
+      "answer": "High-affinity hosts for 2,3-Diazabicyclo(2.2.2)oct-2-ene (logKa ≥ 3.0) include: Cucurbit[8]uril (logKa=4.2), tetrasulfonato-tetrakis(n-butyl)-calix[4]arene (logKa=3.0), β-Cyclodextrin (logKa=3.0). The highest recorded logKa is 4.2. Favorable hosts are predominantly cucurbituril macrocycle (barrel-shaped, hydrophobic cavity, carbonyl-lined portals); calixarene macrocycle (cone-shaped, phenol-derived); cyclodextrin oligosaccharide (truncated-cone shape, hydrophobic interior)."
+    },
+    {
+      "id": "t3_rev_2,3-Diazabicyclo[2.2.1]-hept-2-ene",
+      "subtype": "reverse",
+      "host_name": null,
+      "guest_name": "2,3-Diazabicyclo[2.2.1]-hept-2-ene",
+      "guest_smiles": "C1CC2CC1N=N2",
+      "answer": "High-affinity hosts for 2,3-Diazabicyclo[2.2.1]-hept-2-ene (logKa ≥ 2.9) include: Cucurbit[8]uril (logKa=3.4), Cucurbit[6]uril (logKa=3.1), tetrasulfonato-tetrakis(n-butyl)-calix[4]arene (logKa=2.9). The highest recorded logKa is 3.4. Favorable hosts are predominantly cucurbituril macrocycle (barrel-shaped, hydrophobic cavity, carbonyl-lined portals); calixarene macrocycle (cone-shaped, phenol-derived)."
+    }
+  ]
+}
