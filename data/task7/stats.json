@@ -1,0 +1,26 @@
+{
+  "total_rows": 1955,
+  "unique_hosts": 40,
+  "unique_guests": 838,
+  "host_smiles_coverage": 1.0,
+  "guest_smiles_coverage": 0.6015345268542199,
+  "solvent_distribution": {
+    "water": 1819,
+    "MeOH": 94,
+    "CHCl3": 27,
+    "MeCN": 10,
+    "CH2Cl2": 3,
+    "DMSO": 2
+  },
+  "host_family_distribution": {
+    "CB[n]": 762,
+    "cyclodextrin": 391,
+    "sulfonato-calixarene": 340,
+    "other": 149,
+    "cavitand": 120,
+    "calixarene": 94,
+    "bambusuril": 38,
+    "crown_ether": 31,
+    "cyclophane": 30
+  }
+}
