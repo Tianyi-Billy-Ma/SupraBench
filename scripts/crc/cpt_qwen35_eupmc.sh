@@ -17,7 +17,7 @@
 # are also inert when this script is dispatched via `autoexp submit` — bash
 # ignores them, AutoExp's outer qsub already owns the GPU allocation.
 # ---------------------------------------------------------------------------
-set -euo pipefail
+set -eo pipefail   # not -u: ~/.bashrc -> /etc/bashrc references BASHRCSOURCED before defining it
 
 mkdir -p logs
 

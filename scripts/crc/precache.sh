@@ -12,7 +12,7 @@
 # before submitting GPU training. CPU-only, ~30-60 min wall depending on
 # bandwidth.
 # ---------------------------------------------------------------------------
-set -euo pipefail
+set -eo pipefail   # not -u: ~/.bashrc -> /etc/bashrc references BASHRCSOURCED before defining it
 
 mkdir -p logs
 
