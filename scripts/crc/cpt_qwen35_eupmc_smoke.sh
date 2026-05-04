@@ -13,7 +13,7 @@
 # seq_len=1024. Verifies model loads with FSDP, vision tower is frozen,
 # LoRA params are trainable, loss decreases. ~15-30 min wall.
 # ---------------------------------------------------------------------------
-set -euo pipefail
+set -eo pipefail   # not -u: ~/.bashrc -> /etc/bashrc references BASHRCSOURCED before defining it
 
 mkdir -p logs
 
