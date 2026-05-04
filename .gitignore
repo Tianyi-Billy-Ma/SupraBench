@@ -26,3 +26,11 @@ outputs/**
 .idea/
 .vscode/
 *.swp
+
+# models
+models
+
+#dataset
+supra-vqa
+results
+logs
