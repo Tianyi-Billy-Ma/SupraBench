@@ -15,7 +15,6 @@ set -euo pipefail
 TASK=${1:-"task1"}
 PYTHON=${PYTHON:-python}
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-CONCURRENCY=${CONCURRENCY:-8}
 
 MODEL_CONFIGS=(
     "configs/models/openrouter_gpt54mini.yaml"
@@ -55,8 +54,7 @@ for MODEL_CFG in "${MODEL_CONFIGS[@]}"; do
         $PYTHON src/main.py \
             --task-config  "${TASK_CFG}" \
             --model-config "${MODEL_CFG}" \
-            --output-dir   outputs/ \
-            --concurrency  "${CONCURRENCY}"
+            --output-dir   outputs/
         echo
     done
 done
