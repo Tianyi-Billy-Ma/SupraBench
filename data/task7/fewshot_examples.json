@@ -1,0 +1,44 @@
+[
+  {
+    "interaction_id": 61,
+    "label": "water",
+    "letter": "A",
+    "host": "Cucurbit[8]uril",
+    "guest": "Testosterone"
+  },
+  {
+    "interaction_id": 7668,
+    "label": "DMSO",
+    "letter": "B",
+    "host": "Dodecabenzylbambus[6]uril",
+    "guest": "Tetrafluoroborate"
+  },
+  {
+    "interaction_id": 4272,
+    "label": "MeCN",
+    "letter": "C",
+    "host": "18-Crown-6",
+    "guest": "Lithium perchlorate"
+  },
+  {
+    "interaction_id": 4318,
+    "label": "MeOH",
+    "letter": "D",
+    "host": "15-crown-5",
+    "guest": "Lithium perchlorate"
+  },
+  {
+    "interaction_id": 7618,
+    "label": "CHCl3",
+    "letter": "E",
+    "host": "Dodecamethylbambus[6]uril",
+    "guest": "Chloride anion"
+  },
+  {
+    "interaction_id": 7484,
+    "label": "CH2Cl2",
+    "letter": "F",
+    "host": "Dodecamethylbambus[6]uril",
+    "guest": "Sodium hydrosulfide hydrate"
+  }
+]

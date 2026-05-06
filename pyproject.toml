@@ -1,0 +1,61 @@
+[project]
+name = "suprabench"
+version = "0.1.0"
+description = "Supramolecular benchmark for evaluating LLMs on supramolecular-chemistry tasks."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Tianyi-Billy-Ma", email = "matianyibilly@gmail.com" },
+]
+
+# Runtime dependencies shared across datasets / eval / inference / models.
+# Keep this list deliberately small; add per-backend features via extras.
+dependencies = [
+    "pyyaml>=6.0",
+    "tqdm>=4.66",
+    "numpy>=1.26",
+    "pandas>=2.2",
+]
+
+[project.optional-dependencies]
+# Local inference via HuggingFace Transformers / vLLM.
+# torch is pinned to 2.8.x because flash-attn 2.8.3 (the latest stable
+# pre-built wheel line) does not ship a torch-2.10 build. Bumping torch
+# requires a matching flash-attn release; track Dao-AILab/flash-attention.
+hf = [
+    "torch>=2.8,<2.9",
+    "transformers>=4.50",
+    "accelerate>=0.33",
+    "datasets>=2.20",
+    "peft>=0.12",
+    "trl>=0.10",
+    "bitsandbytes>=0.43",
+    "deepspeed>=0.15",
+    "wandb>=0.17",
+    "sentencepiece>=0.2",
+    "tiktoken>=0.7",
+]
+vllm = [
+    "vllm>=0.6.0",
+]
+# Hosted-API inference (OpenAI / Anthropic / Qwen / etc.).
+api = [
+    "openai>=1.40",
+    "anthropic>=0.34",
+    "httpx>=0.27",
+]
+# Developer tooling.
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[tool.uv]
+# The project is not distributed as a wheel; it is a workspace of scripts
+# invoked via `uv run python src/main.py ...`. `package = false` keeps uv from
+# trying to build a distribution for the repo itself.
+package = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

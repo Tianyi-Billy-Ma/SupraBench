@@ -1,0 +1,71 @@
+# Continued pretraining of Qwen3.5-27B (vision-language) on the EU-PMC
+# supramolecular-chemistry corpus, with vision tower frozen and LoRA on
+# the language-model attention + MLP projections.
+#
+# Override any field at the CLI: --override key=value (see cpt_lora.py).
+
+run_name: qwen3_5-27b-eupmc-lora
+
+model:
+  model_id: Qwen/Qwen3.5-27B
+  trust_remote_code: true
+  dtype: bfloat16
+  attn_implementation: flash_attention_2
+  language_model_path: model.language_model   # Qwen3.5: model.language_model.layers.N.self_attn.{q,k,v,o}_proj
+  freeze_keywords:                       # any module whose name contains one of
+    - vision                             # these substrings is frozen and excluded
+    - visual                             # from LoRA target search
+    - image_encoder
+    - mm_projector
+    - merger
+    - patch_embed
+
+lora:
+  r: 64
+  alpha: 128
+  dropout: 0.05
+  bias: none
+  target_module_names:                   # short suffixes inside language_model
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+dataset:
+  hub_id: mtybilly/EU-PMC
+  split: filtered                        # 133,867 articles
+  text_template: "{title}\n\n{abstract}"
+  title_field: title
+  abstract_field: abstract
+  seq_len: 4096
+  num_proc: 8
+
+training:
+  output_dir: outputs/cpt_qwen35_eupmc
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 4
+  num_train_epochs: 2
+  learning_rate: 2.0e-5                  # ~1/10 of Qwen3 base peak LR
+  weight_decay: 0.0
+  warmup_ratio: 0.03
+  lr_scheduler_type: cosine              # WSD is a future swap; cosine for v1
+  logging_steps: 10
+  save_steps: 200      # frequent enough to bound loss of progress on a crash / preemption
+  save_total_limit: 3
+  bf16: true
+  gradient_checkpointing: true
+  ddp_find_unused_parameters: false
+  report_to: wandb
+  seed: 42
+
+# Smoke-test overrides (used by cpt_qwen35_eupmc_smoke.sh via --override).
+# Documented here for discoverability:
+# smoke:
+#   training.max_steps: 20
+#   dataset.train_rows: 256
+#   dataset.seq_len: 1024
+#   training.gradient_accumulation_steps: 1
+#   training.save_steps: 50
