@@ -1,0 +1,6 @@
+name: deepseek-v4-pro
+backend: openai
+model_id: or-deepseek-v4-pro-no-thinking   # resolved via MODEL_ALIASES → thinking disabled
+provider: openrouter
+generation:
+  max_completion_tokens: 8192

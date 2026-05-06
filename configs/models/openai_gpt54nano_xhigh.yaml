@@ -1,0 +1,4 @@
+name: gpt-5.4-nano-xhigh
+backend: openai
+model_id: gpt-5.4-nano-xhigh   # resolved via MODEL_ALIASES → reasoning_effort=xhigh
+provider: openai

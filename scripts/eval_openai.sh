@@ -1,0 +1,57 @@
+#!/bin/bash
+# eval_openai.sh — run task1/task2 benchmarks via the OpenAI API.
+#
+# Usage:
+#   export OPENAI_API_KEY=sk-...
+#   bash scripts/eval_openai.sh task1   # runs base/fewshot/cot × all OpenAI models
+#   bash scripts/eval_openai.sh task2
+#
+# nohup bash scripts/eval_openai.sh task1 > outputs/eval_openai_task1.log 2>&1 &
+#
+# IMPORTANT: set OPENAI_API_KEY in your environment — do NOT hardcode it here.
+
+set -euo pipefail
+
+TASK=${1:-"task1"}
+PYTHON=${PYTHON:-python}
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+CONCURRENCY=${CONCURRENCY:-8}
+
+MODEL_CONFIGS=(
+    "configs/models/openai_gpt54mini.yaml"
+    "configs/models/openai_gpt54nano_xhigh.yaml"
+)
+
+TASK_CONFIGS=(
+    "configs/tasks/${TASK}_base.yaml"
+    "configs/tasks/${TASK}_fewshot.yaml"
+    "configs/tasks/${TASK}_cot.yaml"
+)
+
+cd "$REPO_ROOT"
+mkdir -p outputs
+
+N_TOTAL=$(( ${#MODEL_CONFIGS[@]} * ${#TASK_CONFIGS[@]} ))
+RUN=0
+
+echo "=== SupraBench — OpenAI (${TASK}) ==="
+echo "Models   : ${#MODEL_CONFIGS[@]}"
+echo "Variants : ${#TASK_CONFIGS[@]}"
+echo "Total    : ${N_TOTAL} runs"
+echo "Time     : $(date)"
+echo
+
+for MODEL_CFG in "${MODEL_CONFIGS[@]}"; do
+    for TASK_CFG in "${TASK_CONFIGS[@]}"; do
+        RUN=$(( RUN + 1 ))
+        echo "── [${RUN}/${N_TOTAL}] ${MODEL_CFG} × ${TASK_CFG} ──"
+        $PYTHON src/main.py \
+            --task-config  "${TASK_CFG}" \
+            --model-config "${MODEL_CFG}" \
+            --output-dir   outputs/ \
+            --concurrency  "${CONCURRENCY}"
+        echo
+    done
+done
+
+echo "=== All runs done: $(date) ==="

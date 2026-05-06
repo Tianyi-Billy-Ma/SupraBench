@@ -1,0 +1,6 @@
+name: llama-3.1-70b
+backend: openai
+model_id: meta-llama/llama-3.1-70b-instruct
+provider: openrouter
+generation:
+  max_completion_tokens: 8192

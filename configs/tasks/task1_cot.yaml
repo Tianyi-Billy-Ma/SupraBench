@@ -1,0 +1,4 @@
+name: task1_cot
+dataset: task1
+evaluator: task1
+data_path: data/task1/cot.jsonl

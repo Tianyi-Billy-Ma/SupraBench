@@ -1,0 +1,6 @@
+name: qwen3.5-27b
+backend: openai
+model_id: or-qwen3.5-27b-no-thinking
+provider: openrouter
+generation:
+  max_completion_tokens: 8192
