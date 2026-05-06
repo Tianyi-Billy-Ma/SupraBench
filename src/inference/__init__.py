@@ -11,6 +11,6 @@ from .base import InferenceBackend, build_inference_backend, register_backend
 
 # Side-effect imports — populate the backend registry.
 from . import example       # noqa: F401
-from . import openai_api    # noqa: F401
+from . import task1_2       # noqa: F401
 
 __all__ = ["InferenceBackend", "build_inference_backend", "register_backend"]
