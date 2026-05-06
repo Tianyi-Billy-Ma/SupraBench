@@ -2,7 +2,7 @@
 
 :mod:`inference.example` is the canonical reference backend — HF
 Transformers with single-node multi-GPU sharding via
-``device_map="auto"``. New backends (vLLM, OpenAI, Anthropic, ...) go in
+``device_map="auto"``. New backends (OpenRouter, vLLM, ...) go in
 sibling modules and register themselves via
 :func:`register_backend`.
 """

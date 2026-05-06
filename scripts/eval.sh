@@ -1,12 +1,12 @@
 #!/bin/bash
-# eval_openrouter.sh — run task1/task2 benchmarks via the OpenRouter API.
+# eval.sh — run task1/task2 benchmarks via the OpenRouter API.
 #
 # Usage:
 #   export OPENROUTER_API_KEY=sk-or-v1-...
-#   bash scripts/eval_openrouter.sh task1
-#   bash scripts/eval_openrouter.sh task2
+#   bash scripts/eval.sh task1
+#   bash scripts/eval.sh task2
 #
-# nohup bash scripts/eval_openrouter.sh task1 > outputs/eval_openrouter_task1.log 2>&1 &
+# nohup bash scripts/eval.sh task1 > outputs/eval_task1.log 2>&1 &
 #
 # IMPORTANT: set OPENROUTER_API_KEY in your environment — do NOT hardcode it here.
 
@@ -39,7 +39,7 @@ mkdir -p outputs
 N_TOTAL=$(( ${#MODEL_CONFIGS[@]} * ${#TASK_CONFIGS[@]} ))
 RUN=0
 
-echo "=== SupraBench — OpenRouter (${TASK}) ==="
+echo "=== SupraBench (${TASK}) ==="
 echo "Models   : ${#MODEL_CONFIGS[@]}"
 echo "Variants : ${#TASK_CONFIGS[@]}"
 echo "Total    : ${N_TOTAL} runs"
