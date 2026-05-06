@@ -18,6 +18,8 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONCURRENCY=${CONCURRENCY:-8}
 
 MODEL_CONFIGS=(
+    "configs/models/openrouter_gpt54mini.yaml"
+    "configs/models/openrouter_gpt54nano_xhigh.yaml"
     "configs/models/openrouter_qwen35_9b.yaml"
     "configs/models/openrouter_qwen35_27b.yaml"
     "configs/models/openrouter_llama31_8b.yaml"

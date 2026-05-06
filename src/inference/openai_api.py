@@ -34,6 +34,11 @@ OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 # Aliases: logical name → {model_id, extra_body}
 # extra_body → merged into extra_body dict for OpenRouter reasoning params
 MODEL_ALIASES: dict[str, dict[str, Any]] = {
+    # ── GPT ──────────────────────────────────────────────────────────────────────
+    "or-gpt-5.4-nano-xhigh": {
+        "model_id":   "openai/gpt-5.4-nano",
+        "extra_body": {"reasoning": {"effort": "xhigh"}},
+    },
     # ── DeepSeek ────────────────────────────────────────────────────────────────
     "or-deepseek-v4-pro-no-thinking": {
         "model_id":   "deepseek/deepseek-v4-pro",
