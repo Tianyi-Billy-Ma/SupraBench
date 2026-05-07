@@ -1,0 +1,15 @@
+name: qwen3.5-27b-base
+
+backend: hf_peft
+model_id: Qwen/Qwen3.5-27B
+
+# No adapter_path → loads the base model only (no-DAPT baseline).
+
+dtype: bfloat16
+device_map: auto
+
+strip_thinking: true
+
+generation:
+  max_new_tokens: 1024
+  do_sample: false

@@ -12,6 +12,7 @@ from .base import InferenceBackend, build_inference_backend, register_backend
 
 # Side-effect imports — populate the backend registry.
 from . import example     # noqa: F401  (key: "example")
+from . import hf_peft     # noqa: F401  (key: "hf_peft")
 from . import openrouter  # noqa: F401  (key: "openrouter")
 
 __all__ = ["InferenceBackend", "build_inference_backend", "register_backend"]

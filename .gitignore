@@ -28,7 +28,7 @@ outputs/**
 *.swp
 
 # models
-models
+/models/
 
 #dataset
 supra-vqa
