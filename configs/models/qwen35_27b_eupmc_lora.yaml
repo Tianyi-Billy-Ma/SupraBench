@@ -4,9 +4,12 @@ backend: hf_peft
 model_id: Qwen/Qwen3.5-27B
 
 # LoRA adapter produced by HF Trainer + Accelerate FSDP.
-# PeftModel.from_pretrained resolves adapter_model.safetensors +
-# adapter_config.json automatically from the checkpoint directory.
-adapter_path: /groups/yye7/BILLY/SupraBench/outputs/cpt_qwen35_eupmc/checkpoint-1302
+# Training used SHARDED_STATE_DICT, so the raw checkpoint-NNNN/ dirs are
+# DCP shards rather than the standard PEFT format. tools/
+# fsdp_to_peft_adapter.py extracts them into adapter_config.json +
+# adapter_model.safetensors at the path below; PeftModel.from_pretrained
+# then resolves both automatically.
+adapter_path: /groups/yye7/BILLY/SupraBench/outputs/cpt_qwen35_eupmc/adapter
 
 dtype: bfloat16
 device_map: auto
