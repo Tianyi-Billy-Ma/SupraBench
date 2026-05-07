@@ -10,13 +10,18 @@ Model aliases allow reasoning-mode control without changing configs:
 
 Usage in a model YAML::
 
-    backend: openai
+    backend: openrouter
     model_id: anthropic/claude-sonnet-4-6
     generation:
       max_completion_tokens: 8192
 
 Concurrency is handled by ``main.py`` (``--concurrency`` flag), which
 calls ``generate()`` from a ``ThreadPoolExecutor``.
+
+The ``openai`` package is lazy-imported inside ``__init__`` so the
+backend registry can be loaded in environments without the ``api``
+extra installed (e.g. CRC training nodes that only have the ``hf``
+extra).
 """
 
 from __future__ import annotations
@@ -24,8 +29,6 @@ from __future__ import annotations
 import os
 import time
 from typing import Any
-
-from openai import OpenAI
 
 from .base import InferenceBackend, register_backend
 
@@ -67,6 +70,10 @@ class OpenRouterBackend(InferenceBackend):
 
     def __init__(self, config: dict[str, Any]) -> None:
         super().__init__(config)
+        # Lazy import: keeps the registry import safe in envs without
+        # the `api` extra (e.g. CRC nodes with only `hf` installed).
+        from openai import OpenAI
+
         api_key = os.environ.get("OPENROUTER_API_KEY", "")
         self._client = OpenAI(api_key=api_key, base_url=OPENROUTER_BASE_URL)
 
