@@ -1,0 +1,6 @@
+name: claude-sonnet-4.6
+backend: openrouter
+model_id: anthropic/claude-sonnet-4-6
+provider: openrouter
+generation:
+  max_completion_tokens: 8192

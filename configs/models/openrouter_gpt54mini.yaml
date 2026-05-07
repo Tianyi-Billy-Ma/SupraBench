@@ -1,0 +1,6 @@
+name: gpt-5.4-mini
+backend: openrouter
+model_id: openai/gpt-5.4-mini
+provider: openrouter
+generation:
+  max_completion_tokens: 8192

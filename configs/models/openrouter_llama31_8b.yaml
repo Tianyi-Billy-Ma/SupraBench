@@ -1,0 +1,6 @@
+name: llama-3.1-8b
+backend: openrouter
+model_id: meta-llama/llama-3.1-8b-instruct
+provider: openrouter
+generation:
+  max_completion_tokens: 8192

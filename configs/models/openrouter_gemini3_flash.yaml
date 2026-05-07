@@ -1,0 +1,6 @@
+name: gemini-3-flash
+backend: openrouter
+model_id: gemini-3-flash-no-thinking   # resolved via MODEL_ALIASES → thinking disabled
+provider: openrouter
+generation:
+  max_completion_tokens: 8192

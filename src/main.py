@@ -3,8 +3,8 @@
 Usage (from the repository root):
 
     uv run python src/main.py \
-        --task-config configs/tasks/task1.yaml \
-        --model-config configs/models/qwen3.yaml \
+        --task-config configs/tasks/task1_base.yaml \
+        --model-config configs/models/openrouter_claude_sonnet46.yaml \
         --output-dir outputs/
 
 The main loop:
@@ -17,9 +17,6 @@ The main loop:
 
 Artifacts land in a flat directory named ``<task>_<model>/`` under
 ``--output-dir`` (default: ``outputs/``).
-
-Each step is dispatched through a small registry so new tasks / models /
-evaluators can be added without touching this file.
 """
 
 from __future__ import annotations
@@ -27,6 +24,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from pathlib import Path
 
 import yaml
@@ -83,10 +81,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def run(args: argparse.Namespace) -> None:
-    task_cfg = _load_yaml(args.task_config)
+    task_cfg  = _load_yaml(args.task_config)
     model_cfg = _load_yaml(args.model_config)
 
-    task_name = task_cfg.get("name") or args.task_config.stem
+    task_name  = task_cfg.get("name")  or args.task_config.stem
     model_name = model_cfg.get("name") or args.model_config.stem
 
     run_dir = args.output_dir / f"{task_name}_{model_name}"
@@ -96,24 +94,45 @@ def run(args: argparse.Namespace) -> None:
     backend = build_inference_backend(model_cfg)
 
     predictions_path = run_dir / "predictions.jsonl"
+
+    # ── Inference ─────────────────────────────────────────────────────────────
+    t0      = time.time()
+    records = []
+    total   = sum(1 for _ in build_dataset(task_cfg, limit=args.limit))
+
+    for i, example in enumerate(dataset, 1):
+        prediction = backend.generate(example.prompt)
+        records.append({
+            "id":         example.id,
+            "prompt":     example.prompt,
+            "prediction": prediction,
+            "reference":  example.reference,
+            "metadata":   example.metadata,
+        })
+        if i % 32 == 0 or i == total:
+            print(f"  {i}/{total}  ({time.time() - t0:.0f}s)")
+
     with predictions_path.open("w", encoding="utf-8") as fh:
-        for example in dataset:
-            prediction = backend.generate(example.prompt)
-            record = {
-                "id": example.id,
-                "prompt": example.prompt,
-                "prediction": prediction,
-                "reference": example.reference,
-            }
-            fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+        for rec in records:
+            fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+
+    print(f"\nInference done in {time.time() - t0:.1f}s  |  output: {predictions_path}")
 
     if args.skip_eval:
         return
 
+    # ── Evaluation ────────────────────────────────────────────────────────────
     evaluator = build_evaluator(task_cfg)
-    metrics = evaluator.evaluate(predictions_path)
-    with (run_dir / "metrics.json").open("w", encoding="utf-8") as fh:
+    metrics   = evaluator.evaluate(predictions_path)
+
+    metrics_path = run_dir / "metrics.json"
+    with metrics_path.open("w", encoding="utf-8") as fh:
         json.dump(metrics, fh, indent=2, ensure_ascii=False)
+    print(f"Metrics saved → {metrics_path}")
+
+    scalar = {k: v for k, v in metrics.items() if isinstance(v, (int, float))}
+    for k, v in scalar.items():
+        print(f"  {k}: {v:.4f}" if isinstance(v, float) else f"  {k}: {v}")
 
 
 def main(argv: list[str] | None = None) -> None:

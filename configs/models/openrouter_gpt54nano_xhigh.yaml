@@ -1,0 +1,6 @@
+name: gpt-5.4-nano-xhigh
+backend: openrouter
+model_id: or-gpt-5.4-nano-xhigh   # resolved via MODEL_ALIASES → reasoning effort=xhigh
+provider: openrouter
+generation:
+  max_completion_tokens: 32768

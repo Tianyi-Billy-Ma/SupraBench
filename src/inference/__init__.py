@@ -1,15 +1,17 @@
 """Inference backends for SupraBench.
 
-:mod:`inference.example` is the canonical reference backend — HF
-Transformers with single-node multi-GPU sharding via
-``device_map="auto"``. New backends (vLLM, OpenAI, Anthropic, ...) go in
-sibling modules and register themselves via
-:func:`register_backend`.
+:mod:`inference.example` is the canonical local-HF backend (single-node
+multi-GPU sharding via ``device_map="auto"``).
+:mod:`inference.openrouter` is the hosted backend for closed and open
+models served behind the OpenRouter chat-completions API.
+New backends (vLLM, Anthropic-direct, …) go in sibling modules and
+register themselves via :func:`register_backend`.
 """
 
 from .base import InferenceBackend, build_inference_backend, register_backend
 
-# Side-effect import — populates the backend registry with "example".
-from . import example  # noqa: F401
+# Side-effect imports — populate the backend registry.
+from . import example     # noqa: F401  (key: "example")
+from . import openrouter  # noqa: F401  (key: "openrouter")
 
 __all__ = ["InferenceBackend", "build_inference_backend", "register_backend"]
