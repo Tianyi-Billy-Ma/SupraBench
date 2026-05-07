@@ -1,0 +1,7 @@
+name: task3_fewshot
+dataset: task3
+evaluator: task3
+data_path: data/task3/task3.jsonl
+prompt:
+  fewshot_k: 6
+  thinking: false

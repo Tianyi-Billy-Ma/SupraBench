@@ -13,7 +13,9 @@ from .acc import compute_acc
 from .bertscore import compute_bertscore
 from .em import compute_em
 from .f1 import compute_f1
+from .kh import compute_kh
 from .mae import compute_mae
+from .multiclass_f1 import compute_multiclass_f1
 from .rmse import compute_rmse
 from .rouge import compute_rouge
 
@@ -22,7 +24,9 @@ __all__ = [
     "compute_bertscore",
     "compute_em",
     "compute_f1",
+    "compute_kh",
     "compute_mae",
+    "compute_multiclass_f1",
     "compute_rmse",
     "compute_rouge",
 ]
