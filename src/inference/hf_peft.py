@@ -20,6 +20,8 @@ Config (from ``configs/models/<model>.yaml``)::
                              # inference, higher RAM usage); default false
     system_prompt: null      # null → models.qwen3.DEFAULT_SYSTEM_PROMPT
     strip_thinking: true     # drop <think>...</think> from stored prediction
+    batch_size: 8            # batched generation (generate_many) — bigger is
+                             # faster up to GPU memory limits
     generation:
       max_new_tokens: 1024
       do_sample: false
@@ -104,34 +106,67 @@ class HFPeftBackend(InferenceBackend):
             "system_prompt", qwen3.DEFAULT_SYSTEM_PROMPT
         )
         self.strip_thinking_blocks: bool = bool(config.get("strip_thinking", True))
+        self.batch_size: int = int(config.get("batch_size", 8))
 
-    def generate(self, prompt: str) -> str:
-        import torch
+        # Causal LMs need left-padding so generated tokens align with the end
+        # of each sequence; right-padding produces nonsense for batches.
+        if self.tokenizer.pad_token_id is None:
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+        self.tokenizer.padding_side = "left"
 
-        messages = qwen3.build_messages(prompt, system_prompt=self.system_prompt)
+    def _render(self, prompt: str) -> str:
         # Qwen3.5 uses the same apply_chat_template interface as Qwen3.
         # enable_thinking is omitted (defaults to off) since the LoRA adapter
         # was trained without thinking mode; strip_thinking still runs to
         # catch any residual <think> blocks in completions.
-        chat_text: str = self.tokenizer.apply_chat_template(
+        messages = qwen3.build_messages(prompt, system_prompt=self.system_prompt)
+        return self.tokenizer.apply_chat_template(
             messages,
             tokenize=False,
             add_generation_prompt=True,
         )
-        inputs = self.tokenizer([chat_text], return_tensors="pt").to(self.model.device)
 
-        with torch.inference_mode():
-            outputs = self.model.generate(
-                **inputs,
-                pad_token_id=self.tokenizer.eos_token_id,
-                **self.generation_kwargs,
-            )
-
-        # Return only the newly generated tokens (strip the prompt prefix).
-        prompt_len: int = inputs["input_ids"].shape[-1]
-        completion_ids = outputs[0][prompt_len:]
-        text: str = self.tokenizer.decode(completion_ids, skip_special_tokens=True)
-
+    def _post(self, text: str) -> str:
         if self.strip_thinking_blocks:
             text = qwen3.strip_thinking(text)
         return text
+
+    def generate(self, prompt: str) -> str:
+        return self.generate_many([prompt])[0]
+
+    def generate_many(self, prompts: list[str]) -> list[str]:
+        import torch
+
+        rendered = [self._render(p) for p in prompts]
+        results: list[str] = []
+        bs = max(1, self.batch_size)
+        n = len(rendered)
+        for i in range(0, n, bs):
+            chunk = rendered[i:i + bs]
+            inputs = self.tokenizer(
+                chunk,
+                return_tensors="pt",
+                padding=True,
+                truncation=True,
+                max_length=self.config.get("max_input_length", 4096),
+            ).to(self.model.device)
+
+            with torch.inference_mode():
+                outputs = self.model.generate(
+                    **inputs,
+                    pad_token_id=self.tokenizer.pad_token_id,
+                    **self.generation_kwargs,
+                )
+
+            # Strip the (left-padded) prompt prefix: each row's prompt is the
+            # first ``input_len`` tokens of inputs, so completion is everything
+            # after that. With left-padding, all rows share the same
+            # ``input_ids.shape[-1]``.
+            prompt_len = inputs["input_ids"].shape[-1]
+            completion_ids = outputs[:, prompt_len:]
+            texts = self.tokenizer.batch_decode(
+                completion_ids, skip_special_tokens=True
+            )
+            results.extend(self._post(t) for t in texts)
+            print(f"  hf_peft: {min(i + bs, n)}/{n}", flush=True)
+        return results

@@ -22,6 +22,9 @@ merge_adapter: false
 # thinking mode, but the base model may still emit reasoning tokens).
 strip_thinking: true
 
+batch_size: 8        # generate_many batches this many prompts per forward
+max_input_length: 3584   # truncate prompt to leave room for max_new_tokens
+
 generation:
-  max_new_tokens: 1024
+  max_new_tokens: 512   # most answers fit comfortably; smaller = faster
   do_sample: false
