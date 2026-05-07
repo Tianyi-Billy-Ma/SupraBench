@@ -1,0 +1,18 @@
+# Local Qwen3-VL-4B-Instruct via vLLM. Used by the VQA tasks (logka,
+# identification). Adjust max_new_tokens per task: 64 for logka (single
+# float), 256 for identification (SMILES strings).
+
+name: qwen3-vl-4b
+backend: vllm
+model_id: /home/wsun4/aisci_data/Qwen3-VL-4B-Instruct
+dtype: bfloat16
+gpu_memory_utilization: 0.88
+max_model_len: 8192
+# Bumped to 8 to fit fewshot demos: logka has 2 imgs/example, so k=3
+# fewshot demos + query = 4*2 = 8. Identification (1 img/example) needs
+# only 4; 8 is harmless.
+limit_mm_per_prompt:
+  image: 8
+generation:
+  max_new_tokens: 256
+  temperature: 0.0

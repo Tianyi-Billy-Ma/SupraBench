@@ -1,0 +1,12 @@
+# vqa_identification with prompt.mode=cot — appends "Let's think step
+# by step." to the prompt. Output goes to outputs/vqa_identification_cot_<model>/.
+
+name: vqa_identification_cot
+dataset: vqa_identification
+evaluator: vqa_identification
+data_path: supra-vqa/identification.csv
+data_root: supra-vqa
+prompt:
+  mode: cot
+  fewshot_k: 3
+  seed: 42

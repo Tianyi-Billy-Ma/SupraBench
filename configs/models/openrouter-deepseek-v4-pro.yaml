@@ -1,0 +1,12 @@
+# DeepSeek V4 Pro via OpenRouter.
+# WARNING: TEXT-ONLY model (verified against OpenRouter API metadata
+# 2026-04-30: input modalities = ['text']). Won't accept image_url
+# content; use only for text tasks or pair with strip_images: true on
+# VQA for a text-only baseline.
+
+name: openrouter-deepseek-v4-pro
+backend: openrouter
+model_id: deepseek/deepseek-v4-pro
+generation:
+  max_new_tokens: 2048
+  temperature: 0.0

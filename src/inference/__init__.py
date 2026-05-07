@@ -11,5 +11,6 @@ from .base import InferenceBackend, build_inference_backend, register_backend
 
 # Side-effect import — populates the backend registry with "example".
 from . import example  # noqa: F401
+from . import openrouter, vllm  # noqa: F401
 
 __all__ = ["InferenceBackend", "build_inference_backend", "register_backend"]

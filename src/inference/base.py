@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Any, Callable
+from typing import TYPE_CHECKING, Any, Callable
+
+if TYPE_CHECKING:
+    from datasets.base import Example
 
 
 class InferenceBackend(ABC):
@@ -15,8 +18,13 @@ class InferenceBackend(ABC):
         self.config = config
 
     @abstractmethod
-    def generate(self, prompt: str) -> str:
-        """Return the model's completion for a single prompt."""
+    def generate(self, example: "Example") -> str:
+        """Return the model's completion for a single example.
+
+        Text-only backends should read ``example.prompt``. Multimodal
+        backends additionally consume ``example.images`` (a list of PIL
+        images, or ``None`` for text-only inputs).
+        """
 
 
 _REGISTRY: dict[str, type[InferenceBackend]] = {}

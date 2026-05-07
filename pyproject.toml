@@ -27,11 +27,17 @@ hf = [
 vllm = [
     "vllm>=0.6.0",
 ]
-# Hosted-API inference (OpenAI / Anthropic / Qwen / etc.).
+# Hosted-API inference (OpenAI / Anthropic / Qwen / OpenRouter / etc.).
 api = [
     "openai>=1.40",
     "anthropic>=0.34",
     "httpx>=0.27",
+    "python-dotenv>=1.0",
+]
+# Multimodal VQA tasks (image rendering + chemistry-aware SMILES eval).
+vqa = [
+    "pillow>=10.0",
+    "rdkit>=2024.3.1",
 ]
 # Developer tooling.
 dev = [

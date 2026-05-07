@@ -1,0 +1,13 @@
+# vqa_identification with prompt.mode=base. Output goes to
+# outputs/vqa_identification_base_<model>/. Use the _fewshot / _cot
+# sibling configs to run the other two prompting baselines.
+
+name: vqa_identification_base
+dataset: vqa_identification
+evaluator: vqa_identification
+data_path: supra-vqa/identification.csv
+data_root: supra-vqa
+prompt:
+  mode: base
+  fewshot_k: 3
+  seed: 42

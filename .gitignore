@@ -21,16 +21,20 @@ outputs/**
 !outputs/.gitignore
 !outputs/README.md
 
+# Secrets — real .env is local-only (.env.example is the template).
+.env
+
 # OS / editor cruft
 .DS_Store
 .idea/
 .vscode/
 *.swp
 
-# models
-models
+# Local model weights (downloaded checkpoints) — top-level only, so this
+# does not accidentally ignore configs/models/ or src/models/.
+/models/
 
-#dataset
-supra-vqa
-results
-logs
+# Local dataset checkout + run artifacts (top-level only).
+/supra-vqa/
+/results/
+/logs/

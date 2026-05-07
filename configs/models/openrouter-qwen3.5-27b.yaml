@@ -1,0 +1,12 @@
+# Qwen 3.5 27B via OpenRouter. Multimodal (text + image + video input).
+# Reasoning model — see openrouter-qwen3.5-9b.yaml for max_tokens / effort rationale.
+# Verified against https://openrouter.ai/api/v1/models on 2026-04-30.
+
+name: openrouter-qwen3.5-27b
+backend: openrouter
+model_id: qwen/qwen3.5-27b
+generation:
+  max_new_tokens: 2048
+  temperature: 0.0
+reasoning:
+  enabled: false   # see openrouter-qwen3.5-9b.yaml for rationale.

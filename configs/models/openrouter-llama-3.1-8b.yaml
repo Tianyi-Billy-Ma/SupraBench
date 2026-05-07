@@ -1,0 +1,13 @@
+# Llama 3.1 8B Instruct via OpenRouter.
+# WARNING: TEXT-ONLY model (verified against OpenRouter API metadata
+# 2026-04-30: input modalities = ['text']). The VQA tasks pass images
+# on Example.images, and OpenRouter rejects image_url content for
+# text-only models. Use this config only for text tasks, or pair it
+# with strip_images: true if you want a text-only baseline on VQA.
+
+name: openrouter-llama-3.1-8b
+backend: openrouter
+model_id: meta-llama/llama-3.1-8b-instruct
+generation:
+  max_new_tokens: 2048
+  temperature: 0.0

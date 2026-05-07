@@ -15,12 +15,31 @@ class Example:
     must be produced through :mod:`templates` (``generate_prompt`` /
     ``generate_options``) — never hand-format it here. Divergence in prompt
     layout across tasks or models defeats the point of a shared benchmark.
+
+    ``images`` is for multimodal tasks (e.g. VQA). Text-only tasks leave it
+    ``None``; multimodal datasets populate it with a list of PIL images (or
+    image references the backend understands). Backends that don't support
+    images ignore the field; vision backends pull from it.
+
+    ``fewshot_demos`` is the chat-level fewshot channel for multimodal tasks:
+    each entry is a dict with keys ``answer`` (str — wrapped in <answer></answer>
+    in the assistant turn) and ``images`` (list of PIL images, possibly empty).
+    The user-text in each demo turn is the same rendered ``prompt`` as the
+    final query (the task instruction is uniform), so it is not stored
+    per-demo. Backends interleave demos as alternating user/assistant turns
+    before the final query turn.
+
+    Text-only fewshot continues to live inside ``prompt`` itself, rendered
+    by :func:`templates.generate_prompt` via its ``fewshot_examples``
+    parameter — leave ``fewshot_demos`` ``None`` for text-only tasks.
     """
 
     id: str
     prompt: str
     reference: Any = None
     metadata: dict[str, Any] = field(default_factory=dict)
+    images: list[Any] | None = None
+    fewshot_demos: list[dict[str, Any]] | None = None
 
 
 class SupraDataset(ABC):

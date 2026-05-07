@@ -1,0 +1,13 @@
+# vqa_identification with prompt.mode=fewshot. Demos are sampled from
+# the eval set itself (current id excluded), with a fixed seed for
+# reproducibility. Output goes to outputs/vqa_identification_fewshot_<model>/.
+
+name: vqa_identification_fewshot
+dataset: vqa_identification
+evaluator: vqa_identification
+data_path: supra-vqa/identification.csv
+data_root: supra-vqa
+prompt:
+  mode: fewshot
+  fewshot_k: 3
+  seed: 42

@@ -1,0 +1,13 @@
+# Predict logKa = log10(Ka) for a 1:1 host-guest complex from images of
+# the host and guest molecules.
+# Pairs with src/datasets/vqa_logka.py + src/eval/vqa_logka.py.
+
+name: vqa_logka
+dataset: vqa_logka
+evaluator: vqa_logka
+data_path: supra-vqa/logka.csv
+data_root: supra-vqa
+prompt:
+  mode: base        # base | fewshot | cot  (mutually exclusive)
+  fewshot_k: 3      # only used when mode == fewshot; demos sampled from eval set, current pair_id excluded
+  seed: 42          # fewshot sampling seed (deterministic per (seed, row_id))

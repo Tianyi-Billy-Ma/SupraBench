@@ -1,0 +1,16 @@
+# Qwen 3.5 9B via OpenRouter. Multimodal (text + image + video input).
+# Reasoning model: thinks before answering, so max_tokens must be large
+# enough that reasoning + final answer both fit. effort=low caps the
+# reasoning budget so the model still has room to emit content.
+# Verified against https://openrouter.ai/api/v1/models on 2026-04-30.
+
+name: openrouter-qwen3.5-9b
+backend: openrouter
+model_id: qwen/qwen3.5-9b
+generation:
+  max_new_tokens: 2048
+  temperature: 0.0
+reasoning:
+  enabled: false   # qwen3.5 always thinks if not explicitly disabled — verified
+                   # `effort: low` does not actually cap, so use enabled:false
+                   # to skip thinking entirely and let content tokens flow.

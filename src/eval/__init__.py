@@ -11,5 +11,6 @@ from .base import Evaluator, build_evaluator, register_evaluator
 
 # Side-effect imports — these populate the evaluator registry.
 from . import example, task1, task2, task3, task4, task5, task6, task7  # noqa: F401
+from . import vqa_identification, vqa_logka  # noqa: F401
 
 __all__ = ["Evaluator", "build_evaluator", "register_evaluator"]

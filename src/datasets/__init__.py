@@ -15,5 +15,6 @@ from .base import Example, SupraDataset, build_dataset, register_dataset
 
 # Side-effect imports — these populate the dataset registry.
 from . import example, task1, task2, task3, task4, task5, task6, task7  # noqa: F401
+from . import vqa_identification, vqa_logka  # noqa: F401
 
 __all__ = ["Example", "SupraDataset", "build_dataset", "register_dataset"]

@@ -1,0 +1,10 @@
+# Llama 3.1 70B Instruct via OpenRouter.
+# WARNING: TEXT-ONLY model — see openrouter-llama-3.1-8b.yaml.
+# Verified against OpenRouter API metadata 2026-04-30.
+
+name: openrouter-llama-3.1-70b
+backend: openrouter
+model_id: meta-llama/llama-3.1-70b-instruct
+generation:
+  max_new_tokens: 2048
+  temperature: 0.0

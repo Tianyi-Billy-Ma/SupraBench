@@ -1,0 +1,13 @@
+# Identify a small molecule from its 2D structural drawing as canonical SMILES.
+# Pairs with src/datasets/vqa_identification.py + src/eval/vqa_identification.py.
+# Source data lives at supra-vqa/ (also published at HF SupraBench/vqa).
+
+name: vqa_identification
+dataset: vqa_identification
+evaluator: vqa_identification
+data_path: supra-vqa/identification.csv
+data_root: supra-vqa
+prompt:
+  mode: base        # base | fewshot | cot  (mutually exclusive)
+  fewshot_k: 3      # only used when mode == fewshot; demos sampled from eval set, current id excluded
+  seed: 42          # fewshot sampling seed (deterministic per (seed, row_id))

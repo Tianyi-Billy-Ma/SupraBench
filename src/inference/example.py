@@ -36,11 +36,14 @@ every task through one backend; pick the right tool per model size.
 
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from models import qwen3
 
 from .base import InferenceBackend, register_backend
+
+if TYPE_CHECKING:
+    from datasets.base import Example
 
 
 @register_backend("example")
@@ -89,10 +92,10 @@ class ExampleBackend(InferenceBackend):
         self.enable_thinking = bool(config.get("enable_thinking", False))
         self.strip_thinking_blocks = bool(config.get("strip_thinking", True))
 
-    def generate(self, prompt: str) -> str:
+    def generate(self, example: "Example") -> str:
         import torch
 
-        messages = qwen3.build_messages(prompt, system_prompt=self.system_prompt)
+        messages = qwen3.build_messages(example.prompt, system_prompt=self.system_prompt)
         chat_text = self.tokenizer.apply_chat_template(
             messages,
             tokenize=False,

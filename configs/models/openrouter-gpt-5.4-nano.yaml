@@ -1,0 +1,16 @@
+# GPT-5.4-nano via OpenRouter. Multimodal (text + image + file input).
+# Verified against https://openrouter.ai/api/v1/models on 2026-04-30.
+
+name: openrouter-gpt-5.4-nano
+backend: openrouter
+model_id: openai/gpt-5.4-nano
+generation:
+  max_new_tokens: 2048
+  temperature: 0.0
+# GPT-5.x family is reasoning-capable; OpenAI's native param is
+# `reasoning_effort` (minimal/low/medium/high). OpenRouter's `enabled:
+# false` *may* not map cleanly to OpenAI, so use `effort: minimal` —
+# documented as the lowest GPT-5 thinking budget. Still going to use
+# some tokens on hidden reasoning, but the rest goes to content.
+reasoning:
+  effort: minimal
