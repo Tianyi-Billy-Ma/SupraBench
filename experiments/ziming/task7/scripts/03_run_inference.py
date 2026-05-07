@@ -45,6 +45,8 @@ import requests
 
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+OPENAI_URL = "https://api.openai.com/v1/chat/completions"
+BACKENDS = ("openrouter", "openai")
 
 ALL_PROMPTS = ["base", "fewshot", "cot"]
 
@@ -125,35 +127,83 @@ def default_out_name(model_id: str) -> str:
     return model_id.split("/")[-1].lower()
 
 
+def _openai_reasoning_effort(reasoning: dict | None) -> str | None:
+    """把 OpenRouter 风格 reasoning dict 翻译成 OpenAI 的 reasoning_effort 字符串。
+    OpenAI gpt-5.x 支持: none / low / medium / high / xhigh (不支持 'minimal').
+    {"effort": "high"} → "high"
+    {"exclude": True, "enabled": False} → "none" (彻底关 thinking)
+    {"effort": "minimal"} → "none" (OpenRouter 的 minimal 在 OpenAI 上对应 none)
+    None / 其他 → None (不发该字段, 用模型默认)
+    """
+    if not reasoning:
+        return None
+    if reasoning.get("exclude") or reasoning.get("enabled") is False:
+        return "none"
+    eff = reasoning.get("effort")
+    if eff == "minimal":
+        return "none"
+    if eff in ("none", "low", "medium", "high", "xhigh"):
+        return eff
+    return None
+
+
 def call_openrouter(
     prompt: str,
     model: str,
     api_key: str,
     *,
+    backend: str = "openrouter",
     temperature: float = 0.0,
     max_tokens: int = 512,
     reasoning: dict | None = None,
     timeout: int = 180,
-    max_retries: int = 4,
+    max_retries: int = 5,
 ) -> tuple[str, str | None]:
-    """返回 (raw_text, error_or_None)。错误时 raw_text 以 '[ERROR]' 开头。"""
+    """统一 chat completions caller (OpenRouter / OpenAI 直连)。
+    返回 (raw_text, error_or_None)。错误时 raw_text 以 '[ERROR]' 开头。"""
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
     }
-    payload = {
-        "model": model,
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": temperature,
-        "max_tokens": max_tokens,
-        "stream": False,
-    }
-    if reasoning is not None:
-        payload["reasoning"] = reasoning
+    if backend == "openai":
+        url = OPENAI_URL
+        # OpenAI 平台 model id 不带 vendor 前缀
+        api_model = model.split("/", 1)[-1] if "/" in model else model
+        eff = _openai_reasoning_effort(reasoning)
+        # gpt-5.x xhigh/high reasoning 会吃掉大量 token (10K-30K), 自动放大上限
+        # 否则 reasoning 用满 → content 是空 → parse_fail
+        if eff in ("high", "xhigh"):
+            api_max_tokens = max(max_tokens, 32768)
+        elif eff in ("medium",):
+            api_max_tokens = max(max_tokens, 16384)
+        else:
+            api_max_tokens = max_tokens
+        payload = {
+            "model": api_model,
+            "messages": [{"role": "user", "content": prompt}],
+            # gpt-5.x reasoning 模型必须用 max_completion_tokens
+            "max_completion_tokens": api_max_tokens,
+            "stream": False,
+        }
+        # reasoning 模型 (gpt-5.x) 不允许 temperature ≠ 1.0, 干脆省掉这个字段
+        if eff is not None:
+            payload["reasoning_effort"] = eff
+    else:  # openrouter
+        url = OPENROUTER_URL
+        payload = {
+            "model": model,
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "stream": False,
+        }
+        if reasoning is not None:
+            payload["reasoning"] = reasoning
+
     last_err: str | None = None
     for attempt in range(max_retries):
         try:
-            r = requests.post(OPENROUTER_URL, headers=headers, json=payload, timeout=timeout)
+            r = requests.post(url, headers=headers, json=payload, timeout=timeout)
             if r.status_code == 200:
                 data = r.json()
                 try:
@@ -166,7 +216,20 @@ def call_openrouter(
                 except (KeyError, IndexError, TypeError):
                     return f"[ERROR] malformed response: {str(data)[:300]}", "malformed"
                 return content, None
-            if r.status_code in (408, 429, 500, 502, 503, 504):
+            if r.status_code == 429:
+                # 优先用 server 给的 retry-after, fallback 指数退避
+                retry_after = r.headers.get("retry-after") or r.headers.get("Retry-After")
+                if retry_after:
+                    try:
+                        sleep_s = max(1.0, float(retry_after))
+                    except ValueError:
+                        sleep_s = 60.0
+                else:
+                    sleep_s = min(2 ** attempt + 1, 60)
+                last_err = f"HTTP 429 (sleep {sleep_s:.1f}s): {r.text[:200]}"
+                time.sleep(sleep_s)
+                continue
+            if r.status_code in (408, 500, 502, 503, 504):
                 last_err = f"HTTP {r.status_code}: {r.text[:200]}"
                 time.sleep(min(2 ** attempt, 30))
                 continue
@@ -188,7 +251,8 @@ def append_progress_log(log_path: Path, record: dict) -> None:
 # ---------------------------------------------------------------------------
 
 def run_task1_setting(prompt_type, model, out_name, api_key, root, limit,
-                      temperature, concurrency, reasoning, log_path):
+                      temperature, concurrency, reasoning, log_path,
+                      backend="openrouter"):
     data_dir = root / "data" / "task1"
     prompt_file = data_dir / f"prompts_{prompt_type}.jsonl"
     if not prompt_file.exists():
@@ -220,7 +284,8 @@ def run_task1_setting(prompt_type, model, out_name, api_key, root, limit,
 
     meta = {
         "model": model, "out_name": out_name, "prompt_type": prompt_type,
-        "engine": "openrouter", "endpoint": OPENROUTER_URL,
+        "engine": backend,
+        "endpoint": OPENAI_URL if backend == "openai" else OPENROUTER_URL,
         "max_tokens": max_tokens, "temperature": temperature,
         "concurrency": concurrency, "reasoning": reasoning,
         "total_prompts": len(prompts_data), "limit": limit,
@@ -244,6 +309,7 @@ def run_task1_setting(prompt_type, model, out_name, api_key, root, limit,
         with ThreadPoolExecutor(max_workers=concurrency) as ex:
             futs = {
                 ex.submit(call_openrouter, rec["prompt"], model, api_key,
+                          backend=backend,
                           temperature=temperature, max_tokens=max_tokens,
                           reasoning=reasoning): rec
                 for rec in todo
@@ -301,7 +367,8 @@ def run_task1_setting(prompt_type, model, out_name, api_key, root, limit,
 # ---------------------------------------------------------------------------
 
 def run_task3_setting(prompt_type, model, out_name, api_key, root, limit,
-                      temperature, concurrency, reasoning, log_path):
+                      temperature, concurrency, reasoning, log_path,
+                      backend="openrouter"):
     data_dir = root / "data" / "task7"
     prompt_file = data_dir / f"prompts_{prompt_type}.jsonl"
     if not prompt_file.exists():
@@ -333,7 +400,8 @@ def run_task3_setting(prompt_type, model, out_name, api_key, root, limit,
 
     meta = {
         "model": model, "out_name": out_name, "prompt_type": prompt_type,
-        "engine": "openrouter", "endpoint": OPENROUTER_URL,
+        "engine": backend,
+        "endpoint": OPENAI_URL if backend == "openai" else OPENROUTER_URL,
         "max_tokens": max_tokens, "temperature": temperature,
         "concurrency": concurrency, "reasoning": reasoning,
         "total_prompts": len(prompts_data), "limit": limit,
@@ -355,6 +423,7 @@ def run_task3_setting(prompt_type, model, out_name, api_key, root, limit,
         with ThreadPoolExecutor(max_workers=concurrency) as ex:
             futs = {
                 ex.submit(call_openrouter, rec["prompt"], model, api_key,
+                          backend=backend,
                           temperature=temperature, max_tokens=max_tokens,
                           reasoning=reasoning): rec
                 for rec in todo
@@ -425,10 +494,17 @@ def run_task3_setting(prompt_type, model, out_name, api_key, root, limit,
 # ---------------------------------------------------------------------------
 
 def main(args):
-    api_key = args.api_key or os.environ.get("OPENROUTER_API_KEY")
-    if not api_key:
-        print("[ERROR] 未设置 OPENROUTER_API_KEY (或 --api-key)", file=sys.stderr)
-        return 2
+    if args.backend == "openai":
+        api_key = args.api_key or os.environ.get("OPENAI_API_KEY")
+        if not api_key:
+            print("[ERROR] --backend openai 但未设置 OPENAI_API_KEY (或 --api-key)",
+                  file=sys.stderr)
+            return 2
+    else:
+        api_key = args.api_key or os.environ.get("OPENROUTER_API_KEY")
+        if not api_key:
+            print("[ERROR] 未设置 OPENROUTER_API_KEY (或 --api-key)", file=sys.stderr)
+            return 2
 
     # reasoning payload 构造
     reasoning = None
@@ -446,7 +522,7 @@ def main(args):
     prompt_list = ALL_PROMPTS if args.prompt == "all" else [args.prompt]
 
     print("=" * 60)
-    print(f"OpenRouter Inference - {args.task}")
+    print(f"Inference ({args.backend}) - {args.task}")
     print(f"  Model:    {args.model}")
     print(f"  OutName:  {out_name}")
     print(f"  Settings: {prompt_list}")
@@ -463,7 +539,8 @@ def main(args):
         print(f"\n{'─'*40}\n[{pt}] 开始\n{'─'*40}")
         try:
             r = runner(pt, args.model, out_name, api_key, root, args.limit,
-                       args.temperature, args.concurrency, reasoning, log_path)
+                       args.temperature, args.concurrency, reasoning, log_path,
+                       backend=args.backend)
             results.append(r)
         except Exception as e:
             err_msg = f"{type(e).__name__}: {e}"
@@ -514,8 +591,13 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default=str(Path(__file__).resolve().parent.parent))
     ap.add_argument("--task", required=True, choices=["task1", "task3"])
+    ap.add_argument("--backend", default="openrouter", choices=list(BACKENDS),
+                    help="API backend. 'openai' uses OPENAI_API_KEY + "
+                         "max_completion_tokens; 'openrouter' is default.")
     ap.add_argument("--model", required=True,
-                    help="OpenRouter model id, e.g. anthropic/claude-sonnet-4.6")
+                    help="OpenRouter model id (e.g. anthropic/claude-sonnet-4.6) "
+                         "or OpenAI model id (e.g. gpt-5.4-mini). For openai backend "
+                         "any 'vendor/' prefix is stripped.")
     ap.add_argument("--out-name", default=None,
                     help="Override 输出目录名 (default: model id 末段)")
     ap.add_argument("--prompt", default="all",
@@ -525,8 +607,10 @@ if __name__ == "__main__":
     ap.add_argument("--concurrency", type=int, default=4)
     ap.add_argument("--api-key", default=None)
     ap.add_argument("--reasoning-effort", default=None,
-                    choices=["minimal", "low", "medium", "high"],
-                    help="OpenRouter reasoning.effort")
+                    choices=["minimal", "low", "medium", "high", "xhigh", "none"],
+                    help="reasoning effort. OpenRouter accepts minimal/low/medium/high; "
+                         "OpenAI gpt-5.x accepts none/low/medium/high/xhigh "
+                         "(translation handled internally).")
     ap.add_argument("--no-reasoning", action="store_true",
                     help="禁用 thinking (设 reasoning.exclude=true, enabled=false)")
     ap.add_argument("--reasoning-json", default=None,

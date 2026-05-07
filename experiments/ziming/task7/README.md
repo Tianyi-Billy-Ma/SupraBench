@@ -53,6 +53,10 @@ Per-class precision / recall / F1 / support are reported per
 - **qwen3.5-27b** prefers `cot` over `fewshot` (0.26 vs 0.20).
 - **llama-3.1-70b-instruct** has its worst score under `cot` (0.11).
 
-Figure `fig_task7_macroF1.png` shows all 9 retained models × 3 settings
+Figure `fig_task7_macroF1.png` shows all 10 retained models × 3 settings
 (excludes gpt-5.5 variants and gemini-flash-preview_high, which had
 pervasive parsing failures).
+
+`gpt-5.4-mini_nothinking` (added 2026-05) prefers `cot`/`base`
+(macro-F1 ≈ 0.22–0.23) over `fewshot` (0.155); the long fewshot prompt
+triggers ~11% parse failures that drag the metric down.

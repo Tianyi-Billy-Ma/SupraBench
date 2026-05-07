@@ -6,13 +6,16 @@ Snapshot of Ziming Li's task 3 + task 7 evaluation runs, May 2026.
 
 - **Tasks**: 3 (host-guest knowledge retrieval) and 7 (solvent
   classification, 6-way).
-- **Models** (11): claude-sonnet-4.6, deepseek-v4-pro,
-  gemini-3-flash-preview (high / nothinking), gpt-5.4-nano (xhigh /
-  nothinking), gpt-5.5 (xhigh / nothinking), llama-3.1-8b-instruct,
-  llama-3.1-70b-instruct, qwen3.5-9b, qwen3.5-27b.
+- **Models** (13): claude-sonnet-4.6, deepseek-v4-pro,
+  gemini-3-flash-preview (high / nothinking), gpt-5.4-mini (nothinking),
+  gpt-5.4-nano (xhigh / nothinking), gpt-5.5 (xhigh / nothinking),
+  llama-3.1-8b-instruct, llama-3.1-70b-instruct, qwen3.5-9b,
+  qwen3.5-27b.
 - **Settings** (3): `base` / `fewshot` / `cot`.
-- **Inference backend**: OpenRouter chat-completions API.
-- **Total runs**: 11 × 3 × 2 = 66 (predictions/) sets.
+- **Inference backends**: OpenRouter chat-completions for all models;
+  OpenAI direct chat-completions for `gpt-5.4-mini` (200K TPM / 500 RPM,
+  via `--backend openai` in `03d_run_inference_openrouter.py`).
+- **Total runs**: 13 × 3 × 2 = 78 (predictions/) sets.
 
 ## Layout
 
