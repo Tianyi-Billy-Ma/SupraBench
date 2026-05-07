@@ -16,8 +16,10 @@ from .f1 import compute_f1
 from .kh import compute_kh
 from .mae import compute_mae
 from .multiclass_f1 import compute_multiclass_f1
+from .rank_corr import compute_pearson, compute_spearman
 from .rmse import compute_rmse
 from .rouge import compute_rouge
+from .tanimoto import compute_tanimoto
 
 __all__ = [
     "compute_acc",
@@ -27,6 +29,9 @@ __all__ = [
     "compute_kh",
     "compute_mae",
     "compute_multiclass_f1",
+    "compute_pearson",
     "compute_rmse",
     "compute_rouge",
+    "compute_spearman",
+    "compute_tanimoto",
 ]

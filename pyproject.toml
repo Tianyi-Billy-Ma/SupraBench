@@ -35,6 +35,9 @@ hf = [
     "wandb>=0.17",
     "sentencepiece>=0.2",
     "tiktoken>=0.7",
+    # Task 4/5 VQA evaluator dependencies (~10 MB wheels each).
+    "rapidfuzz>=3.6",
+    "rdkit>=2024.3",
 ]
 vllm = [
     "vllm>=0.6.0",
