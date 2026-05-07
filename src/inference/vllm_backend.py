@@ -69,7 +69,13 @@ class VLLMBackend(InferenceBackend):
             top_p=gen_cfg.get("top_p", 1.0),
         )
 
-        self._llm = LLM(
+        # ``model_impl`` switches vLLM between native CUDA kernels and a
+        # transformers-backed fallback. Use ``transformers`` for models whose
+        # architecture isn't in vLLM's supported list (e.g. Qwen3.5 as of
+        # vLLM 0.11). The fallback is slower than native but still gets
+        # continuous batching + paged attention, far better than per-prompt
+        # HF generate.
+        llm_kwargs: dict[str, Any] = dict(
             model=model_id,
             tensor_parallel_size=int(config.get("tensor_parallel_size", 4)),
             dtype=config.get("dtype", "bfloat16"),
@@ -79,6 +85,13 @@ class VLLMBackend(InferenceBackend):
             max_lora_rank=int(config.get("max_lora_rank", 64)) if adapter_exists else 16,
             max_loras=1 if adapter_exists else 0,
         )
+        model_impl = config.get("model_impl")
+        if model_impl:
+            llm_kwargs["model_impl"] = model_impl
+        max_model_len = config.get("max_model_len")
+        if max_model_len:
+            llm_kwargs["max_model_len"] = int(max_model_len)
+        self._llm = LLM(**llm_kwargs)
 
         self._lora_request = (
             LoRARequest("eval-adapter", 1, adapter_path) if adapter_exists else None

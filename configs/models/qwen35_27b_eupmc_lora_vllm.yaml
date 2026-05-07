@@ -7,9 +7,20 @@ model_id: Qwen/Qwen3.5-27B
 # tools/fsdp_to_peft_adapter.py.
 adapter_path: /groups/yye7/BILLY/SupraBench/outputs/cpt_qwen35_eupmc/adapter
 
+# Qwen3.5's `Qwen3_5ForConditionalGeneration` arch is not yet in vLLM
+# 0.11's native registry. Force the transformers-backed fallback path,
+# which still gives us continuous batching + paged attention but routes
+# the forward pass through HF transformers. ~5-10x speedup over per-
+# prompt HF generate, vs the 10-50x of a native vLLM kernel.
+model_impl: transformers
+
 dtype: bfloat16
 tensor_parallel_size: 4
 max_lora_rank: 64
+
+# Qwen3.5 default context is huge (~128k); cap it for inference to
+# match the 4096 we trained at and keep KV cache reasonable.
+max_model_len: 4096
 
 # 0.9 leaves headroom for activations; bump to 0.95 if you see OOMs that
 # vanish at higher utilization.
