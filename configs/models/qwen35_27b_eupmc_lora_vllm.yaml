@@ -1,0 +1,26 @@
+name: qwen3.5-27b-eupmc-lora
+
+backend: vllm
+model_id: Qwen/Qwen3.5-27B
+
+# PEFT-format adapter extracted from the FSDP checkpoint via
+# tools/fsdp_to_peft_adapter.py.
+adapter_path: /groups/yye7/BILLY/SupraBench/outputs/cpt_qwen35_eupmc/adapter
+
+dtype: bfloat16
+tensor_parallel_size: 4
+max_lora_rank: 64
+
+# 0.9 leaves headroom for activations; bump to 0.95 if you see OOMs that
+# vanish at higher utilization.
+gpu_memory_utilization: 0.9
+
+# LoRA was trained without thinking mode, but we still strip residual
+# <think>...</think> blocks defensively before scoring.
+strip_thinking: true
+
+generation:
+  max_new_tokens: 512   # smaller than the HF backend's 1024 — most answers fit
+  do_sample: false
+  temperature: 0.0
+  top_p: 1.0

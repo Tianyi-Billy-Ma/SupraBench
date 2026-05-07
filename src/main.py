@@ -96,21 +96,30 @@ def run(args: argparse.Namespace) -> None:
     predictions_path = run_dir / "predictions.jsonl"
 
     # ── Inference ─────────────────────────────────────────────────────────────
-    t0      = time.time()
-    records = []
-    total   = sum(1 for _ in build_dataset(task_cfg, limit=args.limit))
+    # Materialize the dataset once so batched backends (vLLM continuous
+    # batching, etc.) can run all prompts in a single call. Sequential
+    # backends still work because the default ``generate_many`` is a loop
+    # over ``generate``.
+    t0       = time.time()
+    examples = list(dataset)
+    total    = len(examples)
+    print(f"Running {total} examples through {model_cfg.get('backend')} ...")
+    predictions = backend.generate_many([ex.prompt for ex in examples])
+    if len(predictions) != total:
+        raise RuntimeError(
+            f"backend returned {len(predictions)} predictions for {total} prompts"
+        )
 
-    for i, example in enumerate(dataset, 1):
-        prediction = backend.generate(example.prompt)
-        records.append({
-            "id":         example.id,
-            "prompt":     example.prompt,
-            "prediction": prediction,
-            "reference":  example.reference,
-            "metadata":   example.metadata,
-        })
-        if i % 32 == 0 or i == total:
-            print(f"  {i}/{total}  ({time.time() - t0:.0f}s)")
+    records = [
+        {
+            "id":         ex.id,
+            "prompt":     ex.prompt,
+            "prediction": pred,
+            "reference":  ex.reference,
+            "metadata":   ex.metadata,
+        }
+        for ex, pred in zip(examples, predictions)
+    ]
 
     with predictions_path.open("w", encoding="utf-8") as fh:
         for rec in records:

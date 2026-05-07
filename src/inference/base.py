@@ -18,6 +18,17 @@ class InferenceBackend(ABC):
     def generate(self, prompt: str) -> str:
         """Return the model's completion for a single prompt."""
 
+    def generate_many(self, prompts: list[str]) -> list[str]:
+        """Return completions for a batch of prompts.
+
+        Default implementation is a serial loop over :meth:`generate` so any
+        backend gets correct (if slow) batched behavior for free. Backends
+        with native batched APIs (vLLM continuous batching, HF Pipeline,
+        TGI streams) should override this to keep the GPU saturated across
+        the whole list.
+        """
+        return [self.generate(p) for p in prompts]
+
 
 _REGISTRY: dict[str, type[InferenceBackend]] = {}
 
