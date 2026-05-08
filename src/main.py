@@ -77,6 +77,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Run inference only; do not compute metrics.",
     )
+    parser.add_argument(
+        "--eval-only",
+        action="store_true",
+        help="Skip inference; re-score an existing predictions.jsonl. Useful "
+             "when the evaluator changed but the model outputs are stable.",
+    )
     return parser.parse_args(argv)
 
 
@@ -89,46 +95,53 @@ def run(args: argparse.Namespace) -> None:
 
     run_dir = args.output_dir / f"{task_name}_{model_name}"
     run_dir.mkdir(parents=True, exist_ok=True)
-
-    dataset = build_dataset(task_cfg, limit=args.limit)
-    backend = build_inference_backend(model_cfg)
-
     predictions_path = run_dir / "predictions.jsonl"
 
-    # ── Inference ─────────────────────────────────────────────────────────────
-    # Materialize the dataset once so batched backends (vLLM continuous
-    # batching, etc.) can run all prompts in a single call. Sequential
-    # backends still work because the default ``generate_many`` is a loop
-    # over ``generate``.
-    t0       = time.time()
-    examples = list(dataset)
-    total    = len(examples)
-    print(f"Running {total} examples through {model_cfg.get('backend')} ...")
-    predictions = backend.generate_many([ex.prompt for ex in examples])
-    if len(predictions) != total:
-        raise RuntimeError(
-            f"backend returned {len(predictions)} predictions for {total} prompts"
-        )
+    if not args.eval_only:
+        dataset = build_dataset(task_cfg, limit=args.limit)
+        backend = build_inference_backend(model_cfg)
 
-    records = [
-        {
-            "id":         ex.id,
-            "prompt":     ex.prompt,
-            "prediction": pred,
-            "reference":  ex.reference,
-            "metadata":   ex.metadata,
-        }
-        for ex, pred in zip(examples, predictions)
-    ]
+        # ── Inference ─────────────────────────────────────────────────────────
+        # Materialize the dataset once so batched backends (vLLM continuous
+        # batching, etc.) can run all prompts in a single call. Sequential
+        # backends still work because the default ``generate_many`` is a loop
+        # over ``generate``.
+        t0       = time.time()
+        examples = list(dataset)
+        total    = len(examples)
+        print(f"Running {total} examples through {model_cfg.get('backend')} ...")
+        predictions = backend.generate_many([ex.prompt for ex in examples])
+        if len(predictions) != total:
+            raise RuntimeError(
+                f"backend returned {len(predictions)} predictions for {total} prompts"
+            )
 
-    with predictions_path.open("w", encoding="utf-8") as fh:
-        for rec in records:
-            fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        records = [
+            {
+                "id":         ex.id,
+                "prompt":     ex.prompt,
+                "prediction": pred,
+                "reference":  ex.reference,
+                "metadata":   ex.metadata,
+            }
+            for ex, pred in zip(examples, predictions)
+        ]
 
-    print(f"\nInference done in {time.time() - t0:.1f}s  |  output: {predictions_path}")
+        with predictions_path.open("w", encoding="utf-8") as fh:
+            for rec in records:
+                fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
-    if args.skip_eval:
-        return
+        print(f"\nInference done in {time.time() - t0:.1f}s  |  output: {predictions_path}")
+
+        if args.skip_eval:
+            return
+    else:
+        if not predictions_path.is_file():
+            raise SystemExit(
+                f"--eval-only set, but {predictions_path} does not exist. Run "
+                "inference first (or drop --eval-only)."
+            )
+        print(f"--eval-only: re-scoring {predictions_path}")
 
     # ── Evaluation ────────────────────────────────────────────────────────────
     evaluator = build_evaluator(task_cfg)

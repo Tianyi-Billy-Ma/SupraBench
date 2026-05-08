@@ -28,14 +28,46 @@ def _extract_answer_tag(text: str) -> str:
     return m.group(1).strip() if m else _after_think(text).strip()
 
 
+def _coerce_logka(value: float, ans: str) -> float | None:
+    """Map a parsed numeric answer onto a plausible logKa, or reject it.
+
+    Some completions emit raw association constants (``Ka = 2.5e3``) instead
+    of the requested log10. We accept those when the surrounding text has
+    no ``log`` qualifier and the value is large enough to look like a Ka,
+    converting via ``log10``. Anything still outside ``[-10, 30]`` after
+    coercion is treated as a parse failure.
+    """
+    if value > 50 and "log" not in ans.lower():
+        try:
+            value = math.log10(value)
+        except ValueError:
+            return None
+    if value < -10 or value > 30:
+        return None
+    return value
+
+
 def parse_logka(text: str) -> float | None:
     ans = _extract_answer_tag(text)
-    m = re.search(r"\*{1,2}([-+]?\d+\.?\d*)\*{1,2}", ans)
+    # Bolded form: **N**, **-1.5**, **2.3e3** — also handles sci notation now.
+    m = re.search(
+        r"\*{1,2}([-+]?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)\*{1,2}",
+        ans,
+    )
     if m:
-        return float(m.group(1))
+        try:
+            return _coerce_logka(float(m.group(1)), ans)
+        except ValueError:
+            pass
+    # Fallback: strip common temperature mentions, take the first number.
     cleaned = re.sub(r"\b25\s*[°˚]C\b|\b298\.?1?5?\s*K\b", "", ans)
     m = re.search(r"[-+]?\d+\.?\d*(?:[eE][-+]?\d+)?", cleaned)
-    return float(m.group()) if m else None
+    if not m:
+        return None
+    try:
+        return _coerce_logka(float(m.group()), ans)
+    except ValueError:
+        return None
 
 
 @register_evaluator("task1")
