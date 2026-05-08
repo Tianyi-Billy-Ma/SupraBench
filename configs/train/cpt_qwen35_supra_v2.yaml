@@ -1,0 +1,83 @@
+# v2 continued pretraining of Qwen3.5-27B on a tighter mix:
+#   80% mtybilly/EU-PMC[supramolecular]   (strict-keyword subset)
+#  +15% HuggingFaceFW/fineweb-edu          (general-domain replay)
+#  + 5% allenai/tulu-3-sft-mixture         (raw-text format anchor)
+#
+# Recipe motivation:
+#   - v1 (configs/train/cpt_qwen35_eupmc.yaml) regressed Task 7 macro-F1
+#     to 0.16 (mode-collapsed onto majority class) and Task 2 ACC to 0.26
+#     (vs paper baseline 0.40). Diagnosis: catastrophic forgetting of
+#     instruction-following, broad domain corpus, too-aggressive LoRA.
+#   - EvoLM (Qi et al., 2025, arxiv 2506.16029) Table 2 shows ~5–16%
+#     general-domain replay during CPT is the empirically best band; we
+#     pick 15%. The 5% format-anchor stream is our deliberate addition
+#     (not in EvoLM) to specifically counter format collapse.
+#   - LoRA hyperparams tightened: r=64→32, lr=2e-5→1e-5, epochs 2→1.
+#     Smaller-capacity adapter that touches the base less.
+
+run_name: qwen3_5-27b-supra-v2-lora
+
+model:
+  model_id: Qwen/Qwen3.5-27B
+  trust_remote_code: true
+  dtype: bfloat16
+  attn_implementation: flash_attention_2
+  language_model_path: model.language_model
+  freeze_keywords:
+    - vision
+    - visual
+    - image_encoder
+    - mm_projector
+    - merger
+    - patch_embed
+
+lora:
+  r: 32                                    # was 64 in v1; halve capacity
+  alpha: 64                                # keep alpha = 2*r
+  dropout: 0.05
+  bias: none
+  target_module_names:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+dataset:
+  hub_id: mtybilly/SupraBench-CPT-Mix-v2
+  split: train
+  # Mix dataset has ``text``, ``source``, ``length`` columns; ``text`` is
+  # the raw concatenation of (title + abstract) for domain rows, raw web
+  # text for replay rows, and `Question:\n... Answer:\n...` flattened
+  # turns for format-anchor rows. No chat template — pure raw-text CPT.
+  text_field: text
+  seq_len: 4096
+  num_proc: 8
+
+training:
+  output_dir: outputs/cpt_qwen35_supra_v2
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 4
+  num_train_epochs: 1                      # was 2; tighter corpus, fewer passes
+  learning_rate: 1.0e-5                    # was 2.0e-5; less aggressive update
+  weight_decay: 0.0
+  warmup_ratio: 0.05                       # was 0.03; longer warmup
+  lr_scheduler_type: cosine
+  logging_steps: 10
+  save_steps: 200
+  save_total_limit: 3
+  bf16: true
+  gradient_checkpointing: true
+  ddp_find_unused_parameters: false
+  report_to: wandb
+  seed: 42
+
+# Smoke-test overrides (used by cpt_qwen35_supra_v2_smoke.sh via --override):
+# smoke:
+#   training.max_steps: 20
+#   dataset.train_rows: 256
+#   dataset.seq_len: 1024
+#   training.gradient_accumulation_steps: 1
+#   training.save_steps: 50

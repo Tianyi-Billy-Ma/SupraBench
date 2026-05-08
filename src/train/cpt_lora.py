@@ -166,14 +166,22 @@ def build_packed_dataset(tokenizer, dataset_cfg: dict, train_rows: int | None):
     if train_rows is not None:
         raw = raw.select(range(min(train_rows, len(raw))))
 
-    template: str = dataset_cfg["text_template"]
-    title_field = dataset_cfg["title_field"]
-    abstract_field = dataset_cfg["abstract_field"]
+    # Two supported shapes:
+    #   (a) text_field: read raw text from a single column (v2 mix dataset).
+    #   (b) text_template + title_field + abstract_field: legacy v1 EU-PMC.
+    text_field = dataset_cfg.get("text_field")
+    if text_field:
+        def _format(row):
+            return {"text": (row.get(text_field) or "").strip() + tokenizer.eos_token}
+    else:
+        template: str = dataset_cfg["text_template"]
+        title_field = dataset_cfg["title_field"]
+        abstract_field = dataset_cfg["abstract_field"]
 
-    def _format(row):
-        title = row.get(title_field) or ""
-        abstract = row.get(abstract_field) or ""
-        return {"text": template.format(title=title, abstract=abstract).strip() + tokenizer.eos_token}
+        def _format(row):
+            title = row.get(title_field) or ""
+            abstract = row.get(abstract_field) or ""
+            return {"text": template.format(title=title, abstract=abstract).strip() + tokenizer.eos_token}
 
     formatted = raw.map(
         _format,
