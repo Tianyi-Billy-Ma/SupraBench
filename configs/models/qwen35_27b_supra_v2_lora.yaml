@@ -1,0 +1,27 @@
+name: qwen3.5-27b-supra-v2-lora
+
+backend: hf_peft
+model_id: Qwen/Qwen3.5-27B
+
+# v2 LoRA adapter: trained on the EvoLM-style mix
+# (mtybilly/SupraBench-CPT-Mix-v2, 80 % supra-EU-PMC + 15 % FineWeb-Edu
+# + 5 % Tulu-3 anchor) at rank 32 / lr 1e-5 / 1 epoch. The DCP shards at
+# checkpoint-302/pytorch_model_fsdp_0/ are consolidated into PEFT format
+# by tools/fsdp_to_peft_adapter.py (launched via
+# scripts/crc/extract_adapter_v2.sh), so PeftModel.from_pretrained
+# resolves both adapter_config.json and adapter_model.safetensors below.
+adapter_path: /groups/yye7/BILLY/SupraBench/outputs/cpt_qwen35_supra_v2/adapter
+
+dtype: bfloat16
+device_map: auto
+
+# Keep the v1 inference settings — we want a clean v1-vs-v2 comparison.
+merge_adapter: false
+strip_thinking: true
+
+batch_size: 8
+max_input_length: 3584
+
+generation:
+  max_new_tokens: 512
+  do_sample: false
