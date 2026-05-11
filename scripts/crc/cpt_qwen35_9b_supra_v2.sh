@@ -21,6 +21,15 @@ source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
 export WANDB_RUN_GROUP=cpt-supra-v2
 export WANDB_NAME="cpt-qwen9b-supra-v2-${JOB_ID:-local}"
 
+# Qwen3.5-9B ships an unusual shard naming
+# ("model.safetensors-NNNNN-of-NNNN.safetensors", not the standard
+# "model-NNNNN-of-NNNN.safetensors"). When 4 FSDP workers hit
+# transformers.utils.hub.cached_files() concurrently, rank 0 sometimes loses a
+# race against the others' file handles and raises OSError "does not appear to
+# have files named (...)" even though the cache is complete. Forcing offline
+# mode skips the network etag check entirely; the cache has everything needed.
+export HF_HUB_OFFLINE=1
+
 nvidia-smi || true
 
 # accelerate launch translates the YAML's fsdp_transformer_layer_cls_to_wrap

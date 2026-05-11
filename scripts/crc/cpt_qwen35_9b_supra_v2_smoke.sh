@@ -21,6 +21,10 @@ source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
 export WANDB_RUN_GROUP=cpt-supra-v2-smoke
 export WANDB_NAME="cpt-qwen9b-supra-v2-smoke-${JOB_ID:-local}"
 
+# See cpt_qwen35_9b_supra_v2.sh: HF_HUB_OFFLINE=1 avoids the cached_files()
+# race between 4 FSDP workers on Qwen3.5-9B's non-standard shard naming.
+export HF_HUB_OFFLINE=1
+
 nvidia-smi || true
 
 "${ACCELERATE}" launch \
