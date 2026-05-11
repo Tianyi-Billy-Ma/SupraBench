@@ -87,6 +87,22 @@ class Task1Evaluator(Evaluator):
         acc05 = sum(1 for p, r in pairs if abs(p - r) <= 0.5) / n_parsed if n_parsed else float("nan")
         acc10 = sum(1 for p, r in pairs if abs(p - r) <= 1.0) / n_parsed if n_parsed else float("nan")
 
+        # Robust statistics. The reference logKa range is [0, 12]; the parser
+        # accepts the looser [-10, 30] window, so a handful of extreme outliers
+        # can dominate the headline MAE. Emit alongside the regular metrics
+        # so the paper can report tail-robust numbers without re-running eval.
+        errs = sorted(abs(p - r) for p, r in pairs)
+        if n_parsed:
+            medae = errs[n_parsed // 2]
+            cut95 = max(1, int(n_parsed * 0.95))
+            mae_5pct_trimmed = sum(errs[:cut95]) / cut95
+            in_range = [abs(p - r) for p, r in pairs if -2.0 <= p <= 15.0]
+            mae_clipped = (sum(in_range) / len(in_range)) if in_range else float("nan")
+            n_in_clip   = len(in_range)
+        else:
+            medae = mae_5pct_trimmed = mae_clipped = float("nan")
+            n_in_clip = 0
+
         # Per-host breakdown
         host_errors: dict[str, list[float]] = defaultdict(list)
         for row, pred in zip(rows, preds):
@@ -100,11 +116,15 @@ class Task1Evaluator(Evaluator):
         }
 
         return {
-            "mae":      mae["mae"],
-            "rmse":     rmse["rmse"],
-            "acc@0.5":  acc05,
-            "acc@1.0":  acc10,
-            "n_total":  mae["n_total"],
-            "n_parsed": mae["n_parsed"],
-            "per_host": per_host,
+            "mae":              mae["mae"],
+            "rmse":             rmse["rmse"],
+            "acc@0.5":          acc05,
+            "acc@1.0":          acc10,
+            "medae":            medae,
+            "mae_5pct_trimmed": mae_5pct_trimmed,
+            "mae_clipped":      mae_clipped,
+            "n_in_clip":        n_in_clip,
+            "n_total":          mae["n_total"],
+            "n_parsed":         mae["n_parsed"],
+            "per_host":         per_host,
         }
