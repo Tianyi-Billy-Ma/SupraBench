@@ -22,6 +22,17 @@ Config (from ``configs/models/<model>.yaml``)::
     strip_thinking: true     # drop <think>...</think> from stored prediction
     batch_size: 8            # batched generation (generate_many) — bigger is
                              # faster up to GPU memory limits
+    prompt_suffix: ""        # appended *after* the chat-template render and
+                             # *before* generation. Use ``"<answer>\n"`` to
+                             # force the model to start generation from inside
+                             # the answer tag, short-circuiting any preceding
+                             # "Here's a thinking process..." monologue.
+    stop_strings: []         # list[str]; generation stops on any match
+                             # (requires transformers>=4.39).
+    wrap_output_as_answer: false   # if true, re-wrap each stored prediction
+                                   # as ``<answer>{text}</answer>`` so the
+                                   # task evaluators' tag-aware parsers
+                                   # extract the answer reliably.
     generation:
       max_new_tokens: 1024
       do_sample: false
@@ -108,6 +119,16 @@ class HFPeftBackend(InferenceBackend):
         self.strip_thinking_blocks: bool = bool(config.get("strip_thinking", True))
         self.batch_size: int = int(config.get("batch_size", 8))
 
+        # Output-guidance hooks. Together they force the model to skip its
+        # "Here's a thinking process..." monologue: prompt_suffix biases the
+        # very first generated token to come *after* "<answer>\n", and
+        # stop_strings halts generation at "</answer>".
+        self.prompt_suffix: str = config.get("prompt_suffix") or ""
+        self.stop_strings: list[str] = list(config.get("stop_strings") or [])
+        self.wrap_output_as_answer: bool = bool(
+            config.get("wrap_output_as_answer", False)
+        )
+
         # Causal LMs need left-padding so generated tokens align with the end
         # of each sequence; right-padding produces nonsense for batches.
         if self.tokenizer.pad_token_id is None:
@@ -120,15 +141,27 @@ class HFPeftBackend(InferenceBackend):
         # was trained without thinking mode; strip_thinking still runs to
         # catch any residual <think> blocks in completions.
         messages = qwen3.build_messages(prompt, system_prompt=self.system_prompt)
-        return self.tokenizer.apply_chat_template(
+        rendered = self.tokenizer.apply_chat_template(
             messages,
             tokenize=False,
             add_generation_prompt=True,
         )
+        # Append after the assistant-turn opener so the model's first generated
+        # token continues the answer body rather than starting a fresh thought.
+        return rendered + self.prompt_suffix
 
     def _post(self, text: str) -> str:
         if self.strip_thinking_blocks:
             text = qwen3.strip_thinking(text)
+        if self.wrap_output_as_answer:
+            stripped = text.rstrip()
+            # generate() returns the stop string at the tail when ``stop_strings``
+            # fires; trim it so downstream parsers don't see an unmatched tag.
+            for stop in self.stop_strings:
+                if stripped.endswith(stop):
+                    stripped = stripped[: -len(stop)].rstrip()
+                    break
+            text = f"<answer>{stripped}</answer>"
         return text
 
     def generate(self, prompt: str) -> str:
@@ -151,11 +184,18 @@ class HFPeftBackend(InferenceBackend):
                 max_length=self.config.get("max_input_length", 4096),
             ).to(self.model.device)
 
+            gen_kwargs = dict(self.generation_kwargs)
+            if self.stop_strings:
+                # HF generate() needs the tokenizer in scope to decode the
+                # stop_strings stopping criterion (added in transformers 4.39).
+                gen_kwargs["stop_strings"] = self.stop_strings
+                gen_kwargs["tokenizer"] = self.tokenizer
+
             with torch.inference_mode():
                 outputs = self.model.generate(
                     **inputs,
                     pad_token_id=self.tokenizer.pad_token_id,
-                    **self.generation_kwargs,
+                    **gen_kwargs,
                 )
 
             # Strip the (left-padded) prompt prefix: each row's prompt is the

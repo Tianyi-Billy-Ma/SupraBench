@@ -1,0 +1,29 @@
+name: qwen3.5-27b-supra-v2-lora-guided
+
+backend: hf_peft
+model_id: Qwen/Qwen3.5-27B
+adapter_path: /groups/yye7/BILLY/SupraBench/outputs/cpt_qwen35_supra_v2/adapter
+
+dtype: bfloat16
+device_map: auto
+merge_adapter: false
+strip_thinking: true
+
+# Output-guidance: bias the first generated tokens to come *after* "<answer>\n"
+# (so the model can't open with "Here's a thinking process..." monologue) and
+# stop at "</answer>". Predictions are re-wrapped as <answer>{...}</answer>
+# in post-processing so the task evaluators' tag-aware regex parsers extract
+# the answer reliably.
+prompt_suffix: "<answer>\n"
+stop_strings:
+  - "</answer>"
+wrap_output_as_answer: true
+
+batch_size: 8
+max_input_length: 3584
+
+generation:
+  max_new_tokens: 128   # Was 512 in non-guided runs; answers are short once
+                        # the monologue is suppressed, so a tighter cap
+                        # roughly quarters wall time.
+  do_sample: false
