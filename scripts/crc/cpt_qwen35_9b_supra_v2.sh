@@ -21,14 +21,16 @@ source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
 export WANDB_RUN_GROUP=cpt-supra-v2
 export WANDB_NAME="cpt-qwen9b-supra-v2-${JOB_ID:-local}"
 
-# peft's FSDP auto-wrap can't infer the transformer block class on plain
-# causal-LM bases — hand it the name explicitly. Class confirmed by direct
-# model inspection on 2026-05-11.
-export FSDP_TRANSFORMER_CLS_TO_WRAP=Qwen3_5DecoderLayer
-
 nvidia-smi || true
 
+# accelerate launch translates the YAML's fsdp_transformer_layer_cls_to_wrap
+# into the FSDP_TRANSFORMER_CLS_TO_WRAP env var inside the workers, so a
+# shell-level export is overridden. The shared YAML lists
+# "Qwen3_5DecoderLayer,Qwen3_5VisionBlock" (correct for the 27B VLM); the 9B
+# is a plain causal LM and has no VisionBlock instances, so peft's auto-wrap
+# raises. Pass the override via CLI flag, which takes precedence.
 "${ACCELERATE}" launch \
   --config_file scripts/crc/accelerate_fsdp.yaml \
+  --fsdp_transformer_layer_cls_to_wrap Qwen3_5DecoderLayer \
   src/train/cpt_lora.py \
   --config configs/train/cpt_qwen35_9b_supra_v2.yaml
