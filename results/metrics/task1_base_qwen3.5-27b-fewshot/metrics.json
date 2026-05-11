@@ -1,0 +1,944 @@
+{
+  "mae": 2.2365750000000024,
+  "rmse": 3.3881283213175406,
+  "acc@0.5": 0.20652173913043478,
+  "acc@1.0": 0.40091973244147155,
+  "medae": 1.3261000000000003,
+  "mae_5pct_trimmed": 1.850378917253521,
+  "n_total": 2392,
+  "n_parsed": 2392,
+  "per_host": {
+    "Cucurbit[8]uril": {
+      "mae": 3.4254440613026835,
+      "n": 261
+    },
+    "β-Cyclodextrin": {
+      "mae": 0.8363626865671638,
+      "n": 201
+    },
+    "p-Sulfonatocalix[4]arene": {
+      "mae": 1.5166361111111113,
+      "n": 144
+    },
+    "Cucurbit[6]uril": {
+      "mae": 2.5675496124031008,
+      "n": 129
+    },
+    "α-Cyclodextrin": {
+      "mae": 2.7542912280701746,
+      "n": 57
+    },
+    "p-Sulfonatocalix[6]arene": {
+      "mae": 1.140830357142857,
+      "n": 56
+    },
+    "syn-Amide Naphthotube": {
+      "mae": 1.7615953488372091,
+      "n": 43
+    },
+    "Octa acid cavitand": {
+      "mae": 3.642460465116278,
+      "n": 43
+    },
+    "anti-Amide Naphthotube": {
+      "mae": 1.5739261904761905,
+      "n": 42
+    },
+    "Calix[4]arene": {
+      "mae": 5.452233333333333,
+      "n": 36
+    },
+    "4-sulfocalix[4]arene sodium salt": {
+      "mae": 2.5261242424242423,
+      "n": 33
+    },
+    "Tetrahydropyridazinophthalazine-tetraone functionalized Cucurbit[6]uril": {
+      "mae": 1.7152937499999996,
+      "n": 32
+    },
+    "(1,1',4,4')-Tetraoxy-propylsulphite-bisnaftlen-methylen-bisglycouril Sodium": {
+      "mae": 3.274699999999999,
+      "n": 32
+    },
+    "Cucurbit[5]uril": {
+      "mae": 4.575742307692307,
+      "n": 26
+    },
+    "tetra-endo-methyl octa acid cavitand": {
+      "mae": 3.198915384615385,
+      "n": 26
+    },
+    "5,11,17,23,29-pentaguanidinium-31,32,33,34,35-penta (4-methylpentloxy) calix[5]arene": {
+      "mae": 1.79118,
+      "n": 25
+    },
+    "p-sulfonatocalix[8]arene": {
+      "mae": 1.8158666666666665,
+      "n": 24
+    },
+    "γ-Cyclodextrin": {
+      "mae": 1.0094249999999998,
+      "n": 24
+    },
+    "sodium sulfonated pillar[6]arene": {
+      "mae": 4.680326086956522,
+      "n": 23
+    },
+    "p-Sulfonatocalix[5]arene": {
+      "mae": 0.8419565217391304,
+      "n": 23
+    },
+    "carboxylate pillar[6]arene": {
+      "mae": 1.6375681818181818,
+      "n": 22
+    },
+    "Oxatub[4]arene TA4": {
+      "mae": 1.4448454545454545,
+      "n": 22
+    },
+    "sulfonated pillar[5]arene": {
+      "mae": 2.8434380952380955,
+      "n": 21
+    },
+    "Triphenylene receptor": {
+      "mae": 2.471371428571428,
+      "n": 21
+    },
+    "syn amine naphthotube": {
+      "mae": 0.6997736842105263,
+      "n": 19
+    },
+    "Zorb[4]arene": {
+      "mae": 1.5357684210526314,
+      "n": 19
+    },
+    "sulfonated pillar[7]arene": {
+      "mae": 1.2310842105263158,
+      "n": 19
+    },
+    "p-Sulfonatothiacalix[4]arene": {
+      "mae": 1.287288888888889,
+      "n": 18
+    },
+    "anti amine naphthotube": {
+      "mae": 1.198116666666667,
+      "n": 18
+    },
+    "Napthalene-monofunctionalized cucurbit[6]uril, Cucurbituril[6]": {
+      "mae": 1.26164375,
+      "n": 16
+    },
+    "carboxylated azocalix[4]arene": {
+      "mae": 3.429073333333334,
+      "n": 15
+    },
+    "Molecular Tweezer-sodium dimethylphosphonate": {
+      "mae": 1.154446666666667,
+      "n": 15
+    },
+    "Di(9,10-dihydro-9,10-ethenoanthracene-11,12-dicarboxylicacid)-cyclophane": {
+      "mae": 1.03476,
+      "n": 15
+    },
+    "hexasodium p-sulfonatocalix[6]arene": {
+      "mae": 1.314992857142857,
+      "n": 14
+    },
+    "tetrasulfonato-tetrakis(n-butyl)-calix[4]arene": {
+      "mae": 1.1583285714285716,
+      "n": 14
+    },
+    "Dicyclohexano-18-Crown-6": {
+      "mae": 1.4885499999999998,
+      "n": 14
+    },
+    "Positand 1": {
+      "mae": 2.2437916666666666,
+      "n": 12
+    },
+    "p-sulfonatocalix[6]arene-(mono aminoethyl-substituted)": {
+      "mae": 1.1970636363636364,
+      "n": 11
+    },
+    "p-sulfonatocalix[4]arene-(mono aminoethyl-substituted)": {
+      "mae": 1.103490909090909,
+      "n": 11
+    },
+    "Dodeca(4-carboxybenzyl)bambus[6]uril": {
+      "mae": 7.1652272727272734,
+      "n": 11
+    },
+    "p-sulfonatocalix[4]arene-(mono-carboxymethyl-substituted)": {
+      "mae": 1.6920454545454542,
+      "n": 11
+    },
+    "p-sulfonatocalix[4]arene-(mono amidomethyl-substituted)": {
+      "mae": 1.3159818181818181,
+      "n": 11
+    },
+    "p-sulfonatocalix[6]arene-(mono carboxymethyl-substituted)": {
+      "mae": 1.5183090909090913,
+      "n": 11
+    },
+    "p-sulfonatocalix[6]arene-(mono amidomethyl-substituted)": {
+      "mae": 1.2449727272727273,
+      "n": 11
+    },
+    "Tri(9,10-dihydro-9,10-ethenoanthracene-11,12-dicarboxylic acid)-cyclophane": {
+      "mae": 1.104518181818182,
+      "n": 11
+    },
+    "Acyclic sodium 4,4'-(naphthalene-1,4-diyl)bis(butane-1-sulfonate) Cucurbituril (tetrameric glycourilunit)": {
+      "mae": 5.36153,
+      "n": 10
+    },
+    "1,3,5-tris[[(4s)-4-[3-[4-(sodiosulfo)butoxy]phenyl]-2-oxazoline-2-yl]methyl]-2,4,6-trimethylbenzene": {
+      "mae": 2.4536100000000003,
+      "n": 10
+    },
+    "Molecular Tweezer-lithium diphosphate": {
+      "mae": 1.34139,
+      "n": 10
+    },
+    "tetrakis(trimethylammonium) chloride cavitand": {
+      "mae": 3.13668,
+      "n": 10
+    },
+    "1,3,5-tris[[(4s)-4-[3-[4-(sodiosulfo)butoxy]phenyl]-2-oxazoline-2-yl]methyl]-2,4,6-triethylbenzene": {
+      "mae": 2.18248,
+      "n": 10
+    },
+    "Acyclic sodium 3,3'-(naphthalene-1,4-diylbis(oxy))bis(propane-1-sulfonate) Cucurbituril (tetrameric glycourilunit)": {
+      "mae": 1.8919599999999999,
+      "n": 10
+    },
+    "Ethylenediaminetetraacetic acid": {
+      "mae": 0.6201333333333334,
+      "n": 9
+    },
+    "4,7,13,18-Tetraoxa-1,10-diazabicyclo[8.5.5]icosane": {
+      "mae": 1.699966666666667,
+      "n": 9
+    },
+    "4,7,13,16,21-Pentaoxa-1,10-diazabicyclo[8.8.5]tricosane": {
+      "mae": 2.044533333333333,
+      "n": 9
+    },
+    "p-sulfonatocalix[8]arene-(mono aminoethyl-substituted)": {
+      "mae": 1.1719333333333333,
+      "n": 9
+    },
+    "heptakis-O-(2-hydroxypropyl)-β Cyclodextrin": {
+      "mae": 0.8712888888888889,
+      "n": 9
+    },
+    "Corral[5]arene": {
+      "mae": 1.0424666666666667,
+      "n": 9
+    },
+    "sulfobutylether7-β-cyclodextrin": {
+      "mae": 1.9423,
+      "n": 9
+    },
+    "4,7,13,16,21,24-Hexaoxa-1,10-diazabicyclo[8.8.8]hexacosane": {
+      "mae": 2.1944333333333335,
+      "n": 9
+    },
+    "p-sulfonatocalix[8]arene-(mono cyanomethyl-substituted)": {
+      "mae": 1.8890666666666671,
+      "n": 9
+    },
+    "4,7,10,16,19,24,27-Heptaoxa-1,13-diazabicyclo[11.8.8]nonacosane": {
+      "mae": 0.8777777777777778,
+      "n": 9
+    },
+    "4,7,10,16,19,22,27,30-Octaoxa-1,13-diazabicyclo[11.11.8]dotriacontan-28-ylmethanol": {
+      "mae": 4.305577777777778,
+      "n": 9
+    },
+    "Zeolite L3.0": {
+      "mae": 3.339044444444445,
+      "n": 9
+    },
+    "4-butyl-7-(diethylamino)-2-oxochromene-3-carbaldehyde": {
+      "mae": 3.615922222222222,
+      "n": 9
+    },
+    "[3.3.3]Cryptand": {
+      "mae": 4.4375374999999995,
+      "n": 8
+    },
+    "Monohydroxycucurbit[7]uril": {
+      "mae": 2.4334625,
+      "n": 8
+    },
+    "cucurbit[10]uril": {
+      "mae": 6.6252875,
+      "n": 8
+    },
+    "propyl sulfonated pillar[5]arene": {
+      "mae": 1.1659375,
+      "n": 8
+    },
+    "carboxylate pillar[5]arene": {
+      "mae": 0.99295,
+      "n": 8
+    },
+    "Acyclic (sodium 3,3'-(1,4-phenylenebis(oxy))bis(propane-1-sulfonate) Cucurbiturils (tetrameric Glycouril units)": {
+      "mae": 1.7678250000000002,
+      "n": 8
+    },
+    "Inverted Cucurbit[7]uril": {
+      "mae": 4.028512500000001,
+      "n": 8
+    },
+    "Acyclic sodium 3,3'-(naphthalene-2,7-diyl)bis(propane-1-sulfonate) Cucurbituril (tetrameric Glycourilunit)": {
+      "mae": 1.6651875,
+      "n": 8
+    },
+    "exo-Octa Acid": {
+      "mae": 0.8006714285714286,
+      "n": 7
+    },
+    "Tetramethyl((2,2,10,10-tetramethyl-65,145-dinitro-4,8,12,16-tetraoxa-1,3,9,11(1,4),6,14(1,3)-hexabenzenacyclohexadecaphane-13,33,92,113-tetrayl)tetrakis(methylene))tetrakis(phosphonate)": {
+      "mae": 2.5769857142857147,
+      "n": 7
+    },
+    "5,11,17,23-tetrasulfonato-25,26,27,28-tetrakis(n-pentyl)-calix[4]arene": {
+      "mae": 1.221242857142857,
+      "n": 7
+    },
+    "5,11,17,23-Tetrakis(dihydroxyphosphoryl)-25,26, 27,28-tetrapropoxycalix[4]arene": {
+      "mae": 1.5468285714285717,
+      "n": 7
+    },
+    "Molecular Tweezer-Sodium disulfonate": {
+      "mae": 0.7001571428571429,
+      "n": 7
+    },
+    "2-[[Methyl[5-[2-oxo-3-formyl-7-(diethylamino)-2H-1-benzopyran-4-yl]pentyl]amino]methyl]phenylboronic acid": {
+      "mae": 1.0289857142857142,
+      "n": 7
+    },
+    "syn oxatube": {
+      "mae": 3.4701999999999997,
+      "n": 7
+    },
+    "dodeca(PEG)bambus[6]uril": {
+      "mae": 5.428471428571428,
+      "n": 7
+    },
+    "Hexakis(2,3,6-tri-o-methyl)-alpha-cyclodextrin": {
+      "mae": 4.5407714285714285,
+      "n": 7
+    },
+    "5,11,17,23-Tetrakis-(hydroxymethoxyphosphoryl)- 25,26,27,28-tetrapropoxycalix[4]arene Tetralithium Salt": {
+      "mae": 1.9835857142857143,
+      "n": 7
+    },
+    "1-[5-(Carbamoylmethyl-isopropyl-carbamoyl)-1H-pyrrole-2-ylcarbonyl]guanidinium": {
+      "mae": 0.9527857142857142,
+      "n": 7
+    },
+    "Uramildiacetic acid": {
+      "mae": 2.9628142857142854,
+      "n": 7
+    },
+    "o-Xylyleneglycoluriltetramer": {
+      "mae": 1.6145000000000003,
+      "n": 6
+    },
+    "5-[4-(2-dihydroxyboryl-benzylamino)-butyroylamino]-m-xylylene bisphosphonic acid dimethyl ester dilithium salt": {
+      "mae": 2.60675,
+      "n": 6
+    },
+    "cucurbit[7]uril-hexaethylene glycol-berberine conjugate": {
+      "mae": 4.5903,
+      "n": 6
+    },
+    "5-[4-(2-dihydroxyboryl-benzyl-N-methylamino)-butyroylamino]-m-xylylene bisphosphonic acid dimethyl ester dilithium salt": {
+      "mae": 1.8117833333333333,
+      "n": 6
+    },
+    "Dodecamethylbambus[6]uril": {
+      "mae": 7.6429833333333335,
+      "n": 6
+    },
+    "permethylated β-cyclodextrin": {
+      "mae": 0.9100166666666666,
+      "n": 6
+    },
+    "Cyclobis(paraquat-1,4-phenylene) tetrakis(hexafluorophosphate)": {
+      "mae": 0.9641666666666667,
+      "n": 6
+    },
+    "cucurbit[7]uril-tetraethylene glycol-berberine conjugate": {
+      "mae": 2.848266666666667,
+      "n": 6
+    },
+    "p-Sulfonatocalix[5]arene sodium salt": {
+      "mae": 0.47769999999999985,
+      "n": 6
+    },
+    "p-sulfonatocalix[4]arene-(phenyl)": {
+      "mae": 1.4975999999999998,
+      "n": 5
+    },
+    "p-sulfonatocalix[4]arene-(carboxamidophenyl-substituted)": {
+      "mae": 1.51072,
+      "n": 5
+    },
+    "5-[4-[2-(dihydroxyboryl)benzylaminomethyl]benzoylamino]-1,3-xylylenebis(phosphonic acid lithium methyl) ester salt": {
+      "mae": 1.9897599999999998,
+      "n": 5
+    },
+    "Mono[2-O-(2-hydroxypropyl)]-β-Cyclodextrin": {
+      "mae": 0.33566,
+      "n": 5
+    },
+    "p-sulfonatocalix[4]arene-(bromo-substituted)": {
+      "mae": 1.03166,
+      "n": 5
+    },
+    "Molecular Tweezer-sodium diacetate": {
+      "mae": 1.0927600000000002,
+      "n": 5
+    },
+    "Zeolite Y2.55 (FAU)": {
+      "mae": 5.573840000000001,
+      "n": 5
+    },
+    "p-Sulfonatothiacalix[4]arene sodium salt": {
+      "mae": 0.77638,
+      "n": 5
+    },
+    "5,11,17,23,29-Pentasulfonato-31,32,33,34,35-pentakis((4- methylpentyl)oxy)calix[5]arene": {
+      "mae": 1.03246,
+      "n": 5
+    },
+    "Meta-ethylphenylcucurbit[6]urils": {
+      "mae": 2.14562,
+      "n": 5
+    },
+    "p-sulfonatocalix[4]arene-carboxymethylsubsituted": {
+      "mae": 0.38000000000000017,
+      "n": 5
+    },
+    "Guanidinocalix[5]arene pentadodecyl ether": {
+      "mae": 0.77354,
+      "n": 5
+    },
+    "Mono(6-carboxymethylamino-6-deoxy)-β-Cyclodextrin": {
+      "mae": 0.6758599999999999,
+      "n": 5
+    },
+    "p-sulfonatocalix[4]arene-(cyanophenyl-substituted": {
+      "mae": 1.45208,
+      "n": 5
+    },
+    "tetra-endo-ethyl octa acid": {
+      "mae": 1.07965,
+      "n": 4
+    },
+    "Zeolite Y15 (FAU15)": {
+      "mae": 4.1678500000000005,
+      "n": 4
+    },
+    "tetracyanoresorcin[4]arene": {
+      "mae": 0.7499500000000001,
+      "n": 4
+    },
+    "Dimetoxixylyleneglycoluril trimer": {
+      "mae": 1.234,
+      "n": 4
+    },
+    "Mono(6-amino-6-deoxy)-β-Cyclodextrin": {
+      "mae": 0.5954999999999998,
+      "n": 4
+    },
+    "p-sulfonatocalix[4]arene-(carboxysulfonamide-substituted)": {
+      "mae": 1.8494500000000003,
+      "n": 4
+    },
+    "Mono[6-(R(-)-1-hydroxymethylpropylamino)-6-deoxy]β-Cyclodextrin": {
+      "mae": 0.48455000000000004,
+      "n": 4
+    },
+    "bis(p-sulfonatocalix[4]arenes)": {
+      "mae": 3.860975,
+      "n": 4
+    },
+    "Methylcarboxylate-substituted Calix[4]arene": {
+      "mae": 2.9625,
+      "n": 4
+    },
+    "Dimetoxinaphtaleneglycoluril trimer": {
+      "mae": 1.12635,
+      "n": 4
+    },
+    "WNBP": {
+      "mae": 1.1902999999999997,
+      "n": 4
+    },
+    "Cucurbit[7]uril-tetramethylrhodamine conjugate": {
+      "mae": 2.4742749999999996,
+      "n": 4
+    },
+    "bisurea-receptor-Cl": {
+      "mae": 0.9075000000000002,
+      "n": 4
+    },
+    "bisurea-receptor-F": {
+      "mae": 1.3156499999999998,
+      "n": 4
+    },
+    "6I-O-(1-naphtholxy)-2I,31-di-O- methylhexakis(2II-VII,3II-VII,6II-VII-tri-O-methyl)-B-cyclodextrin": {
+      "mae": 0.44647500000000007,
+      "n": 4
+    },
+    "bisurea-receptor-NMe2": {
+      "mae": 1.353425,
+      "n": 4
+    },
+    "bisurea-receptor-OMe": {
+      "mae": 1.35755,
+      "n": 4
+    },
+    "bisurea-receptor-NO2": {
+      "mae": 1.854625,
+      "n": 4
+    },
+    "Dodecakis(5‐carboxypentyl)bambus[6]uril": {
+      "mae": 6.26765,
+      "n": 4
+    },
+    "p-sulfonatocalix[8]arene-(carboxymethyl-substituted)": {
+      "mae": 2.241175,
+      "n": 4
+    },
+    "Mono(6-O-a-maltosyl)-β-Cyclodextrin": {
+      "mae": 0.5519499999999999,
+      "n": 4
+    },
+    "Calixarene": {
+      "mae": 8.161625,
+      "n": 4
+    },
+    "ExBox.4Cl": {
+      "mae": 3.56115,
+      "n": 4
+    },
+    "6I-O-(8-hydroxyquinoline)-2I,31- di-O-methylhexakis(2II-VII,3II-VII,6II-VII- tri-O-methyl)-B-cyclodextrin": {
+      "mae": 0.371525,
+      "n": 4
+    },
+    "2,3-[1,2-phenylenebis[oxy(3,6-dioxaoctane-1,8-diyl)oxy]]quinoxaline": {
+      "mae": 3.8431,
+      "n": 4
+    },
+    "bisurea-receptor-tBu": {
+      "mae": 1.7757999999999998,
+      "n": 4
+    },
+    "Dodecabenzylbambus[6]uril": {
+      "mae": 9.8248,
+      "n": 4
+    },
+    "p-sulfonatocalix[4]arene-(nitro-substituted)": {
+      "mae": 0.9325,
+      "n": 4
+    },
+    "2-[13,29,32-Tris(carboxymethyl)-8,15,27,34-tetraoxo-2,21-dioxa-7,10,13,16,26,29,32,35-octazapentacyclo[34.2.2.23,6.217,20.222,25]hexatetraconta-1(38),3(46),4,6(45),17(44),18,20(43),22,24,36,39,41-dodecaen-10-yl]acetic acid": {
+      "mae": 2.3666666666666667,
+      "n": 3
+    },
+    "p-sulfonatocalix[6]arene-(hexakis(dodecyloxy)-substituted)": {
+      "mae": 2.3485333333333336,
+      "n": 3
+    },
+    "p-sulfonatocalix[4]arene-(amino-substituted)": {
+      "mae": 0.7544999999999998,
+      "n": 3
+    },
+    "p-sulfonatocalix[4]arene-(tetrakis(hexyloxy) substitued)": {
+      "mae": 1.0379666666666667,
+      "n": 3
+    },
+    "(2-(((anthracen-9-ylmethyl)(methyl)amino)methyl)phenyl)boronic acid": {
+      "mae": 0.25069999999999987,
+      "n": 3
+    },
+    "p-sulfocalixmethylcalix[4]arene": {
+      "mae": 1.2061,
+      "n": 3
+    },
+    "bisurea-receptor": {
+      "mae": 0.33059999999999984,
+      "n": 3
+    },
+    "6,6,19,19-tetramethyl-12,13,25,26-tetraoxo-2,6,10,15,19,23-hexaazatricyclo[22.2.0.011,14]hexacosa-1(24),11(14)-diene-6,19-diium": {
+      "mae": 6.0868,
+      "n": 3
+    },
+    "Dimetoxixylyleneglycoluril tetramer": {
+      "mae": 1.1285333333333336,
+      "n": 3
+    },
+    "Methyl Cucurbit[8]uril-Viologen-Rotaxane": {
+      "mae": 4.5759333333333325,
+      "n": 3
+    },
+    "Dimetoxinaphtaleneglycoluril tetramer": {
+      "mae": 1.7045000000000001,
+      "n": 3
+    },
+    "p-sulfocalixmethylcalix[5]arene": {
+      "mae": 0.8908000000000005,
+      "n": 3
+    },
+    "5,11,17,23-Tetraamino-25,26,27,28-tetrahydroxycalix[4]arene": {
+      "mae": 3.5686,
+      "n": 3
+    },
+    "Napthalene-copper complex 1": {
+      "mae": 1.4991333333333332,
+      "n": 3
+    },
+    "p-sulfonatocalix[6]arene-(hexakis(hexyloxy) substituted)": {
+      "mae": 0.35379999999999995,
+      "n": 3
+    },
+    "p-sulfonatocalix[4]arene-(methylphenyl-substituted)": {
+      "mae": 2.4054,
+      "n": 3
+    },
+    "p-sulfonatocalix[4]arene-(tosylamide-substituted)": {
+      "mae": 1.7621,
+      "n": 3
+    },
+    "p-sulfonatocalix[4]arene-(methoxyphenyl-substituted)": {
+      "mae": 1.2429333333333332,
+      "n": 3
+    },
+    "(2-((((10-formylanthracen-9-yl)methyl)(methyl)amino)methyl)phenyl)boronic acid": {
+      "mae": 0.28083333333333327,
+      "n": 3
+    },
+    "p-sulfonatocalix[4]arene-(2,3-dimethoxyphenyl-substituted)": {
+      "mae": 0.9535,
+      "n": 3
+    },
+    "Octa-(6-O-(1-ethoxypropan-2-ol))-γ-Cyclodextrine": {
+      "mae": 1.7329,
+      "n": 3
+    },
+    "Deprotonated calix[4]resorcinarene": {
+      "mae": 0.2666666666666668,
+      "n": 3
+    },
+    "methyl (S)-2-(l4-azaneyl)-3-(((5-((diaminomethyl)carbamoyl)-1H-pyrrol-2-yl)methyl)-l4-azaneyl)propanoate": {
+      "mae": 3.4705000000000004,
+      "n": 2
+    },
+    "Rotaxane": {
+      "mae": 1.0358500000000002,
+      "n": 2
+    },
+    "Human Serum Albumin": {
+      "mae": 0.19035000000000002,
+      "n": 2
+    },
+    "p-sulfonatocalix[4]arene-(bromosulfonamide-substituted)": {
+      "mae": 0.8180499999999999,
+      "n": 2
+    },
+    "p-immidazoliumcalix[4]arene-3C": {
+      "mae": 1.2322,
+      "n": 2
+    },
+    "Dodecakis(3‐carboxypropyl)bambus[6]uril": {
+      "mae": 8.35315,
+      "n": 2
+    },
+    "p-sulfonatocalix[4]arene-(aminomethylphenyl-substituted)": {
+      "mae": 0.24149999999999983,
+      "n": 2
+    },
+    "Perylene-Bridged Bis(b-cyclodextrin)": {
+      "mae": 0.6211999999999998,
+      "n": 2
+    },
+    "twisted p-Sulfonatocalix[4]arene (methylcaboxylate substituted)": {
+      "mae": 0.25,
+      "n": 2
+    },
+    "p-sulfonatocalix[4]arene-(naphthoylamide-substituted)": {
+      "mae": 1.7963500000000003,
+      "n": 2
+    },
+    "dodecakis(5‐carboxypentyl-2‐hydroxyethylamide)bambus[6]uril": {
+      "mae": 10.5165,
+      "n": 2
+    },
+    "singly ethyl-bridged bis(p-sulfonatocalix[4]arene)": {
+      "mae": 0.60535,
+      "n": 2
+    },
+    "Hemimethyl-substituted Cucurbit[7]uril, Cucurbituril[7]": {
+      "mae": 1.4239000000000002,
+      "n": 2
+    },
+    "p-Sulfonatocalix[4]arene (tetrakis(2-(dimethylamino)-2-oxoethoxy)-substituted)": {
+      "mae": 1.4000000000000001,
+      "n": 2
+    },
+    "p-sulfonatocalix[4]arene-(2,4-dicarboxysulfonamide-substituted)": {
+      "mae": 0.90015,
+      "n": 2
+    },
+    "Sulfonated azocalix[4]arene": {
+      "mae": 2.0006999999999997,
+      "n": 2
+    },
+    "C39H41N5O2": {
+      "mae": 21.025,
+      "n": 2
+    },
+    "Dimetoxinaphtaleneglycoluril": {
+      "mae": 0.8136999999999999,
+      "n": 2
+    },
+    "p-sulfonatocalix[4]arene-(carboxyphenyl-substituted)": {
+      "mae": 0.46409999999999996,
+      "n": 2
+    },
+    "Pseudocyclopeptide iodide": {
+      "mae": 0.4524999999999999,
+      "n": 2
+    },
+    "p-sulfonatocalix[4]arene-(benzoylamide-substituted)": {
+      "mae": 2.5010000000000003,
+      "n": 2
+    },
+    "Dimetoxinaphtaleneglycoluril dimer": {
+      "mae": 1.55165,
+      "n": 2
+    },
+    "5,11,17,23,29-pentasulfonato-31,32,33,34,35-pentakis(dodecyloxy)calix[5]arene": {
+      "mae": 2.60115,
+      "n": 2
+    },
+    "p-Sulfonato calix[4]arene (bis(2-ethoxyethoxy)-substituted)": {
+      "mae": 0.55,
+      "n": 2
+    },
+    "Tetraphosphonate cyclophane": {
+      "mae": 2.3484,
+      "n": 2
+    },
+    "p-sulfonatocalix[4]arene-(bromoamide-substituted)": {
+      "mae": 1.5732499999999998,
+      "n": 2
+    },
+    "18-Crown-6": {
+      "mae": 0.5303500000000001,
+      "n": 2
+    },
+    "homoditopic doubly ethyl-bridged bis(p-sulfonatocalix[4]arene)": {
+      "mae": 1.1551,
+      "n": 1
+    },
+    "15-crown-5": {
+      "mae": 3.0,
+      "n": 1
+    },
+    "Amphipilic Cholin-alkyl-subsituted Calix[4]arene": {
+      "mae": 2.8617,
+      "n": 1
+    },
+    "Amphipilic Cholin-alkyl-subsituted Calix[5]arene": {
+      "mae": 2.4051,
+      "n": 1
+    },
+    "p-sulfonatocalix[4]arene-(TEG-triazole-O-NBDphenyl-substituted)": {
+      "mae": 0.42219999999999924,
+      "n": 1
+    },
+    "p-sulfonatocalix[4]arene-(strapped-ethyleneglycol-substituted)": {
+      "mae": 0.5792000000000002,
+      "n": 1
+    },
+    "5,11,17,23- tetrakis[(p-carboxyphenyl)azo]-25,26,27,28-tetra-hydroxy calix[4]arene": {
+      "mae": 2.9460999999999995,
+      "n": 1
+    },
+    "anti-Thiourea Naphthotube": {
+      "mae": 9.057300000000001,
+      "n": 1
+    },
+    "perylene- bridged bis(b-cyclodextrin)s": {
+      "mae": 1.5281000000000002,
+      "n": 1
+    },
+    "Cyclohexanohemi cucurbit[8]uril": {
+      "mae": 0.915,
+      "n": 1
+    },
+    "Dimetoxixylyleneglycoluril dimer": {
+      "mae": 1.0558999999999998,
+      "n": 1
+    },
+    "Bis[quinoxaline-2,3-diylbis[oxy(3,6-dioxaoctane-1,8-diyl)oxy]]-9,10-dipropylanthracene and on dibenzylammonium": {
+      "mae": 5.438599999999999,
+      "n": 1
+    },
+    "1-[5-(ethylcarbamoyl)-1H-pyrrole-2-ylcarbonyl]guanidinium": {
+      "mae": 0.31350000000000033,
+      "n": 1
+    },
+    "Tris[2,3-quinoxalinediylbis(oxyethyleneoxyethyleneoxyethyleneoxy)]triphenylene and Dibenzylammonium guest": {
+      "mae": 3.6576,
+      "n": 1
+    },
+    "Hexakis(butanyloxy)-p-Sulfonatocalix[6]arene": {
+      "mae": 0.8498000000000001,
+      "n": 1
+    },
+    "calix[4]arene bis-hydroxymethylphosphous acid": {
+      "mae": 6.6637,
+      "n": 1
+    },
+    "undecacyclo[36.2.2.22,5.26,9.210,13.214,17.218,21.222,25.226,29.230,33.234,37]hexaconta-1(40),2(60),3,5(59),6(58),7,9(57),10(56),11,13(55),14(54),15,17(53),18(52),19,21(51),22,24,26,28,30,32,34,36,38,41,43,45,47,49-triacontaene": {
+      "mae": 10.2559,
+      "n": 1
+    },
+    "Potassium iodide": {
+      "mae": 9.0899,
+      "n": 1
+    },
+    "p-sulfonatocalix[4]arene-(TEG-azidephenyl-substituted)": {
+      "mae": 0.5404,
+      "n": 1
+    },
+    "Sugammadex": {
+      "mae": 0.7212000000000005,
+      "n": 1
+    },
+    "6-O-alpha-D-glucosyl-β-Cyclodextrin": {
+      "mae": 0.3355999999999999,
+      "n": 1
+    },
+    "Guanidinium Chloride": {
+      "mae": 2.0,
+      "n": 1
+    },
+    "C41H45N5O2": {
+      "mae": 37.041,
+      "n": 1
+    },
+    "Pyridine-bisurea-receptor": {
+      "mae": 1.4451,
+      "n": 1
+    },
+    "Hexakis(octyloxy)-p-Sulfonatocalix[6]arene": {
+      "mae": 0.6696,
+      "n": 1
+    },
+    "1-(1H-hyrrole-2-ylcarbonyl)guanidinium": {
+      "mae": 1.4861,
+      "n": 1
+    },
+    "heptakis(2,6-di-methyl)-β-Cyclodextrine": {
+      "mae": 0.8007,
+      "n": 1
+    },
+    "oligoethylene glycol functionalized guanidinocalixarene": {
+      "mae": 0.5747,
+      "n": 1
+    },
+    "Octamethyl substituted CB[6]": {
+      "mae": 0.9702999999999999,
+      "n": 1
+    },
+    "H+Pyridine-bisurea-receptorTFA": {
+      "mae": 2.1096000000000004,
+      "n": 1
+    },
+    "pyrene-modified calix[4]arene derivative": {
+      "mae": 4.8404,
+      "n": 1
+    },
+    "Hexakis(pentyloxy)-p-Sulfonatocalix[6]arene": {
+      "mae": 0.6152999999999995,
+      "n": 1
+    },
+    "Hydroxypropyl-β-Cyclodextrin": {
+      "mae": 3.4823000000000004,
+      "n": 1
+    },
+    "2,3:6,7:10,11-tris[2,3-quinoxalinediylbis(oxyethyleneoxyethyleneoxyethyleneoxy)]triphenylene": {
+      "mae": 8.661999999999999,
+      "n": 1
+    },
+    "Trisodium 8-eicosyloxypyrene-1,3,6-trisulfonate": {
+      "mae": 2.5221999999999998,
+      "n": 1
+    },
+    "4-(2,7-di-tert-butyl-9,9-dimethyl-5-(3-(pyridin-2-yl)-5-(pyridin-3-yl)phenyl)-9H-xanthen-4-yl)benzoate-platinum(II) chlorid": {
+      "mae": 1.0998,
+      "n": 1
+    },
+    "Acyclic di-(sodium(3-((4-(2-azidoethoxy)naphthalen-1-yl)oxy)propane-1-sulfonate) Cucurbituril (tetrametic glycourilunit)sodium": {
+      "mae": 1.3436000000000003,
+      "n": 1
+    },
+    "2-Acetylguanidinium": {
+      "mae": 1.801,
+      "n": 1
+    },
+    "1-[5-(methoxycarbonyl)-1H-pyrrole-2-ylcarbonyl]guanidinium": {
+      "mae": 0.8268999999999997,
+      "n": 1
+    },
+    "Resorcin[4]arene": {
+      "mae": 2.1616999999999997,
+      "n": 1
+    },
+    "Tetraundecyl calix[4]resorcinarene": {
+      "mae": 1.0751,
+      "n": 1
+    },
+    "Cryptophane-A-acid": {
+      "mae": 0.5706000000000002,
+      "n": 1
+    },
+    "p-Sulfonatocalix[4]arene(tetrakis(2-ethoxyethoxy)-substituted)": {
+      "mae": 1.5,
+      "n": 1
+    },
+    "7-(diethylamino)-2-oxochromene-3-carbaldehyde": {
+      "mae": 3.0,
+      "n": 1
+    },
+    "Acyclic di-(sodium(3-((4-(2-azidoethoxy)naphthalen-1-yl)oxy)propane-1-sulfonate)-functionalizedCucurbiturils (tetrameric glycourilunit)": {
+      "mae": 6.609,
+      "n": 1
+    },
+    "1-[5-(Butylcarbamoyl)-1H-pyrrole-2-ylcarbonyl]guanidinium": {
+      "mae": 0.9611999999999998,
+      "n": 1
+    },
+    "Mono[2-O-(2-hydroxyethyl)]-β-CD": {
+      "mae": 0.7238000000000002,
+      "n": 1
+    },
+    "1-[5-(carbamoylmethylcarbamoyl)-1h-pyrrole-2-ylcarbonyl]guanidinium": {
+      "mae": 1.6675,
+      "n": 1
+    },
+    "p-Sulfonatocalix[4]arene bis(carboxymethoxy)-substituted": {
+      "mae": 0.0,
+      "n": 1
+    }
+  }
+}
