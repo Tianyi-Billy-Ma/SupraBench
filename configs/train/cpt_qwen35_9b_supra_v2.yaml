@@ -1,0 +1,54 @@
+# v2 LoRA CPT on Qwen3.5-9B with the EvoLM-style mix.
+# Sibling of configs/train/cpt_qwen35_supra_v2.yaml (27B) — same recipe, same
+# mix dataset, smaller plain-text base. Run alongside the Llama-3.1-8B config
+# to test whether v2's regression on 27B is contamination-specific to that
+# base or fundamental to the recipe.
+
+run_name: qwen3_5-9b-supra-v2-lora
+
+model:
+  model_id: Qwen/Qwen3.5-9B
+  arch: causal_lm                          # 9B is a plain causal LM (no VLM tower)
+  trust_remote_code: true
+  dtype: bfloat16
+  attn_implementation: flash_attention_2
+  # No language_model_path / freeze_keywords needed for plain causal-LM bases.
+
+lora:
+  r: 32
+  alpha: 64
+  dropout: 0.05
+  bias: none
+  target_module_names:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+dataset:
+  hub_id: mtybilly/SupraBench-CPT-Mix-v2
+  split: train
+  text_field: text
+  seq_len: 4096
+  num_proc: 8
+
+training:
+  output_dir: outputs/cpt_qwen35_9b_supra_v2
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 4
+  num_train_epochs: 1
+  learning_rate: 1.0e-5
+  weight_decay: 0.0
+  warmup_ratio: 0.05
+  lr_scheduler_type: cosine
+  logging_steps: 10
+  save_steps: 200
+  save_total_limit: 3
+  bf16: true
+  gradient_checkpointing: true
+  ddp_find_unused_parameters: false
+  report_to: wandb
+  seed: 42

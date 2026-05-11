@@ -72,7 +72,11 @@ class HFPeftBackend(InferenceBackend):
 
         # Lazy imports: heavy deps only load when the backend is actually built.
         import torch
-        from transformers import AutoModelForImageTextToText, AutoTokenizer
+        from transformers import (
+            AutoModelForCausalLM,
+            AutoModelForImageTextToText,
+            AutoTokenizer,
+        )
 
         model_id: str = config["model_id"]
         dtype_str: str = config.get("dtype", "bfloat16")
@@ -83,12 +87,21 @@ class HFPeftBackend(InferenceBackend):
             trust_remote_code=True,
         )
 
-        base_model = AutoModelForImageTextToText.from_pretrained(
-            model_id,
+        # ``arch`` picks the AutoModel class. Default preserves the Qwen3.5-27B
+        # VLM path; ``causal_lm`` is for plain text bases (Qwen3.5-9B,
+        # Llama-3.1-8B). Both share the same downstream PEFT-wrap flow.
+        arch = config.get("arch", "image_text_to_text")
+        load_kwargs = dict(
             torch_dtype=dtype,
             device_map=config.get("device_map", "auto"),
             trust_remote_code=True,
         )
+        if arch == "image_text_to_text":
+            base_model = AutoModelForImageTextToText.from_pretrained(model_id, **load_kwargs)
+        elif arch == "causal_lm":
+            base_model = AutoModelForCausalLM.from_pretrained(model_id, **load_kwargs)
+        else:
+            raise ValueError(f"Unknown arch={arch!r}; expected 'image_text_to_text' or 'causal_lm'.")
 
         adapter_path: str | None = config.get("adapter_path")
         if adapter_path and os.path.isdir(adapter_path):

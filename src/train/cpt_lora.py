@@ -39,6 +39,7 @@ import yaml
 from datasets import load_dataset
 from peft import LoraConfig, TaskType, get_peft_model
 from transformers import (
+    AutoModelForCausalLM,
     AutoModelForImageTextToText,
     AutoProcessor,
     AutoTokenizer,
@@ -100,12 +101,20 @@ _DTYPE_MAP = {"bfloat16": torch.bfloat16, "float16": torch.float16, "float32": t
 
 def load_base_model(model_cfg: dict):
     dtype = _DTYPE_MAP[model_cfg.get("dtype", "bfloat16")]
-    model = AutoModelForImageTextToText.from_pretrained(
-        model_cfg["model_id"],
+    # ``arch`` picks the AutoModel class. Default preserves the v1/v2 Qwen3.5-27B
+    # VLM path; ``causal_lm`` is for plain text bases (Qwen3.5-9B, Llama-3.1-8B).
+    arch = model_cfg.get("arch", "image_text_to_text")
+    common = dict(
         torch_dtype=dtype,
         trust_remote_code=model_cfg.get("trust_remote_code", True),
         attn_implementation=model_cfg.get("attn_implementation", "sdpa"),
     )
+    if arch == "image_text_to_text":
+        model = AutoModelForImageTextToText.from_pretrained(model_cfg["model_id"], **common)
+    elif arch == "causal_lm":
+        model = AutoModelForCausalLM.from_pretrained(model_cfg["model_id"], **common)
+    else:
+        raise ValueError(f"Unknown model.arch={arch!r}; expected 'image_text_to_text' or 'causal_lm'.")
     return model
 
 
@@ -127,9 +136,13 @@ def find_lora_target_modules(
 ) -> list[str]:
     short = set(short_names)
     targets: list[str] = []
-    prefix = language_model_path.rstrip(".") + "."
+    # Empty / None ``language_model_path`` means "match everywhere" — used for
+    # plain causal-LM bases (Qwen3.5-9B, Llama-3.1-8B) where there's no VLM
+    # wrapper to skip past.
+    use_prefix = bool(language_model_path)
+    prefix = (language_model_path.rstrip(".") + ".") if use_prefix else ""
     for name, module in model.named_modules():
-        if not name.startswith(prefix):
+        if use_prefix and not name.startswith(prefix):
             continue
         if not isinstance(module, torch.nn.Linear):
             continue
@@ -272,9 +285,12 @@ def main(argv: list[str] | None = None) -> None:
     if is_main:
         print(f"[cpt_lora] frozen non-LM params: {frozen_params:,}")
 
+    # language_model_path is optional: VLM bases (Qwen3.5-27B) need it to scope
+    # LoRA off the vision tower; plain causal-LM bases (Qwen3.5-9B,
+    # Llama-3.1-8B) leave it empty so LoRA targets every matching Linear.
     targets = find_lora_target_modules(
         model,
-        cfg["model"]["language_model_path"],
+        cfg["model"].get("language_model_path", ""),
         cfg["lora"]["target_module_names"],
     )
     if is_main:

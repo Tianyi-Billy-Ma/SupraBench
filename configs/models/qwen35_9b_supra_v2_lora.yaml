@@ -1,0 +1,19 @@
+name: qwen3.5-9b-supra-v2-lora
+
+backend: hf_peft
+model_id: Qwen/Qwen3.5-9B
+arch: causal_lm
+
+adapter_path: /groups/yye7/BILLY/SupraBench/outputs/cpt_qwen35_9b_supra_v2/adapter
+
+dtype: bfloat16
+device_map: auto
+merge_adapter: false
+strip_thinking: true
+
+batch_size: 8
+max_input_length: 3584
+
+generation:
+  max_new_tokens: 512
+  do_sample: false

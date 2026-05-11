@@ -1,0 +1,19 @@
+name: llama3.1-8b-supra-v2-lora
+
+backend: hf_peft
+model_id: meta-llama/Llama-3.1-8B
+arch: causal_lm
+
+adapter_path: /groups/yye7/BILLY/SupraBench/outputs/cpt_llama31_8b_supra_v2/adapter
+
+dtype: bfloat16
+device_map: auto
+merge_adapter: false
+strip_thinking: true                       # no-op for Llama (no <think> tokens), kept for parity
+
+batch_size: 8
+max_input_length: 3584
+
+generation:
+  max_new_tokens: 512
+  do_sample: false

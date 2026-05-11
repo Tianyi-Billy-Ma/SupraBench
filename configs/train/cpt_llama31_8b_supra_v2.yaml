@@ -1,0 +1,55 @@
+# v2 LoRA CPT on Llama-3.1-8B with the EvoLM-style mix.
+# Sibling of cpt_qwen35_9b_supra_v2.yaml. Llama-3.1-8B is documented to have
+# substantially less synthetic-data / RLHF residue in its pretraining than
+# recent Qwen 3.x releases, so it's our control for the "format collapse is
+# contamination-driven" hypothesis: if v2 regresses on Qwen 9B but lifts
+# Llama 8B, the recipe is fine and the prior failure was a Qwen-specific
+# artifact.
+
+run_name: llama3_1-8b-supra-v2-lora
+
+model:
+  model_id: meta-llama/Llama-3.1-8B
+  arch: causal_lm
+  trust_remote_code: false                 # Llama doesn't ship custom code
+  dtype: bfloat16
+  attn_implementation: flash_attention_2
+
+lora:
+  r: 32
+  alpha: 64
+  dropout: 0.05
+  bias: none
+  target_module_names:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+dataset:
+  hub_id: mtybilly/SupraBench-CPT-Mix-v2
+  split: train
+  text_field: text
+  seq_len: 4096
+  num_proc: 8
+
+training:
+  output_dir: outputs/cpt_llama31_8b_supra_v2
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 4
+  num_train_epochs: 1
+  learning_rate: 1.0e-5
+  weight_decay: 0.0
+  warmup_ratio: 0.05
+  lr_scheduler_type: cosine
+  logging_steps: 10
+  save_steps: 200
+  save_total_limit: 3
+  bf16: true
+  gradient_checkpointing: true
+  ddp_find_unused_parameters: false
+  report_to: wandb
+  seed: 42
