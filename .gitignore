@@ -32,5 +32,12 @@ outputs/**
 
 #dataset
 supra-vqa
-results
 logs
+
+# results/ is tracked (metrics.json + markdown analysis under results/metrics/
+# and results/analysis/). Block accidental large binary/intermediate dumps.
+results/**/*.pkl
+results/**/*.parquet
+results/**/*.ckpt
+results/**/*.safetensors
+results/.ipynb_checkpoints/

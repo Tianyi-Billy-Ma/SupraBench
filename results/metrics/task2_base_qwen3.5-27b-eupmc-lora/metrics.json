@@ -1,0 +1,527 @@
+{
+  "accuracy": 0.2611434108527132,
+  "n_total": 2064,
+  "n_parsed": 2064,
+  "per_host": {
+    "Cucurbit[8]uril": {
+      "accuracy": 0.24,
+      "n": 200
+    },
+    "β-Cyclodextrin": {
+      "accuracy": 0.29,
+      "n": 200
+    },
+    "p-Sulfonatocalix[4]arene": {
+      "accuracy": 0.2847222222222222,
+      "n": 144
+    },
+    "Cucurbit[6]uril": {
+      "accuracy": 0.20930232558139536,
+      "n": 129
+    },
+    "α-Cyclodextrin": {
+      "accuracy": 0.20689655172413793,
+      "n": 58
+    },
+    "p-Sulfonatocalix[6]arene": {
+      "accuracy": 0.19642857142857142,
+      "n": 56
+    },
+    "Octa acid cavitand": {
+      "accuracy": 0.18604651162790697,
+      "n": 43
+    },
+    "syn-Amide Naphthotube": {
+      "accuracy": 0.32558139534883723,
+      "n": 43
+    },
+    "anti-Amide Naphthotube": {
+      "accuracy": 0.2857142857142857,
+      "n": 42
+    },
+    "Calix[4]arene": {
+      "accuracy": 0.3333333333333333,
+      "n": 36
+    },
+    "4-sulfocalix[4]arene sodium salt": {
+      "accuracy": 0.24242424242424243,
+      "n": 33
+    },
+    "(1,1',4,4')-Tetraoxy-propylsulphite-bisnaftlen-methylen-bisglycouril Sodium": {
+      "accuracy": 0.1875,
+      "n": 32
+    },
+    "Tetrahydropyridazinophthalazine-tetraone functionalized Cucurbit[6]uril": {
+      "accuracy": 0.40625,
+      "n": 32
+    },
+    "Cucurbit[5]uril": {
+      "accuracy": 0.23076923076923078,
+      "n": 26
+    },
+    "tetra-endo-methyl octa acid cavitand": {
+      "accuracy": 0.19230769230769232,
+      "n": 26
+    },
+    "5,11,17,23,29-pentaguanidinium-31,32,33,34,35-penta (4-methylpentloxy) calix[5]arene": {
+      "accuracy": 0.24,
+      "n": 25
+    },
+    "p-sulfonatocalix[8]arene": {
+      "accuracy": 0.125,
+      "n": 24
+    },
+    "γ-Cyclodextrin": {
+      "accuracy": 0.25,
+      "n": 24
+    },
+    "p-Sulfonatocalix[5]arene": {
+      "accuracy": 0.30434782608695654,
+      "n": 23
+    },
+    "sodium sulfonated pillar[6]arene": {
+      "accuracy": 0.2608695652173913,
+      "n": 23
+    },
+    "Oxatub[4]arene TA4": {
+      "accuracy": 0.36363636363636365,
+      "n": 22
+    },
+    "carboxylate pillar[6]arene": {
+      "accuracy": 0.3181818181818182,
+      "n": 22
+    },
+    "Triphenylene receptor": {
+      "accuracy": 0.38095238095238093,
+      "n": 21
+    },
+    "sulfonated pillar[5]arene": {
+      "accuracy": 0.42857142857142855,
+      "n": 21
+    },
+    "Zorb[4]arene": {
+      "accuracy": 0.21052631578947367,
+      "n": 19
+    },
+    "sulfonated pillar[7]arene": {
+      "accuracy": 0.3684210526315789,
+      "n": 19
+    },
+    "syn amine naphthotube": {
+      "accuracy": 0.3157894736842105,
+      "n": 19
+    },
+    "anti amine naphthotube": {
+      "accuracy": 0.3888888888888889,
+      "n": 18
+    },
+    "p-Sulfonatothiacalix[4]arene": {
+      "accuracy": 0.2222222222222222,
+      "n": 18
+    },
+    "Napthalene-monofunctionalized cucurbit[6]uril, Cucurbituril[6]": {
+      "accuracy": 0.1875,
+      "n": 16
+    },
+    "Di(9,10-dihydro-9,10-ethenoanthracene-11,12-dicarboxylicacid)-cyclophane": {
+      "accuracy": 0.06666666666666667,
+      "n": 15
+    },
+    "Molecular Tweezer-sodium dimethylphosphonate": {
+      "accuracy": 0.3333333333333333,
+      "n": 15
+    },
+    "carboxylated azocalix[4]arene": {
+      "accuracy": 0.26666666666666666,
+      "n": 15
+    },
+    "Dicyclohexano-18-Crown-6": {
+      "accuracy": 0.35714285714285715,
+      "n": 14
+    },
+    "hexasodium p-sulfonatocalix[6]arene": {
+      "accuracy": 0.5,
+      "n": 14
+    },
+    "tetrasulfonato-tetrakis(n-butyl)-calix[4]arene": {
+      "accuracy": 0.35714285714285715,
+      "n": 14
+    },
+    "Positand 1": {
+      "accuracy": 0.3333333333333333,
+      "n": 12
+    },
+    "Dodeca(4-carboxybenzyl)bambus[6]uril": {
+      "accuracy": 0.09090909090909091,
+      "n": 11
+    },
+    "Tri(9,10-dihydro-9,10-ethenoanthracene-11,12-dicarboxylic acid)-cyclophane": {
+      "accuracy": 0.6363636363636364,
+      "n": 11
+    },
+    "p-sulfonatocalix[4]arene-(mono amidomethyl-substituted)": {
+      "accuracy": 0.2727272727272727,
+      "n": 11
+    },
+    "p-sulfonatocalix[4]arene-(mono aminoethyl-substituted)": {
+      "accuracy": 0.36363636363636365,
+      "n": 11
+    },
+    "p-sulfonatocalix[4]arene-(mono-carboxymethyl-substituted)": {
+      "accuracy": 0.2727272727272727,
+      "n": 11
+    },
+    "p-sulfonatocalix[6]arene-(mono amidomethyl-substituted)": {
+      "accuracy": 0.09090909090909091,
+      "n": 11
+    },
+    "p-sulfonatocalix[6]arene-(mono aminoethyl-substituted)": {
+      "accuracy": 0.2727272727272727,
+      "n": 11
+    },
+    "p-sulfonatocalix[6]arene-(mono carboxymethyl-substituted)": {
+      "accuracy": 0.2727272727272727,
+      "n": 11
+    },
+    "1,3,5-tris[[(4s)-4-[3-[4-(sodiosulfo)butoxy]phenyl]-2-oxazoline-2-yl]methyl]-2,4,6-triethylbenzene": {
+      "accuracy": 0.1,
+      "n": 10
+    },
+    "1,3,5-tris[[(4s)-4-[3-[4-(sodiosulfo)butoxy]phenyl]-2-oxazoline-2-yl]methyl]-2,4,6-trimethylbenzene": {
+      "accuracy": 0.3,
+      "n": 10
+    },
+    "Acyclic sodium 3,3'-(naphthalene-1,4-diylbis(oxy))bis(propane-1-sulfonate) Cucurbituril (tetrameric glycourilunit)": {
+      "accuracy": 0.2,
+      "n": 10
+    },
+    "Acyclic sodium 4,4'-(naphthalene-1,4-diyl)bis(butane-1-sulfonate) Cucurbituril (tetrameric glycourilunit)": {
+      "accuracy": 0.2,
+      "n": 10
+    },
+    "Molecular Tweezer-lithium diphosphate": {
+      "accuracy": 0.2,
+      "n": 10
+    },
+    "tetrakis(trimethylammonium) chloride cavitand": {
+      "accuracy": 0.6,
+      "n": 10
+    },
+    "4,7,10,16,19,22,27,30-Octaoxa-1,13-diazabicyclo[11.11.8]dotriacontan-28-ylmethanol": {
+      "accuracy": 0.2222222222222222,
+      "n": 9
+    },
+    "4,7,10,16,19,24,27-Heptaoxa-1,13-diazabicyclo[11.8.8]nonacosane": {
+      "accuracy": 0.2222222222222222,
+      "n": 9
+    },
+    "4,7,13,16,21,24-Hexaoxa-1,10-diazabicyclo[8.8.8]hexacosane": {
+      "accuracy": 0.2222222222222222,
+      "n": 9
+    },
+    "4,7,13,16,21-Pentaoxa-1,10-diazabicyclo[8.8.5]tricosane": {
+      "accuracy": 0.1111111111111111,
+      "n": 9
+    },
+    "4,7,13,18-Tetraoxa-1,10-diazabicyclo[8.5.5]icosane": {
+      "accuracy": 0.3333333333333333,
+      "n": 9
+    },
+    "4-butyl-7-(diethylamino)-2-oxochromene-3-carbaldehyde": {
+      "accuracy": 0.3333333333333333,
+      "n": 9
+    },
+    "Corral[5]arene": {
+      "accuracy": 0.2222222222222222,
+      "n": 9
+    },
+    "Ethylenediaminetetraacetic acid": {
+      "accuracy": 0.1111111111111111,
+      "n": 9
+    },
+    "Zeolite L3.0": {
+      "accuracy": 0.1111111111111111,
+      "n": 9
+    },
+    "heptakis-O-(2-hydroxypropyl)-β Cyclodextrin": {
+      "accuracy": 0.1111111111111111,
+      "n": 9
+    },
+    "p-sulfonatocalix[8]arene-(mono aminoethyl-substituted)": {
+      "accuracy": 0.0,
+      "n": 9
+    },
+    "p-sulfonatocalix[8]arene-(mono cyanomethyl-substituted)": {
+      "accuracy": 0.1111111111111111,
+      "n": 9
+    },
+    "sulfobutylether7-β-cyclodextrin": {
+      "accuracy": 0.2222222222222222,
+      "n": 9
+    },
+    "Acyclic (sodium 3,3'-(1,4-phenylenebis(oxy))bis(propane-1-sulfonate) Cucurbiturils (tetrameric Glycouril units)": {
+      "accuracy": 0.5,
+      "n": 8
+    },
+    "Acyclic sodium 3,3'-(naphthalene-2,7-diyl)bis(propane-1-sulfonate) Cucurbituril (tetrameric Glycourilunit)": {
+      "accuracy": 0.25,
+      "n": 8
+    },
+    "Inverted Cucurbit[7]uril": {
+      "accuracy": 0.125,
+      "n": 8
+    },
+    "Monohydroxycucurbit[7]uril": {
+      "accuracy": 0.375,
+      "n": 8
+    },
+    "[3.3.3]Cryptand": {
+      "accuracy": 0.875,
+      "n": 8
+    },
+    "carboxylate pillar[5]arene": {
+      "accuracy": 0.125,
+      "n": 8
+    },
+    "cucurbit[10]uril": {
+      "accuracy": 0.25,
+      "n": 8
+    },
+    "propyl sulfonated pillar[5]arene": {
+      "accuracy": 0.125,
+      "n": 8
+    },
+    "1-[5-(Carbamoylmethyl-isopropyl-carbamoyl)-1H-pyrrole-2-ylcarbonyl]guanidinium": {
+      "accuracy": 0.2857142857142857,
+      "n": 7
+    },
+    "2-[[Methyl[5-[2-oxo-3-formyl-7-(diethylamino)-2H-1-benzopyran-4-yl]pentyl]amino]methyl]phenylboronic acid": {
+      "accuracy": 0.0,
+      "n": 7
+    },
+    "5,11,17,23-Tetrakis(dihydroxyphosphoryl)-25,26, 27,28-tetrapropoxycalix[4]arene": {
+      "accuracy": 0.0,
+      "n": 7
+    },
+    "5,11,17,23-Tetrakis-(hydroxymethoxyphosphoryl)- 25,26,27,28-tetrapropoxycalix[4]arene Tetralithium Salt": {
+      "accuracy": 0.14285714285714285,
+      "n": 7
+    },
+    "5,11,17,23-tetrasulfonato-25,26,27,28-tetrakis(n-pentyl)-calix[4]arene": {
+      "accuracy": 0.0,
+      "n": 7
+    },
+    "Hexakis(2,3,6-tri-o-methyl)-alpha-cyclodextrin": {
+      "accuracy": 0.14285714285714285,
+      "n": 7
+    },
+    "Molecular Tweezer-Sodium disulfonate": {
+      "accuracy": 0.0,
+      "n": 7
+    },
+    "Tetramethyl((2,2,10,10-tetramethyl-65,145-dinitro-4,8,12,16-tetraoxa-1,3,9,11(1,4),6,14(1,3)-hexabenzenacyclohexadecaphane-13,33,92,113-tetrayl)tetrakis(methylene))tetrakis(phosphonate)": {
+      "accuracy": 0.2857142857142857,
+      "n": 7
+    },
+    "Uramildiacetic acid": {
+      "accuracy": 0.14285714285714285,
+      "n": 7
+    },
+    "dodeca(PEG)bambus[6]uril": {
+      "accuracy": 0.7142857142857143,
+      "n": 7
+    },
+    "exo-Octa Acid": {
+      "accuracy": 0.14285714285714285,
+      "n": 7
+    },
+    "syn oxatube": {
+      "accuracy": 0.14285714285714285,
+      "n": 7
+    },
+    "5-[4-(2-dihydroxyboryl-benzyl-N-methylamino)-butyroylamino]-m-xylylene bisphosphonic acid dimethyl ester dilithium salt": {
+      "accuracy": 0.16666666666666666,
+      "n": 6
+    },
+    "5-[4-(2-dihydroxyboryl-benzylamino)-butyroylamino]-m-xylylene bisphosphonic acid dimethyl ester dilithium salt": {
+      "accuracy": 0.16666666666666666,
+      "n": 6
+    },
+    "Cyclobis(paraquat-1,4-phenylene) tetrakis(hexafluorophosphate)": {
+      "accuracy": 0.3333333333333333,
+      "n": 6
+    },
+    "Dodecamethylbambus[6]uril": {
+      "accuracy": 0.5,
+      "n": 6
+    },
+    "cucurbit[7]uril-hexaethylene glycol-berberine conjugate": {
+      "accuracy": 0.3333333333333333,
+      "n": 6
+    },
+    "cucurbit[7]uril-tetraethylene glycol-berberine conjugate": {
+      "accuracy": 0.0,
+      "n": 6
+    },
+    "o-Xylyleneglycoluriltetramer": {
+      "accuracy": 0.16666666666666666,
+      "n": 6
+    },
+    "p-Sulfonatocalix[5]arene sodium salt": {
+      "accuracy": 0.3333333333333333,
+      "n": 6
+    },
+    "permethylated β-cyclodextrin": {
+      "accuracy": 0.8333333333333334,
+      "n": 6
+    },
+    "5,11,17,23,29-Pentasulfonato-31,32,33,34,35-pentakis((4- methylpentyl)oxy)calix[5]arene": {
+      "accuracy": 0.2,
+      "n": 5
+    },
+    "5-[4-[2-(dihydroxyboryl)benzylaminomethyl]benzoylamino]-1,3-xylylenebis(phosphonic acid lithium methyl) ester salt": {
+      "accuracy": 0.2,
+      "n": 5
+    },
+    "Guanidinocalix[5]arene pentadodecyl ether": {
+      "accuracy": 0.0,
+      "n": 5
+    },
+    "Meta-ethylphenylcucurbit[6]urils": {
+      "accuracy": 0.6,
+      "n": 5
+    },
+    "Mono(6-carboxymethylamino-6-deoxy)-β-Cyclodextrin": {
+      "accuracy": 0.4,
+      "n": 5
+    },
+    "Mono[2-O-(2-hydroxypropyl)]-β-Cyclodextrin": {
+      "accuracy": 0.0,
+      "n": 5
+    },
+    "Zeolite Y2.55 (FAU)": {
+      "accuracy": 0.0,
+      "n": 5
+    },
+    "p-sulfonatocalix[4]arene-(bromo-substituted)": {
+      "accuracy": 0.4,
+      "n": 5
+    },
+    "p-sulfonatocalix[4]arene-(carboxamidophenyl-substituted)": {
+      "accuracy": 0.4,
+      "n": 5
+    },
+    "p-sulfonatocalix[4]arene-(cyanophenyl-substituted": {
+      "accuracy": 0.4,
+      "n": 5
+    },
+    "p-sulfonatocalix[4]arene-(phenyl)": {
+      "accuracy": 0.2,
+      "n": 5
+    },
+    "Molecular Tweezer-sodium diacetate": {
+      "accuracy": 0.5,
+      "n": 4
+    },
+    "2,3-[1,2-phenylenebis[oxy(3,6-dioxaoctane-1,8-diyl)oxy]]quinoxaline": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "6I-O-(1-naphtholxy)-2I,31-di-O- methylhexakis(2II-VII,3II-VII,6II-VII-tri-O-methyl)-B-cyclodextrin": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "6I-O-(8-hydroxyquinoline)-2I,31- di-O-methylhexakis(2II-VII,3II-VII,6II-VII- tri-O-methyl)-B-cyclodextrin": {
+      "accuracy": 1.0,
+      "n": 1
+    },
+    "Calixarene": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "Cucurbit[7]uril-tetramethylrhodamine conjugate": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "Dimetoxinaphtaleneglycoluril trimer": {
+      "accuracy": 1.0,
+      "n": 1
+    },
+    "Dimetoxixylyleneglycoluril trimer": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "Dodecabenzylbambus[6]uril": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "Dodecakis(5‐carboxypentyl)bambus[6]uril": {
+      "accuracy": 1.0,
+      "n": 1
+    },
+    "Methylcarboxylate-substituted Calix[4]arene": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "Mono(6-O-a-maltosyl)-β-Cyclodextrin": {
+      "accuracy": 1.0,
+      "n": 1
+    },
+    "Mono(6-amino-6-deoxy)-β-Cyclodextrin": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "Mono[6-(R(-)-1-hydroxymethylpropylamino)-6-deoxy]β-Cyclodextrin": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "Zeolite Y15 (FAU15)": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "bis(p-sulfonatocalix[4]arenes)": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "bisurea-receptor-Cl": {
+      "accuracy": 1.0,
+      "n": 1
+    },
+    "bisurea-receptor-F": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "bisurea-receptor-NMe2": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "bisurea-receptor-NO2": {
+      "accuracy": 1.0,
+      "n": 1
+    },
+    "bisurea-receptor-OMe": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "bisurea-receptor-tBu": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "p-sulfonatocalix[4]arene-(carboxysulfonamide-substituted)": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "p-sulfonatocalix[4]arene-(nitro-substituted)": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "tetra-endo-ethyl octa acid": {
+      "accuracy": 0.0,
+      "n": 1
+    },
+    "tetracyanoresorcin[4]arene": {
+      "accuracy": 0.0,
+      "n": 1
+    }
+  }
+}
