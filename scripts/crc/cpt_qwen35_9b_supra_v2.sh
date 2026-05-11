@@ -21,6 +21,11 @@ source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
 export WANDB_RUN_GROUP=cpt-supra-v2
 export WANDB_NAME="cpt-qwen9b-supra-v2-${JOB_ID:-local}"
 
+# peft's FSDP auto-wrap can't infer the transformer block class on plain
+# causal-LM bases — hand it the name explicitly. Class confirmed by direct
+# model inspection on 2026-05-11.
+export FSDP_TRANSFORMER_CLS_TO_WRAP=Qwen3_5DecoderLayer
+
 nvidia-smi || true
 
 "${ACCELERATE}" launch \
