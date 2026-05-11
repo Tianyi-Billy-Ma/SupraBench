@@ -41,3 +41,5 @@ results/**/*.parquet
 results/**/*.ckpt
 results/**/*.safetensors
 results/.ipynb_checkpoints/
+# auto-generated per-submission launchers from submit_eval.sh / submit_extract.sh
+scripts/crc/_generated/
