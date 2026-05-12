@@ -149,16 +149,31 @@ class HFPeftBackend(InferenceBackend):
         self.tokenizer.padding_side = "left"
 
     def _render(self, prompt: str) -> str:
-        # Qwen3.5 uses the same apply_chat_template interface as Qwen3.
-        # enable_thinking is omitted (defaults to off) since the LoRA adapter
-        # was trained without thinking mode; strip_thinking still runs to
-        # catch any residual <think> blocks in completions.
-        messages = qwen3.build_messages(prompt, system_prompt=self.system_prompt)
-        rendered = self.tokenizer.apply_chat_template(
-            messages,
-            tokenize=False,
-            add_generation_prompt=True,
-        )
+        # Two co-equal rendering paths, selected by tokenizer capability. Both
+        # match how the LoRA was trained, so neither is a workaround:
+        #
+        #   chat-template tokenizer (Qwen3.5 27B/9B):
+        #       Use apply_chat_template with the Qwen3 message schema. Thinking
+        #       mode is left off (default) since the LoRA was trained without
+        #       it; strip_thinking still catches any residual <think> blocks.
+        #   raw-text tokenizer (Llama-3.1-8B Base, plain completion model):
+        #       Concatenate system + prompt with newline separators. This is
+        #       the only correct path for a Base-tagged model — cpt_lora.py
+        #       tokenized the training mix's raw `text` column directly, with
+        #       no chat-template wrapping, so inference must mirror that.
+        if getattr(self.tokenizer, "chat_template", None):
+            messages = qwen3.build_messages(prompt, system_prompt=self.system_prompt)
+            rendered = self.tokenizer.apply_chat_template(
+                messages,
+                tokenize=False,
+                add_generation_prompt=True,
+            )
+        else:
+            parts: list[str] = []
+            if self.system_prompt:
+                parts.append(self.system_prompt)
+            parts.append(prompt)
+            rendered = "\n\n".join(parts) + "\n"
         # Append after the assistant-turn opener so the model's first generated
         # token continues the answer body rather than starting a fresh thought.
         return rendered + self.prompt_suffix
