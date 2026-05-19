@@ -1,0 +1,17 @@
+{
+  "model": "gpt-5.4-mini",
+  "out_name": "gpt-5.4-mini_nothinking",
+  "prompt_type": "base",
+  "engine": "openai",
+  "endpoint": "https://api.openai.com/v1/chat/completions",
+  "max_tokens": 4096,
+  "temperature": 0.0,
+  "concurrency": 4,
+  "reasoning": {
+    "exclude": true,
+    "enabled": false
+  },
+  "total_prompts": 122,
+  "limit": null,
+  "started_at": "2026-05-06T21:09:25"
+}

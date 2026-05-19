@@ -1,0 +1,16 @@
+{
+  "model": "google/gemini-3-flash-preview",
+  "out_name": "gemini-3-flash-preview_high",
+  "prompt_type": "base",
+  "engine": "openrouter",
+  "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+  "max_tokens": 4096,
+  "temperature": 0.0,
+  "concurrency": 6,
+  "reasoning": {
+    "effort": "high"
+  },
+  "total_prompts": 1955,
+  "limit": null,
+  "started_at": "2026-04-30T13:51:10"
+}

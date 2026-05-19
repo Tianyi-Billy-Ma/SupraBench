@@ -1,0 +1,14 @@
+{
+  "model": "qwen/qwen3.5-27b",
+  "out_name": "qwen3.5-27b",
+  "prompt_type": "cot",
+  "engine": "openrouter",
+  "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+  "max_tokens": 8192,
+  "temperature": 0.0,
+  "concurrency": 8,
+  "reasoning": null,
+  "total_prompts": 1955,
+  "limit": null,
+  "started_at": "2026-04-30T13:51:10"
+}
