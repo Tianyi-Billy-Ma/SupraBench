@@ -34,7 +34,7 @@ uv pip install bert-score
 from eval import register_evaluator, Evaluator
 from eval.metrics import compute_em, compute_f1
 
-@register_evaluator("task1")
+@register_evaluator("bap")
 class Task1Evaluator(Evaluator):
     def evaluate(self, predictions_path):
         rows = list(self._load_predictions(predictions_path))

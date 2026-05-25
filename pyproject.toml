@@ -5,7 +5,7 @@ description = "Supramolecular benchmark for evaluating LLMs on supramolecular-ch
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [
-    { name = "Tianyi-Billy-Ma", email = "matianyibilly@gmail.com" },
+    { name = "Anonymous", email = "anonymous@example.org" },
 ]
 
 # Runtime dependencies shared across datasets / eval / inference / models.
@@ -16,6 +16,10 @@ dependencies = [
     "numpy>=1.26",
     "pandas>=2.2",
     "pyarrow>=24.0.0",
+    "pyoverleaf>=0.1.8",
+    "rouge-score>=0.1.2",
+    "anthropic>=0.97.0",
+    "matplotlib>=3.10.9",
 ]
 
 [project.optional-dependencies]

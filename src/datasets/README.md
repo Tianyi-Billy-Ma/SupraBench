@@ -40,7 +40,7 @@ class BindingAffinityDataset(SupraDataset):
 `build_dataset(config, limit=...)` reads `config["dataset"]`, instantiates
 the matching loader, and returns an iterable of `Example` objects. A full
 working reference lives in [`example.py`](./example.py); the
-`task1`…`task7` files are deliberate stubs that raise `NotImplementedError`
+`bap`…`sid` files are deliberate stubs that raise `NotImplementedError`
 until a teammate fills them in.
 
 ## Adding a new task

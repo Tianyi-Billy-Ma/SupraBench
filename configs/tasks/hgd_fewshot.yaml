@@ -1,0 +1,7 @@
+name: hgd_fewshot
+dataset: hgd
+evaluator: hgd
+data_path: data/hgd/hgd.jsonl
+prompt:
+  fewshot_k: 6
+  thinking: false

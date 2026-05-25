@@ -14,7 +14,7 @@ with one deliberate addition: a small format-anchor stream of instruction-
 formatted text concatenated as raw `prompt\\n\\nresponse` pairs (no chat
 template). EvoLM uses raw text only; we add ~5 % anchor specifically to
 counter the instruction-following collapse we observed in v1
-(Task 7 mode-collapsed onto majority class, Task 2 dropped 14 pts).
+(SID mode-collapsed onto majority class, TBS dropped 14 pts).
 
 Outputs a single split ``train`` with columns ``text, source, length`` so
 the trainer can iterate naively while keeping per-stream provenance.

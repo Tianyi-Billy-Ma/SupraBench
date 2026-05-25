@@ -1,0 +1,7 @@
+name: sid_base
+dataset: sid
+evaluator: sid
+data_path: data/sid/eval.parquet
+prompt:
+  fewshot_k: 0
+  thinking: false

@@ -6,7 +6,7 @@
 #$ -o logs/$JOB_NAME_$JOB_ID.log
 #$ -e logs/$JOB_NAME_$JOB_ID.err
 #$ -m abe
-#$ -M tma2@nd.edu
+#$ -M anonymous@example.org
 # ---------------------------------------------------------------------------
 # Pre-cache Qwen3.5-27B and the EU-PMC corpus into the shared HF cache
 # before submitting GPU training. CPU-only, ~30-60 min wall depending on
@@ -16,7 +16,7 @@ set -eo pipefail   # not -u: ~/.bashrc -> /etc/bashrc references BASHRCSOURCED b
 
 mkdir -p logs
 
-source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
+source /path/to/SupraBench/scripts/crc/base.sh
 
 echo "[precache] HF_HOME=${HF_HOME}"
 echo "[precache] $(date) downloading model"

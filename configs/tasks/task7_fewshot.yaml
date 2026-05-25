@@ -1,7 +1,0 @@
-name: task7_fewshot
-dataset: task7
-evaluator: task7
-data_path: data/task7/eval.parquet
-prompt:
-  fewshot_k: 3
-  thinking: false

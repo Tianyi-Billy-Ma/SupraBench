@@ -9,7 +9,7 @@ model_id: Qwen/Qwen3.5-27B
 # fsdp_to_peft_adapter.py extracts them into adapter_config.json +
 # adapter_model.safetensors at the path below; PeftModel.from_pretrained
 # then resolves both automatically.
-adapter_path: /groups/yye7/BILLY/SupraBench/outputs/cpt_qwen35_eupmc/adapter
+adapter_path: /path/to/SupraBench/outputs/cpt_qwen35_eupmc/adapter
 
 dtype: bfloat16
 device_map: auto

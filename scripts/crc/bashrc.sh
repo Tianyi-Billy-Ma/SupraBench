@@ -6,14 +6,14 @@
 
 source ~/.bashrc
 
-cd "/groups/yye7/BILLY/SupraBench"
+cd "/path/to/SupraBench"
 source "./.venv/bin/activate"
 
 # ---- Caches & Tmp ---------------------------------------------------------
-# Shared HF cache across all yye7 projects — avoids re-downloading the same
+# Shared HF cache across all projects — avoids re-downloading the same
 # base models. Lives on the group filesystem so it's stable through AFS
 # token expiry mid-job.
-export HF_HOME="/groups/yye7/BILLY/.cache/huggingface"
+export HF_HOME="/path/to/.cache/huggingface"
 
 # Pre-export HF_TOKEN while AFS is fresh; huggingface_hub's
 # _get_token_from_environment() takes precedence over file-based lookup,
@@ -28,7 +28,7 @@ fi
 
 # Outputs land on the group filesystem so they survive scratch wipes and
 # stay readable across nodes. Training scripts respect $OUTPUTS_DIR.
-export OUTPUTS_DIR="/groups/yye7/BILLY/SupraBench/outputs"
+export OUTPUTS_DIR="/path/to/SupraBench/outputs"
 mkdir -p "${OUTPUTS_DIR}"
 
 # ---- Python ---------------------------------------------------------------

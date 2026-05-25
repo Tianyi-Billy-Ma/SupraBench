@@ -13,7 +13,7 @@ configs/
 
 ```bash
 uv run python src/main.py \
-    --task-config configs/tasks/task1.yaml \
+    --task-config configs/tasks/bap.yaml \
     --model-config configs/models/qwen3.yaml
 ```
 

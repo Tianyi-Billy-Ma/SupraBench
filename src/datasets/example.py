@@ -1,7 +1,7 @@
 """Example dataset loader — reference implementation for new tasks.
 
 Reads a single JSON file containing a list of objects with the schema
-used by ``data/task1/sample.json``::
+used by ``data/bap/sample.json``::
 
     [
       {"question": str, "host": str (SMILES), "guest": str (SMILES), "answer": Any},

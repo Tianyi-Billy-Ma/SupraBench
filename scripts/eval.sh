@@ -1,18 +1,18 @@
 #!/bin/bash
-# eval.sh — run task1/task2 benchmarks via the OpenRouter API.
+# eval.sh — run bap/tbs benchmarks via the OpenRouter API.
 #
 # Usage:
 #   export OPENROUTER_API_KEY=sk-or-v1-...
-#   bash scripts/eval.sh task1
-#   bash scripts/eval.sh task2
+#   bash scripts/eval.sh bap
+#   bash scripts/eval.sh tbs
 #
-# nohup bash scripts/eval.sh task1 > outputs/eval_task1.log 2>&1 &
+# nohup bash scripts/eval.sh bap > outputs/eval_bap.log 2>&1 &
 #
 # IMPORTANT: set OPENROUTER_API_KEY in your environment — do NOT hardcode it here.
 
 set -euo pipefail
 
-TASK=${1:-"task1"}
+TASK=${1:-"bap"}
 PYTHON=${PYTHON:-python}
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 

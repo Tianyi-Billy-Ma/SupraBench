@@ -4,9 +4,9 @@ set -eo pipefail
 
 mkdir -p logs
 
-source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
+source /path/to/SupraBench/scripts/crc/base.sh
 
-OUT="/groups/yye7/BILLY/SupraBench/outputs/cpt_llama31_8b_supra_v2"
+OUT="/path/to/SupraBench/outputs/cpt_llama31_8b_supra_v2"
 CKPT="$(ls -d ${OUT}/checkpoint-* 2>/dev/null | sort -V | tail -1)"
 [[ -n "$CKPT" ]] || { echo "no checkpoint found under $OUT"; exit 1; }
 

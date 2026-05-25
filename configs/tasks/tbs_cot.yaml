@@ -1,0 +1,4 @@
+name: tbs_cot
+dataset: tbs
+evaluator: tbs
+data_path: data/tbs/cot.jsonl

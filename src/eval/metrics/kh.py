@@ -5,7 +5,7 @@ names (guests for forward, hosts for reverse).  The metric is the fraction
 of gold names that appear as a case-insensitive substring of the prediction.
 
 The name lists are prepared by the task-specific evaluator (see
-:mod:`eval.task3`); this module only handles the substring-match counting.
+:mod:`eval.hgd`); this module only handles the substring-match counting.
 """
 
 from __future__ import annotations

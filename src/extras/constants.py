@@ -17,14 +17,11 @@ ANSWER_OPEN_TAG = "<answer>"
 ANSWER_CLOSE_TAG = "</answer>"
 
 # Canonical list of task identifiers. Each must have a YAML under
-# configs/tasks/ and a registered dataset + evaluator. Names here are
-# placeholders — update once the seven tasks are finalized.
+# configs/tasks/ and a registered dataset + evaluator.
 SUPPORTED_TASKS: tuple[str, ...] = (
-    "task1",
-    "task2",
-    "task3",
-    "task4",
-    "task5",
-    "task6",
-    "task7",
+    "bap",  # Binding Affinity Prediction
+    "tbs",  # Top-Binder Selection
+    "hgd",  # Host-Guest Description
+    "mi",   # Molecular Identification
+    "sid",  # Solvent Identification
 )

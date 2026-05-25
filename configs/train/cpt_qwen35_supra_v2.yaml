@@ -4,8 +4,8 @@
 #  + 5% allenai/tulu-3-sft-mixture         (raw-text format anchor)
 #
 # Recipe motivation:
-#   - v1 (configs/train/cpt_qwen35_eupmc.yaml) regressed Task 7 macro-F1
-#     to 0.16 (mode-collapsed onto majority class) and Task 2 ACC to 0.26
+#   - v1 (configs/train/cpt_qwen35_eupmc.yaml) regressed SID macro-F1
+#     to 0.16 (mode-collapsed onto majority class) and TBS ACC to 0.26
 #     (vs paper baseline 0.40). Diagnosis: catastrophic forgetting of
 #     instruction-following, broad domain corpus, too-aggressive LoRA.
 #   - EvoLM (Qi et al., 2025, arxiv 2506.16029) Table 2 shows ~5–16%

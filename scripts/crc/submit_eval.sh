@@ -8,9 +8,9 @@
 #     scripts/crc/submit_eval.sh <task_yaml> <model_yaml> [gpus] [name]
 #
 # Example:
-#     scripts/crc/submit_eval.sh task1_base.yaml qwen35_9b_supra_v2_lora.yaml
+#     scripts/crc/submit_eval.sh bap_base.yaml qwen35_9b_supra_v2_lora.yaml
 #
-# `task_yaml`  is resolved relative to configs/tasks/  (e.g. task1_base.yaml).
+# `task_yaml`  is resolved relative to configs/tasks/  (e.g. bap_base.yaml).
 # `model_yaml` is resolved relative to configs/models/ (e.g. qwen35_9b_supra_v2_lora.yaml).
 # Generated launcher lands under scripts/crc/_generated/eval_<auto-name>.sh
 # (kept as a permanent record of what was submitted).
@@ -20,14 +20,14 @@
 #     - autoexp CLI in PATH (or override via AUTOEXP=...)
 set -eo pipefail
 
-SUPRA_ROOT=/groups/yye7/BILLY/SupraBench
+SUPRA_ROOT=/path/to/SupraBench
 EVAL_TASK_CONFIG=${1:?usage: submit_eval.sh <task_yaml> <model_yaml> [gpus] [name]}
 EVAL_MODEL_CONFIG=${2:?usage: submit_eval.sh <task_yaml> <model_yaml> [gpus] [name]}
 GPUS=${3:-4}
-AUTOEXP=${AUTOEXP:-/users/tma2/AutoExp-src/.venv/bin/autoexp}
+AUTOEXP=${AUTOEXP:-/path/to/AutoExp-src/.venv/bin/autoexp}
 
-# Auto-name: task1_base.yaml + qwen35_9b_supra_v2_lora.yaml ->
-# eval_task1_base_qwen35_9b_supra_v2_lora
+# Auto-name: bap_base.yaml + qwen35_9b_supra_v2_lora.yaml ->
+# eval_bap_base_qwen35_9b_supra_v2_lora
 TASK_STEM=$(basename "${EVAL_TASK_CONFIG}" .yaml)
 MODEL_STEM=$(basename "${EVAL_MODEL_CONFIG}" .yaml)
 AUTO_NAME=${4:-eval_${TASK_STEM}_${MODEL_STEM}}

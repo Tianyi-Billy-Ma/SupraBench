@@ -1,0 +1,7 @@
+name: hgd_cot
+dataset: hgd
+evaluator: hgd
+data_path: data/hgd/hgd.jsonl
+prompt:
+  fewshot_k: 0
+  thinking: true

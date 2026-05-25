@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -q gpu@@yye7_lab
+#$ -q gpu@@anonymous_lab
 #$ -l gpu_card=4
 #$ -N suprabench_cpt_qwen9b_v2_smoke
 #$ -pe smp 32
@@ -7,7 +7,7 @@
 #$ -o logs/$JOB_NAME_$JOB_ID.log
 #$ -e logs/$JOB_NAME_$JOB_ID.err
 #$ -m abe
-#$ -M tma2@nd.edu
+#$ -M anonymous@example.org
 # ---------------------------------------------------------------------------
 # Smoke test for the Qwen3.5-9B v2 LoRA CPT: 20 steps over 256 mix rows at
 # seq_len=1024. Verifies the new `arch: causal_lm` plumbing in cpt_lora.py.
@@ -16,7 +16,7 @@ set -eo pipefail
 
 mkdir -p logs
 
-source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
+source /path/to/SupraBench/scripts/crc/base.sh
 
 export WANDB_RUN_GROUP=cpt-supra-v2-smoke
 export WANDB_NAME="cpt-qwen9b-supra-v2-smoke-${JOB_ID:-local}"

@@ -4,7 +4,7 @@ backend: hf_peft
 model_id: meta-llama/Llama-3.1-8B
 arch: causal_lm
 
-adapter_path: /groups/yye7/BILLY/SupraBench/outputs/cpt_llama31_8b_supra_v2/adapter
+adapter_path: /path/to/SupraBench/outputs/cpt_llama31_8b_supra_v2/adapter
 
 dtype: bfloat16
 device_map: auto

@@ -1,13 +1,13 @@
 # Example task config — exercises the full pipeline against the sample
-# regression data shipped under data/task1/. Keep this around as a smoke
-# test; real benchmark tasks live under task1.yaml … task7.yaml.
+# regression data shipped under data/bap/. Keep this around as a smoke
+# test; real benchmark tasks live under bap.yaml … sid.yaml.
 name: example
 
 dataset: example      # src/datasets/example.py
 evaluator: example    # src/eval/example.py
 
 # JSON-array file (not JSONL): list of {question, host, guest, answer}.
-data_path: data/task1/sample.json
+data_path: data/bap/sample.json
 
 prompt:
   fewshot_k: 0

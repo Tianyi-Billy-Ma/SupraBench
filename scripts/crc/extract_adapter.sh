@@ -25,7 +25,7 @@ set -eo pipefail
 
 mkdir -p logs
 
-source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
+source /path/to/SupraBench/scripts/crc/base.sh
 
 : "${CHECKPOINT:?CHECKPOINT must be set (e.g. outputs/cpt_qwen35_supra_v2/checkpoint-302)}"
 : "${OUTPUT:?OUTPUT must be set (target adapter dir)}"

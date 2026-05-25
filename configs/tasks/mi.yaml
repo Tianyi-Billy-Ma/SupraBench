@@ -1,0 +1,25 @@
+# MI — molecular-structure identification VQA
+#
+# Data layout (not included in the repository — populate before running):
+#   data/mi/identification.csv   CSV with columns:
+#                                     molecule_id, image, gold_name,
+#                                     names_alias_set, gold_smiles
+#                                   (names_alias_set is pipe-separated)
+#   data/mi/images/              directory containing all image files
+#                                   referenced by the image column
+#
+# Mode: "smiles" (default) — predict canonical SMILES from the image.
+#       "name"             — predict the molecule's common/chemical name.
+#
+# Note: image inputs in metadata.images are not yet honored by any inference
+# backend. A follow-up commit will extend the backends to read metadata.images
+# and pass them to the multimodal processor.
+
+name: mi
+dataset: mi
+evaluator: mi
+data_path: data/mi/identification.csv
+image_root: data/mi/images/
+mode: smiles
+prompt:
+  thinking: false

@@ -11,11 +11,11 @@ wires together:
 ## Schema (minimum viable)
 
 ```yaml
-name: task1                   # logical name; used in outputs/<task>_<model>/
+name: bap                   # logical name; used in outputs/<task>_<model>/
 dataset: <dataset_key>        # registered via @register_dataset in src/datasets/
 evaluator: <evaluator_key>    # registered via @register_evaluator in src/eval/
 
-data_path: data/task1.jsonl   # resolved relative to the repo root
+data_path: data/bap.jsonl   # resolved relative to the repo root
 prompt:
   fewshot_k: 0                # number of few-shot examples
   thinking: false             # chain-of-thought cue on/off

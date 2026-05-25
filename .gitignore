@@ -41,5 +41,39 @@ results/**/*.parquet
 results/**/*.ckpt
 results/**/*.safetensors
 results/.ipynb_checkpoints/
+results/task1_task2_results.zip
+results/analysis/*.md
+results/analysis/dataset_stats.json
+results/metrics/task1_base_llama3.1-8b-supra-v2-lora/
+results/metrics/task1_base_qwen3.5-9b-supra-v2-lora/
+results/metrics/task2_base_qwen3.5-9b-supra-v2-lora/
+results/metrics/task3_base_llama3.1-8b-supra-v2-lora/
+results/metrics/task3_base_qwen3.5-9b-supra-v2-lora/
+results/metrics/task7_base_qwen3.5-9b-supra-v2-lora/
 # auto-generated per-submission launchers from submit_eval.sh / submit_extract.sh
 scripts/crc/_generated/
+
+# Local paper / Overleaf / analysis workspaces
+paper-overleaf/
+scripts/overleaf/
+docs/
+data/molecular-pretrain/
+
+# Local paper-generation and audit helpers from active drafting sessions.
+tools/render_dataset_stats_figure.py
+tools/render_overview_figure.py
+tools/resolve_cite_placeholders.py
+tools/validate_corpus.py
+
+# Personal planning / scratch docs (anonymous-release exclusion)
+PAPER_PLAN*.md
+MANIFEST.md
+refine-logs/
+results/analysis/round*_review.md
+results/analysis/outstanding_citations.md
+results/analysis/acl_insight_*.json
+outputs/
+backups/
+
+# Local-only state (do not publish)
+.omx/

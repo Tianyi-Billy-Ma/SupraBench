@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -q gpu@@yye7_lab
+#$ -q gpu@@anonymous_lab
 #$ -l gpu_card=4
 #$ -N suprabench_cpt
 #$ -pe smp 32
@@ -7,12 +7,12 @@
 #$ -o logs/$JOB_NAME_$JOB_ID.log
 #$ -e logs/$JOB_NAME_$JOB_ID.err
 #$ -m abe
-#$ -M tma2@nd.edu
+#$ -M anonymous@example.org
 # ---------------------------------------------------------------------------
 # Full LoRA continued pretraining of Qwen3.5-27B on EU-PMC (filtered split,
 # 133,867 articles). 4× A40, FSDP_FULL_SHARD, vision tower frozen.
 #
-# Walltime: 720 h (queue maximum on yye7_lab). Projected total wall is ~64 h,
+# Walltime: 720 h (queue maximum on anonymous_lab). Projected total wall is ~64 h,
 # so the run finishes naturally without a SIGTERM. The SGE directives above
 # are also inert when this script is dispatched via `autoexp submit` — bash
 # ignores them, AutoExp's outer qsub already owns the GPU allocation.
@@ -21,7 +21,7 @@ set -eo pipefail   # not -u: ~/.bashrc -> /etc/bashrc references BASHRCSOURCED b
 
 mkdir -p logs
 
-source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
+source /path/to/SupraBench/scripts/crc/base.sh
 
 export WANDB_RUN_GROUP=cpt-eupmc
 export WANDB_NAME="cpt-eupmc-${JOB_ID:-local}"

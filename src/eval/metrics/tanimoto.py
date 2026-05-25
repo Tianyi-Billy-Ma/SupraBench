@@ -1,6 +1,6 @@
 """Tanimoto similarity via RDKit Morgan fingerprints.
 
-RDKit is an optional dependency used only by the Task 5 (SMILES-mode)
+RDKit is an optional dependency used only by the MI (SMILES-mode)
 evaluator. Install it before running that evaluator::
 
     uv pip install rdkit

@@ -10,9 +10,9 @@ combination. Loaded by `src/train/cpt_lora.py` (and future siblings).
 
 ## v2 design
 
-The v1 LoRA catastrophically forgot instruction-following: Task 7 macro-F1
-fell from 0.230 → 0.161 (model collapsed onto the majority class), Task 2
-ACC from 0.402 → 0.261, Task 1 MAE 1.73 → 2.19. v2 is a **data-mix
+The v1 LoRA catastrophically forgot instruction-following: SID macro-F1
+fell from 0.230 → 0.161 (model collapsed onto the majority class), TBS
+ACC from 0.402 → 0.261, BAP MAE 1.73 → 2.19. v2 is a **data-mix
 re-design** rather than a fresh pretrain.
 
 **Recipe** — informed by EvoLM (Qi et al. 2025, [arxiv 2506.16029](https://arxiv.org/abs/2506.16029)),
@@ -25,7 +25,7 @@ whose Table 2 shows replay ratio ≈5–16 % is the empirical sweet spot.
 | format-anchor  | `allenai/tulu-3-sft-mixture` (raw-flattened) | 5                  |
 
 The 5 % format-anchor stream is our deliberate addition (not in EvoLM)
-to specifically counter the v1 Task 7 mode-collapse. Tulu-3 turns are
+to specifically counter the v1 SID mode-collapse. Tulu-3 turns are
 flattened into raw `Question:\n... Answer:\n...` text — no chat template,
 so the run remains a pure raw-text CPT.
 

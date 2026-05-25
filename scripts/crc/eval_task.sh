@@ -3,7 +3,7 @@
 # Generic SupraBench evaluation wrapper for CRC AutoExp dispatch.
 #
 # Reads two env vars set by the per-task wrapper script:
-#   EVAL_TASK_CONFIG   — path under configs/tasks/ (e.g. task1_base.yaml)
+#   EVAL_TASK_CONFIG   — path under configs/tasks/ (e.g. bap_base.yaml)
 #   EVAL_MODEL_CONFIG  — path under configs/models/ (e.g. qwen35_27b_eupmc_lora.yaml)
 #
 # Run via `autoexp submit --gpus 4 --name <task>_eval scripts/crc/eval_task<n>.sh`.
@@ -14,7 +14,7 @@ set -eo pipefail   # not -u: ~/.bashrc -> /etc/bashrc references BASHRCSOURCED
 
 mkdir -p logs
 
-source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
+source /path/to/SupraBench/scripts/crc/base.sh
 
 : "${EVAL_TASK_CONFIG:?EVAL_TASK_CONFIG must be set}"
 : "${EVAL_MODEL_CONFIG:?EVAL_MODEL_CONFIG must be set}"

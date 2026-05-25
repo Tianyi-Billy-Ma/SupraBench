@@ -1,0 +1,4 @@
+name: bap_base
+dataset: bap
+evaluator: bap
+data_path: data/bap/base.jsonl

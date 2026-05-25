@@ -1,4 +1,0 @@
-name: task2_base
-dataset: task2
-evaluator: task2
-data_path: data/task2/base.jsonl

@@ -11,12 +11,12 @@ Usage::
 
 The headline metric per task is the same one used in the paper:
 
-    Task 1: MAE        (lower is better)
-    Task 2: accuracy   (higher is better)
-    Task 3: rougeL_f   (higher is better)
-    Task 7: macro_f1   (higher is better)
+    BAP: MAE        (lower is better)
+    TBS: accuracy   (higher is better)
+    HGD: rougeL_f   (higher is better)
+    SID: macro_f1   (higher is better)
 
-For Task 1 the script also reports the robust statistics (medae,
+For BAP the script also reports the robust statistics (medae,
 mae_5pct_trimmed, mae_clipped) when present, since v2-and-later eval runs
 emit them.
 """
@@ -112,11 +112,11 @@ def render_headline_table(metrics: dict[int, dict[str, dict]]) -> str:
     return "\n".join(rows)
 
 
-def render_task1_robust(metrics: dict[int, dict[str, dict]]) -> str:
-    """Per-model robust-statistics table for Task 1."""
+def render_bap_robust(metrics: dict[int, dict[str, dict]]) -> str:
+    """Per-model robust-statistics table for BAP."""
     t1 = metrics.get(1, {})
     if not t1:
-        return "_(no Task 1 metrics)_\n"
+        return "_(no BAP metrics)_\n"
     cols = ["MAE", "MedAE", "MAE 5%-trim", "MAE clipped[-2,15]", "n_parsed/n_total"]
     headers = ["Model"] + cols
     rows = ["| " + " | ".join(headers) + " |", "|" + "---|" * len(headers)]
@@ -156,10 +156,10 @@ def main() -> None:
     body.append("Arrows mark optimization direction.  ↑ = higher is better, ↓ = lower is better.\n")
     body.append("## Headline metric per task\n")
     body.append(render_headline_table(metrics) + "\n")
-    body.append("## Task 1 robust statistics\n")
+    body.append("## BAP robust statistics\n")
     body.append("MedAE, 5%-trimmed MAE, and chemistry-plausible-range MAE expose ")
     body.append("how much of the headline gap is tail-driven.\n")
-    body.append(render_task1_robust(metrics) + "\n")
+    body.append(render_bap_robust(metrics) + "\n")
     body.append("## Missing pairs\n")
     expected = sorted(MODEL_DISPLAY)
     missing_lines = []

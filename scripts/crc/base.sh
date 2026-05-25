@@ -22,7 +22,7 @@ kinit -R 2>/dev/null || true
 aklog 2>/dev/null || true
 
 # Resolve repo root and activate environment
-_REPO_ROOT="/groups/yye7/BILLY/SupraBench"
+_REPO_ROOT="/path/to/SupraBench"
 source "${_REPO_ROOT}/scripts/crc/bashrc.sh"
 cd "${_REPO_ROOT}" || {
   echo "[$(basename "$0")] ERROR: cannot cd to ${_REPO_ROOT}"

@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -q gpu@@yye7_lab
+#$ -q gpu@@anonymous_lab
 #$ -l gpu_card=4
 #$ -N suprabench_cpt_smoke
 #$ -pe smp 32
@@ -7,7 +7,7 @@
 #$ -o logs/$JOB_NAME_$JOB_ID.log
 #$ -e logs/$JOB_NAME_$JOB_ID.err
 #$ -m abe
-#$ -M tma2@nd.edu
+#$ -M anonymous@example.org
 # ---------------------------------------------------------------------------
 # Smoke test for the LoRA CPT pipeline: 20 steps over 256 EU-PMC rows at
 # seq_len=1024. Verifies model loads with FSDP, vision tower is frozen,
@@ -17,7 +17,7 @@ set -eo pipefail   # not -u: ~/.bashrc -> /etc/bashrc references BASHRCSOURCED b
 
 mkdir -p logs
 
-source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
+source /path/to/SupraBench/scripts/crc/base.sh
 
 export WANDB_RUN_GROUP=cpt-smoke
 export WANDB_NAME="cpt-smoke-${JOB_ID:-local}"

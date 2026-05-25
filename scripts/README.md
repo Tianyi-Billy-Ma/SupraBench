@@ -6,7 +6,7 @@ environments differ, so scripts do not cross-pollinate.
 
 | Directory | Cluster | Scheduler |
 | --- | --- | --- |
-| `crc/` | University of Notre Dame CRC | to be confirmed |
+| `crc/` | Anonymous University CRC | to be confirmed |
 | `delta/` | NCSA Delta at UIUC | Slurm |
 
 Subdirectories are intentionally empty at initialization — add scripts as

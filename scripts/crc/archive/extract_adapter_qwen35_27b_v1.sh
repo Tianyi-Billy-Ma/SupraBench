@@ -1,15 +1,15 @@
 #!/bin/bash
 # Convert the FSDP-sharded checkpoint to PEFT adapter format. Submit via:
-#   autoexp submit --gpus 1 --name extract_adapter --cwd /groups/yye7/BILLY/SupraBench scripts/crc/extract_adapter.sh
+#   autoexp submit --gpus 1 --name extract_adapter --cwd /path/to/SupraBench scripts/crc/extract_adapter.sh
 # 1 GPU is reserved out of caution but the tool runs entirely on CPU.
 set -eo pipefail   # not -u: ~/.bashrc -> /etc/bashrc references BASHRCSOURCED
 
 mkdir -p logs
 
-source /groups/yye7/BILLY/SupraBench/scripts/crc/base.sh
+source /path/to/SupraBench/scripts/crc/base.sh
 
-CHECKPOINT="/groups/yye7/BILLY/SupraBench/outputs/cpt_qwen35_eupmc/checkpoint-1302"
-OUTPUT="/groups/yye7/BILLY/SupraBench/outputs/cpt_qwen35_eupmc/adapter"
+CHECKPOINT="/path/to/SupraBench/outputs/cpt_qwen35_eupmc/checkpoint-1302"
+OUTPUT="/path/to/SupraBench/outputs/cpt_qwen35_eupmc/adapter"
 
 "${PYTHON}" tools/fsdp_to_peft_adapter.py \
   --checkpoint "${CHECKPOINT}" \

@@ -3,7 +3,7 @@
 Usage (from the repository root):
 
     uv run python src/main.py \
-        --task-config configs/tasks/task1_base.yaml \
+        --task-config configs/tasks/bap_base.yaml \
         --model-config configs/models/openrouter_claude_sonnet46.yaml \
         --output-dir outputs/
 

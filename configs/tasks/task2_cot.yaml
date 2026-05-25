@@ -1,4 +1,0 @@
-name: task2_cot
-dataset: task2
-evaluator: task2
-data_path: data/task2/cot.jsonl

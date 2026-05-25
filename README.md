@@ -22,7 +22,7 @@ SupraBench/
 │   ├── templates/        # prompt rendering helpers
 │   └── main.py           # entry point
 ├── scripts/
-│   ├── crc/              # Notre Dame CRC submission scripts
+│   ├── crc/              # Anonymous HPC Cluster submission scripts
 │   └── delta/            # NCSA Delta (UIUC) submission scripts
 ├── outputs/              # run artifacts (gitignored)
 ├── pyproject.toml        # uv-managed dependencies
@@ -56,7 +56,7 @@ uv sync --extra dev     # pytest / ruff
 
 ```bash
 uv run python src/main.py \
-    --task-config  configs/tasks/task1.yaml \
+    --task-config  configs/tasks/bap.yaml \
     --model-config configs/models/qwen3.yaml \
     --output-dir   outputs/
 ```

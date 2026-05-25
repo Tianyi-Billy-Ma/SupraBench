@@ -1,0 +1,4 @@
+name: tbs_base
+dataset: tbs
+evaluator: tbs
+data_path: data/tbs/base.jsonl

@@ -1,0 +1,4 @@
+name: bap_cot
+dataset: bap
+evaluator: bap
+data_path: data/bap/cot.jsonl

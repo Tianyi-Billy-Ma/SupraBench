@@ -1,7 +1,7 @@
 # `scripts/crc/`
 
 CRC launchers for SupraBench. All jobs go through AutoExp's warm pool
-(`gpu@@yye7_lab`, 4× A40); the SGE directives at the top of each `cpt_*.sh`
+(`gpu@@anonymous_lab`, 4× A40); the SGE directives at the top of each `cpt_*.sh`
 script are inert when AutoExp dispatches them but stay there for the rare
 hand-`qsub` case.
 
@@ -34,7 +34,7 @@ keywords) that vary too much to share a template.
 
 ```bash
 # (1) One-time per new base model
-qsub /groups/yye7/BILLY/SupraBench/scripts/crc/precache.sh
+qsub /path/to/SupraBench/scripts/crc/precache.sh
 
 # (2) CPT — submit the per-model launcher directly
 autoexp submit --gpus 4 --name cpt_qwen9b_v2 --cwd $PWD \
@@ -46,10 +46,10 @@ autoexp submit --gpus 4 --name cpt_qwen9b_v2 --cwd $PWD \
 scripts/crc/submit_extract.sh qwen35_9b_v2
 
 # (4) Eval — one call per (task, model) pair
-scripts/crc/submit_eval.sh task1_base.yaml qwen35_9b_supra_v2_lora.yaml
-scripts/crc/submit_eval.sh task2_base.yaml qwen35_9b_supra_v2_lora.yaml
-scripts/crc/submit_eval.sh task3_base.yaml qwen35_9b_supra_v2_lora.yaml
-scripts/crc/submit_eval.sh task7_base.yaml qwen35_9b_supra_v2_lora.yaml
+scripts/crc/submit_eval.sh bap_base.yaml qwen35_9b_supra_v2_lora.yaml
+scripts/crc/submit_eval.sh tbs_base.yaml qwen35_9b_supra_v2_lora.yaml
+scripts/crc/submit_eval.sh hgd_base.yaml qwen35_9b_supra_v2_lora.yaml
+scripts/crc/submit_eval.sh sid_base.yaml qwen35_9b_supra_v2_lora.yaml
 ```
 
 The generated launchers under `_generated/` are tracked-but-ignored
@@ -69,7 +69,7 @@ Mapping from old per-script naming to the helper invocation:
 | --- | --- |
 | `eval_task<N>_qwen35_27b_v1.sh` | `submit_eval.sh task<N>_base.yaml qwen35_27b_eupmc_lora.yaml` |
 | `eval_task<N>_qwen35_27b_v2.sh` | `submit_eval.sh task<N>_base.yaml qwen35_27b_supra_v2_lora.yaml` |
-| `eval_task1_qwen35_27b_v2_guided.sh` | `submit_eval.sh task1_base.yaml qwen35_27b_supra_v2_lora_guided.yaml` |
+| `eval_bap_qwen35_27b_v2_guided.sh` | `submit_eval.sh bap_base.yaml qwen35_27b_supra_v2_lora_guided.yaml` |
 | `eval_task<N>_qwen35_9b_v2.sh` | `submit_eval.sh task<N>_base.yaml qwen35_9b_supra_v2_lora.yaml` |
 | `eval_task<N>_llama31_8b_v2.sh` | `submit_eval.sh task<N>_base.yaml llama31_8b_supra_v2_lora.yaml` |
 | `extract_adapter_qwen35_27b_v1.sh` | `submit_extract.sh qwen35_27b_v1` |

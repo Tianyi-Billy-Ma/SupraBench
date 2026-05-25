@@ -1,0 +1,4 @@
+name: tbs_fewshot
+dataset: tbs
+evaluator: tbs
+data_path: data/tbs/fewshot.jsonl

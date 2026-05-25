@@ -20,9 +20,9 @@
 #     BASE_PATH      "model.language_model" for VLM bases, "" for causal-LM bases.
 set -eo pipefail
 
-SUPRA_ROOT=/groups/yye7/BILLY/SupraBench
+SUPRA_ROOT=/path/to/SupraBench
 RECIPE=${1:?usage: submit_extract.sh <recipe>}
-AUTOEXP=${AUTOEXP:-/users/tma2/AutoExp-src/.venv/bin/autoexp}
+AUTOEXP=${AUTOEXP:-/path/to/AutoExp-src/.venv/bin/autoexp}
 
 case "${RECIPE}" in
   qwen35_27b_v1)

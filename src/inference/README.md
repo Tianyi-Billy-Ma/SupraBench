@@ -35,7 +35,7 @@ uv sync --extra hf
 
 # Run Qwen3 across all visible GPUs (set CUDA_VISIBLE_DEVICES to restrict)
 uv run python src/main.py \
-    --task-config  configs/tasks/task1.yaml \
+    --task-config  configs/tasks/bap.yaml \
     --model-config configs/models/qwen3.yaml
 ```
 
