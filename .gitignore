@@ -41,15 +41,15 @@ results/**/*.parquet
 results/**/*.ckpt
 results/**/*.safetensors
 results/.ipynb_checkpoints/
-results/task1_task2_results.zip
+results/bap_tbs_results.zip
 results/analysis/*.md
 results/analysis/dataset_stats.json
-results/metrics/task1_base_llama3.1-8b-supra-v2-lora/
-results/metrics/task1_base_qwen3.5-9b-supra-v2-lora/
-results/metrics/task2_base_qwen3.5-9b-supra-v2-lora/
-results/metrics/task3_base_llama3.1-8b-supra-v2-lora/
-results/metrics/task3_base_qwen3.5-9b-supra-v2-lora/
-results/metrics/task7_base_qwen3.5-9b-supra-v2-lora/
+results/metrics/bap_base_llama3.1-8b-supra-v2-lora/
+results/metrics/bap_base_qwen3.5-9b-supra-v2-lora/
+results/metrics/tbs_base_qwen3.5-9b-supra-v2-lora/
+results/metrics/hgd_base_llama3.1-8b-supra-v2-lora/
+results/metrics/hgd_base_qwen3.5-9b-supra-v2-lora/
+results/metrics/sid_base_qwen3.5-9b-supra-v2-lora/
 
 # Local paper / Overleaf / analysis workspaces
 paper-overleaf/

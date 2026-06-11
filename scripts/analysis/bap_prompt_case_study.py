@@ -546,7 +546,7 @@ def build_report(
     lines = [
         "# Case Study: Why CoT and Few-Shot Hurt Drug Delivery",
         "",
-        "**Scope**: This report analyzes BAP Drug Delivery binding-affinity prediction using existing inference files under `results/task1/`. It does not modify Overleaf files.",
+        "**Scope**: This report analyzes BAP Drug Delivery binding-affinity prediction using existing inference files under `results/bap/`. It does not modify Overleaf files.",
         "",
         "## Executive Summary",
         "",

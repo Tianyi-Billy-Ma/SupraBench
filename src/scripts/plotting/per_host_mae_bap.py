@@ -44,7 +44,7 @@ HOST_ABBREV = {
 YBOX_MAX = 12.0   # clip per-example errors above this for plot readability
 
 def load_t1(model_slug, method):
-    path = REPO / f"results/task1/{method}/{model_slug}.jsonl"
+    path = REPO / f"results/bap/{method}/{model_slug}.jsonl"
     return [json.loads(l) for l in path.open()] if path.exists() else []
 
 # Top-10 hosts (Qwen-9B base used as the reference index — same id schema across models)

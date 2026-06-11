@@ -91,7 +91,7 @@ def wilson_ci(n_correct: int, n_total: int, z: float = 1.96):
 
 
 def load_records(model_slug: str, method: str) -> list[dict]:
-    path = REPO / f"results/task2/{method}/{model_slug}.jsonl"
+    path = REPO / f"results/tbs/{method}/{model_slug}.jsonl"
     if not path.exists():
         return []
     return [json.loads(line) for line in path.open() if line.strip()]

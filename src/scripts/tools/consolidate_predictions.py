@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Consolidate Ziming's per-(task, model, method) inference dumps into the
-canonical results/task<idx>/<method>/<model>.jsonl layout.
+canonical results/<task>/<method>/<model>.jsonl layout.
 
 Two source layouts are supported:
 
@@ -12,7 +12,7 @@ Two source layouts are supported:
     where v1 = base, v2 = fewshot, v3 = cot. No run_meta sidecar.
 
 Output layout (uniform):
-    results/task<idx>/<method>/<model>.jsonl
+    results/<task>/<method>/<model>.jsonl
 
 Row schemas (prompt fields dropped; per-row dataset metadata kept so
 files are self-describing for slice analysis):

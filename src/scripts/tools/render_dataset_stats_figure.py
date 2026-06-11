@@ -32,7 +32,7 @@ import pyarrow.parquet as pq
 # ---------------------------------------------------------------------------
 REPO     = Path(__file__).resolve().parents[3]
 STATS    = REPO / "results/analysis/dataset_stats.json"
-T1_JSONL = REPO / "results/task1/base/qwen3.5-9b.jsonl"
+T1_JSONL = REPO / "results/bap/base/qwen3.5-9b.jsonl"
 T7_PARQ  = REPO / "data/sid/eval.parquet"
 OUT_DIR  = REPO / "paper-overleaf/figures"
 OUT_DIR.mkdir(parents=True, exist_ok=True)

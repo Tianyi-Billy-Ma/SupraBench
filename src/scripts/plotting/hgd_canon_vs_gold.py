@@ -124,7 +124,7 @@ def normalise(text: str) -> str:
 # ---------------------------------------------------------------------------
 
 def compute_cell(model_slug: str, method: str) -> dict:
-    path = REPO / f"results/task3/{method}/{model_slug}.jsonl"
+    path = REPO / f"results/hgd/{method}/{model_slug}.jsonl"
     if not path.exists():
         raise FileNotFoundError(path)
 

@@ -48,7 +48,7 @@ METHODS = [("base", "base"), ("fewshot", "fewshot"), ("cot", "cot")]
 # ---------------------------------------------------------------------------
 
 def load_rows(model_slug: str, method: str) -> list[dict]:
-    path = REPO / f"results/task7/{method}/{model_slug}.jsonl"
+    path = REPO / f"results/sid/{method}/{model_slug}.jsonl"
     if not path.exists():
         print(f"  WARN: missing {path}", file=sys.stderr)
         return []
