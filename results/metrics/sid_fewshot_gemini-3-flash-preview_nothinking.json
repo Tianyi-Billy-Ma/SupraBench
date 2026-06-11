@@ -1,0 +1,25 @@
+{
+  "v1": {
+    "macro_f1": 0.3879124809699481,
+    "balanced_accuracy": 0.4190923227972094,
+    "n_total": 1949,
+    "n_parsed": 1949,
+    "parse_fail_rate": 0.0
+  },
+  "cb7": {
+    "macro_f1": 0.16666666666666666,
+    "balanced_accuracy": 1.0,
+    "n_total": 217,
+    "n_parsed": 217,
+    "parse_fail_rate": 0.0
+  },
+  "merged": {
+    "macro_f1": 0.38876309009623927,
+    "balanced_accuracy": 0.420646667420861,
+    "n_total": 2166,
+    "n_parsed": 2166,
+    "parse_fail_rate": 0.0
+  },
+  "n_v1": 1949,
+  "n_cb7": 217
+}

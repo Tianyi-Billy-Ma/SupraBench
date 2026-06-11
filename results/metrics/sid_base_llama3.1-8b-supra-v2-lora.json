@@ -1,0 +1,25 @@
+{
+  "v1": {
+    "macro_f1": 0,
+    "balanced_accuracy": 0,
+    "n_total": 1955,
+    "n_parsed": 0,
+    "parse_fail_rate": 1.0
+  },
+  "cb7": {
+    "macro_f1": 0,
+    "balanced_accuracy": 0,
+    "n_total": 217,
+    "n_parsed": 0,
+    "parse_fail_rate": 1.0
+  },
+  "merged": {
+    "macro_f1": 0,
+    "balanced_accuracy": 0,
+    "n_total": 2172,
+    "n_parsed": 0,
+    "parse_fail_rate": 1.0
+  },
+  "n_v1": 1955,
+  "n_cb7": 217
+}

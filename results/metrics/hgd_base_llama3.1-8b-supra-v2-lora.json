@@ -1,0 +1,15 @@
+{
+  "v1": null,
+  "cb7": {
+    "rougeL_f": 0,
+    "rouge1_f": 0,
+    "n_total": 1
+  },
+  "merged": {
+    "rougeL_f": 0,
+    "rouge1_f": 0,
+    "n_total": 1
+  },
+  "n_v1": 0,
+  "n_cb7": 1
+}

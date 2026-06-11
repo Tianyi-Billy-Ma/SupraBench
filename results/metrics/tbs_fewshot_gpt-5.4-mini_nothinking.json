@@ -1,0 +1,25 @@
+{
+  "v1": {
+    "accuracy": 0.42829457364341084,
+    "regret": 0.8238308139534883,
+    "n_total": 2064,
+    "n_parsed": 2064,
+    "parse_fail_rate": 0.0
+  },
+  "cb7": {
+    "accuracy": 0.445,
+    "regret": null,
+    "n_total": 200,
+    "n_parsed": 200,
+    "parse_fail_rate": 0.0
+  },
+  "merged": {
+    "accuracy": 0.4297703180212014,
+    "regret": 0.8238308139534883,
+    "n_total": 2264,
+    "n_parsed": 2264,
+    "parse_fail_rate": 0.0
+  },
+  "n_v1": 2064,
+  "n_cb7": 200
+}
