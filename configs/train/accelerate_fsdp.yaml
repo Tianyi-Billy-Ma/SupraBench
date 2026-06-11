@@ -10,7 +10,7 @@
 #
 # fsdp_cpu_ram_efficient_loading=true means only rank 0 holds the full
 # 56 GB bf16 base in CPU RAM during from_pretrained; shards are broadcast
-# to other ranks. CRC GPU nodes have 256 GB RAM — comfortable.
+# to other ranks (assumes nodes with >= ~256 GB RAM).
 compute_environment: LOCAL_MACHINE
 distributed_type: FSDP
 downcast_bf16: 'no'

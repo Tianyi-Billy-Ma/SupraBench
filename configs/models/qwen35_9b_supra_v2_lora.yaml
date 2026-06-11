@@ -4,7 +4,7 @@ backend: hf_peft
 model_id: Qwen/Qwen3.5-9B
 arch: causal_lm
 
-adapter_path: /path/to/SupraBench/outputs/cpt_qwen35_9b_supra_v2/adapter
+adapter_path: outputs/cpt_qwen35_9b_supra_v2/adapter
 
 dtype: bfloat16
 device_map: auto

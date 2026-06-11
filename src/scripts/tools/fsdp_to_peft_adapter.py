@@ -23,8 +23,8 @@ Usage
 ::
 
     python tools/fsdp_to_peft_adapter.py \\
-        --checkpoint /path/to/SupraBench/outputs/cpt_qwen35_eupmc/checkpoint-1302 \\
-        --output     /path/to/SupraBench/outputs/cpt_qwen35_eupmc/adapter \\
+        --checkpoint outputs/cpt_qwen35_eupmc/checkpoint-1302 \\
+        --output     outputs/cpt_qwen35_eupmc/adapter \\
         --base-model Qwen/Qwen3.5-27B \\
         --lora-r 64 --lora-alpha 128 --lora-dropout 0.05 \\
         --target-modules q_proj k_proj v_proj o_proj gate_proj up_proj down_proj \\

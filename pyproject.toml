@@ -5,7 +5,15 @@ description = "Supramolecular benchmark for evaluating LLMs on supramolecular-ch
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [
-    { name = "Anonymous", email = "anonymous@example.org" },
+    { name = "Tianyi Ma", email = "tma2@nd.edu" },
+    { name = "Yijun Ma", email = "yma7@nd.edu" },
+    { name = "Zehong Wang", email = "zwang43@nd.edu" },
+    { name = "Weixiang Sun" },
+    { name = "Ziming Li" },
+    { name = "Connor R. Schmidt" },
+    { name = "Chuxu Zhang" },
+    { name = "Matthew J. Webber" },
+    { name = "Yanfang Ye", email = "yye7@nd.edu" },
 ]
 
 # Runtime dependencies shared across datasets / eval / inference / models.
@@ -16,7 +24,6 @@ dependencies = [
     "numpy>=1.26",
     "pandas>=2.2",
     "pyarrow>=24.0.0",
-    "pyoverleaf>=0.1.8",
     "rouge-score>=0.1.2",
     "anthropic>=0.97.0",
     "matplotlib>=3.10.9",
@@ -39,7 +46,7 @@ hf = [
     "wandb>=0.17",
     "sentencepiece>=0.2",
     "tiktoken>=0.7",
-    # Task 4/5 VQA evaluator dependencies (~10 MB wheels each).
+    # MI (Molecular Identification) VQA evaluator dependencies (~10 MB wheels each).
     "rapidfuzz>=3.6",
     "rdkit>=2024.3",
 ]

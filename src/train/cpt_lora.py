@@ -14,11 +14,11 @@ Design notes:
 - Sequences are packed by concatenating tokenised rows and chunking to
   ``dataset.seq_len`` — the standard CPT recipe (e.g. Meditron, BioMistral).
 - Launched via ``accelerate launch`` with FSDP_FULL_SHARD; the launch
-  config lives at ``scripts/crc/accelerate_fsdp.yaml``.
+  config lives at ``configs/train/accelerate_fsdp.yaml``.
 
 Run:
 
-    accelerate launch --config_file scripts/crc/accelerate_fsdp.yaml \\
+    accelerate launch --config_file configs/train/accelerate_fsdp.yaml \\
         src/train/cpt_lora.py \\
         --config configs/train/cpt_qwen35_eupmc.yaml \\
         --override training.max_steps=20 dataset.train_rows=256

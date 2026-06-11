@@ -50,8 +50,6 @@ results/metrics/task2_base_qwen3.5-9b-supra-v2-lora/
 results/metrics/task3_base_llama3.1-8b-supra-v2-lora/
 results/metrics/task3_base_qwen3.5-9b-supra-v2-lora/
 results/metrics/task7_base_qwen3.5-9b-supra-v2-lora/
-# auto-generated per-submission launchers from submit_eval.sh / submit_extract.sh
-scripts/crc/_generated/
 
 # Local paper / Overleaf / analysis workspaces
 paper-overleaf/
@@ -77,3 +75,4 @@ backups/
 
 # Local-only state (do not publish)
 .omx/
+tmp/

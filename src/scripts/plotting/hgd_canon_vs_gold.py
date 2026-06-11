@@ -28,7 +28,7 @@ import matplotlib.lines as mlines
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-REPO = Path("/Users/anonuser/Workspace/SupraBench")
+REPO = Path(__file__).resolve().parents[3]
 OUT_PDF = REPO / "paper-overleaf/figures/hgd_canon_vs_gold.pdf"
 OUT_PNG = REPO / "paper-overleaf/figures/hgd_canon_vs_gold.png"
 

@@ -158,7 +158,7 @@ async def judge_all(raw_samples: list[dict], filt_samples: list[dict], args):
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://github.com/Anonymous/SupraBench",
+        "HTTP-Referer": "https://github.com/Tianyi-Billy-Ma/SupraBench",
         "X-Title": "SupraBench Corpus Validation",
     }
 

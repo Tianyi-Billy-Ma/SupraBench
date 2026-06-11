@@ -30,7 +30,7 @@ import pyarrow.parquet as pq
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-REPO     = Path("/Users/anonuser/Workspace/SupraBench")
+REPO     = Path(__file__).resolve().parents[3]
 STATS    = REPO / "results/analysis/dataset_stats.json"
 T1_JSONL = REPO / "results/task1/base/qwen3.5-9b.jsonl"
 T7_PARQ  = REPO / "data/sid/eval.parquet"

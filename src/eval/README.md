@@ -1,6 +1,6 @@
 # `src/eval/`
 
-Evaluation for the seven SupraBench tasks. Layout:
+Evaluation for the five SupraBench tasks. Layout:
 
 ```
 src/eval/

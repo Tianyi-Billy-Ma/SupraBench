@@ -24,7 +24,7 @@ import numpy as np
 matplotlib.rcParams["font.family"] = "sans-serif"
 matplotlib.rcParams["font.weight"] = "bold"
 
-REPO = Path("/Users/anonuser/Workspace/SupraBench")
+REPO = Path(__file__).resolve().parents[3]
 OUT_PDF = REPO / "paper-overleaf/figures/sid_class_recall.pdf"
 OUT_PNG = REPO / "paper-overleaf/figures/sid_class_recall.png"
 

@@ -5,7 +5,7 @@ model_id: Qwen/Qwen3.5-27B
 
 # PEFT-format adapter extracted from the FSDP checkpoint via
 # tools/fsdp_to_peft_adapter.py.
-adapter_path: /path/to/SupraBench/outputs/cpt_qwen35_eupmc/adapter
+adapter_path: outputs/cpt_qwen35_eupmc/adapter
 
 # Qwen3.5's `Qwen3_5ForConditionalGeneration` arch is not yet in vLLM
 # 0.11's native registry. Force the transformers-backed fallback path,

@@ -8,9 +8,9 @@ model_id: Qwen/Qwen3.5-27B
 # + 5 % Tulu-3 anchor) at rank 32 / lr 1e-5 / 1 epoch. The DCP shards at
 # checkpoint-302/pytorch_model_fsdp_0/ are consolidated into PEFT format
 # by tools/fsdp_to_peft_adapter.py (launched via
-# scripts/crc/extract_adapter_v2.sh), so PeftModel.from_pretrained
+# src/scripts/tools/fsdp_to_peft_adapter.py), so PeftModel.from_pretrained
 # resolves both adapter_config.json and adapter_model.safetensors below.
-adapter_path: /path/to/SupraBench/outputs/cpt_qwen35_supra_v2/adapter
+adapter_path: outputs/cpt_qwen35_supra_v2/adapter
 
 dtype: bfloat16
 device_map: auto

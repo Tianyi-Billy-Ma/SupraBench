@@ -15,10 +15,10 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
-sys.path.insert(0, "/Users/anonuser/Workspace/SupraBench")
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from src.eval.bap import parse_logka
 
-REPO = Path("/Users/anonuser/Workspace/SupraBench")
+REPO = Path(__file__).resolve().parents[3]
 OUT_PDF = REPO / "paper-overleaf/figures/bap.pdf"
 OUT_PNG = REPO / "paper-overleaf/figures/bap.png"
 

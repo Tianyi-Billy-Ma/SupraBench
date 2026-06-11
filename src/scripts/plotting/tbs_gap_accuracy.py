@@ -18,7 +18,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 
-REPO = Path("/Users/anonuser/Workspace/SupraBench")
+REPO = Path(__file__).resolve().parents[3]
 OUT_PDF = REPO / "paper-overleaf/figures/tbs_gap_accuracy.pdf"
 OUT_PNG = REPO / "paper-overleaf/figures/tbs_gap_accuracy.png"
 

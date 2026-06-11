@@ -1,6 +1,6 @@
 # `src/datasets/`
 
-Dataset loaders for the seven SupraBench tasks.
+Dataset loaders for the five SupraBench tasks.
 
 ## Contract
 

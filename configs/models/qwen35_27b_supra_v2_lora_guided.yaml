@@ -2,7 +2,7 @@ name: qwen3.5-27b-supra-v2-lora-guided
 
 backend: hf_peft
 model_id: Qwen/Qwen3.5-27B
-adapter_path: /path/to/SupraBench/outputs/cpt_qwen35_supra_v2/adapter
+adapter_path: outputs/cpt_qwen35_supra_v2/adapter
 
 dtype: bfloat16
 device_map: auto
