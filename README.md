@@ -10,7 +10,7 @@ for domain-adaptive pretraining (DAPT).
 > Designing host–guest systems is slow (days of dry-lab verification per pair);
 > SupraBench probes whether LLMs can reason about these systems directly.
 
-- 📄 **Paper:** arXiv link coming soon (TODO)
+- 📄 **Paper:** [`arXiv:2606.13477`](https://arxiv.org/abs/2606.13477)
 - 🤗 **Datasets:** [`huggingface.co/SupraBench`](https://huggingface.co/SupraBench)
 - 💻 **Code:** [`github.com/Tianyi-Billy-Ma/SupraBench`](https://github.com/Tianyi-Billy-Ma/SupraBench)
 
@@ -141,6 +141,8 @@ If you use SupraBench, please cite the paper and the upstream data sources.
   title   = {SupraBench: A Benchmark for Supramolecular Host--Guest Chemistry Reasoning in Large Language Models},
   author  = {Ma, Tianyi and Ma, Yijun and Wang, Zehong and Sun, Weixiang and Li, Ziming and Schmidt, Connor R. and Zhang, Chuxu and Webber, Matthew J. and Ye, Yanfang},
   year    = {2026},
-  note    = {arXiv preprint, link coming soon}
+  eprint        = {2606.13477},
+  archivePrefix = {arXiv},
+  journal = {arXiv preprint arXiv:2606.13477}
 }
 ```
