@@ -122,9 +122,13 @@ Tianyi Ma¹\*, Yijun Ma¹\*, Zehong Wang¹†, Weixiang Sun¹, Ziming Li², Conn
 
 ## Sources & license
 
-Binding records are derived from [SupraBank](https://suprabank.org/) (CC-BY-4.0);
-the text corpus is built from open-access [Europe PMC](https://europepmc.org/)
-articles subject to each article's individual license; molecular structures use
+SupraBench (code and curated benchmark data) is released under
+[CC BY 4.0](./LICENSE).
+
+Upstream data: binding records are derived from
+[SupraBank](https://suprabank.org/) (CC-BY-4.0); the text corpus is built from
+open-access [Europe PMC](https://europepmc.org/) articles subject to each
+article's individual license; molecular structures use
 [PubChem](https://pubchem.ncbi.nlm.nih.gov/) and
 [OPSIN](https://github.com/dan2097/opsin).
 
